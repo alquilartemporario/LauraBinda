@@ -6,7 +6,7 @@
 
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
   >
 
   <title>Alquiler Temporarios</title>
@@ -35,6 +35,9 @@
 
     html {
       scroll-behavior: smooth;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -56,6 +59,10 @@
       line-height: 1.5;
 
       -webkit-font-smoothing: antialiased;
+
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
 
     }
 
@@ -86,25 +93,15 @@
     :root {
 
       --primary: #006eff;
-
       --primary-dark: #0056cc;
-
       --active: #16a34a;
-
       --active-dark: #15803d;
-
       --text: #172033;
-
       --text-soft: #667085;
-
       --background: #f5f7fa;
-
       --white: #ffffff;
-
       --border: #e5e7eb;
-
       --success: #16a34a;
-
       --danger: #dc3545;
 
       --shadow-sm:
@@ -117,7 +114,6 @@
         0 20px 60px rgba(16, 24, 40, 0.16);
 
       --radius: 18px;
-
       --radius-sm: 12px;
 
     }
@@ -128,15 +124,11 @@
     ========================================================= */
 
     .hero {
-
       width: 100%;
-
+      max-width: 100%;
       background: var(--primary);
-
       overflow: hidden;
-
     }
-
 
     .hero-image {
 
@@ -157,7 +149,6 @@
 
     }
 
-
     .hero-background {
 
       position: absolute;
@@ -171,7 +162,6 @@
       background-repeat: no-repeat;
 
     }
-
 
     .hero-image-overlay {
 
@@ -190,7 +180,6 @@
 
     }
 
-
     .hero-bottom {
 
       width: 100%;
@@ -206,7 +195,6 @@
 
     }
 
-
     .hero-content {
 
       width:
@@ -218,7 +206,6 @@
       margin: 0 auto;
 
     }
-
 
     .hero-title {
 
@@ -238,7 +225,6 @@
       margin-bottom: 10px;
 
     }
-
 
     .hero-subtitle {
 
@@ -306,7 +292,6 @@
 
     }
 
-
     .filters-header {
 
       display: flex;
@@ -321,7 +306,6 @@
 
     }
 
-
     .filters-title {
 
       font-size: 19px;
@@ -332,7 +316,6 @@
 
     }
 
-
     .results-count {
 
       color: var(--text-soft);
@@ -342,7 +325,6 @@
       margin-top: 2px;
 
     }
-
 
     .filter-grid {
 
@@ -356,7 +338,6 @@
 
     }
 
-
     .filter-group {
 
       display: flex;
@@ -365,8 +346,9 @@
 
       gap: 9px;
 
-    }
+      min-width: 0;
 
+    }
 
     .filter-label {
 
@@ -403,7 +385,6 @@
 
     }
 
-
     .environment-button {
 
       min-height: 44px;
@@ -429,7 +410,6 @@
 
     }
 
-
     .environment-button:hover {
 
       border-color: var(--active);
@@ -437,7 +417,6 @@
       transform: translateY(-1px);
 
     }
-
 
     .environment-button.active {
 
@@ -462,8 +441,9 @@
 
       position: relative;
 
-    }
+      width: 100%;
 
+    }
 
     .select-wrapper::after {
 
@@ -484,7 +464,6 @@
       font-size: 18px;
 
     }
-
 
     .neighborhood-select {
 
@@ -517,7 +496,6 @@
 
     }
 
-
     .neighborhood-select:focus {
 
       border-color: var(--active);
@@ -543,8 +521,9 @@
 
       margin-top: 18px;
 
-    }
+      width: 100%;
 
+    }
 
     .amenity-button {
 
@@ -579,13 +558,11 @@
 
     }
 
-
     .amenity-button:hover {
 
       border-color: var(--active);
 
     }
-
 
     .amenity-button.active {
 
@@ -624,7 +601,6 @@
 
     }
 
-
     .clear-filters:hover {
 
       color: var(--active);
@@ -649,6 +625,8 @@
         );
 
       gap: 24px;
+
+      width: 100%;
 
     }
 
@@ -681,8 +659,9 @@
 
       min-width: 0;
 
-    }
+      width: 100%;
 
+    }
 
     .property-card:hover {
 
@@ -716,7 +695,6 @@
 
     }
 
-
     .property-image {
 
       width: 100%;
@@ -732,14 +710,12 @@
 
     }
 
-
     .property-card:hover
     .property-image {
 
       transform: scale(1.035);
 
     }
-
 
     .property-image-placeholder {
 
@@ -800,13 +776,11 @@
 
     }
 
-
     .image-badge.available {
 
       color: var(--success);
 
     }
-
 
     .photos-badge {
 
@@ -853,8 +827,9 @@
 
       flex: 1;
 
-    }
+      min-width: 0;
 
+    }
 
     .property-location {
 
@@ -872,7 +847,6 @@
 
     }
 
-
     .property-title {
 
       font-size: 22px;
@@ -886,7 +860,6 @@
       letter-spacing: -0.025em;
 
     }
-
 
     .property-address {
 
@@ -928,7 +901,6 @@
 
     }
 
-
     .price-label {
 
       font-size: 11px;
@@ -942,7 +914,6 @@
       letter-spacing: 0.06em;
 
     }
-
 
     .price-value {
 
@@ -974,7 +945,6 @@
 
     }
 
-
     .cost-box {
 
       background: #f8fafc;
@@ -988,7 +958,6 @@
       padding: 11px;
 
     }
-
 
     .cost-label {
 
@@ -1007,7 +976,6 @@
       letter-spacing: 0.04em;
 
     }
-
 
     .cost-value {
 
@@ -1037,7 +1005,6 @@
       gap: 7px;
 
     }
-
 
     .amenity-chip {
 
@@ -1102,7 +1069,6 @@
 
     }
 
-
     .description-button:hover {
 
       background: #f8fafc;
@@ -1125,7 +1091,6 @@
       padding-top: 2px;
 
     }
-
 
     .whatsapp-button {
 
@@ -1161,7 +1126,6 @@
         rgba(24, 185, 87, 0.16);
 
     }
-
 
     .whatsapp-button:hover {
 
@@ -1203,13 +1167,11 @@
 
     }
 
-
     .description-modal.active {
 
       display: flex;
 
     }
-
 
     .description-panel {
 
@@ -1245,7 +1207,6 @@
 
     }
 
-
     @keyframes modalIn {
 
       from {
@@ -1269,7 +1230,6 @@
       }
 
     }
-
 
     .description-close {
 
@@ -1297,13 +1257,11 @@
 
     }
 
-
     .description-close:hover {
 
       background: #e5e7eb;
 
     }
-
 
     .description-modal-title {
 
@@ -1319,7 +1277,6 @@
 
     }
 
-
     .description-modal-location {
 
       color: var(--text-soft);
@@ -1329,7 +1286,6 @@
       margin-bottom: 20px;
 
     }
-
 
     .description-modal-text {
 
@@ -1366,7 +1322,6 @@
 
     }
 
-
     .empty-icon {
 
       font-size: 42px;
@@ -1374,7 +1329,6 @@
       margin-bottom: 15px;
 
     }
-
 
     .empty-title {
 
@@ -1385,7 +1339,6 @@
       margin-bottom: 7px;
 
     }
-
 
     .empty-text {
 
@@ -1420,7 +1373,6 @@
 
     }
 
-
     .spinner {
 
       width: 42px;
@@ -1443,7 +1395,6 @@
         infinite;
 
     }
-
 
     @keyframes spin {
 
@@ -1477,7 +1428,6 @@
       color: #991b1b;
 
     }
-
 
     .retry-button {
 
@@ -1544,7 +1494,6 @@
 
     }
 
-
     .floating-whatsapp:hover {
 
       transform: scale(1.07);
@@ -1577,13 +1526,11 @@
 
     }
 
-
     .gallery.active {
 
       display: flex;
 
     }
-
 
     .gallery-image {
 
@@ -1602,7 +1549,6 @@
       user-select: none;
 
     }
-
 
     .gallery-close {
 
@@ -1631,14 +1577,12 @@
 
     }
 
-
     .gallery-close:hover {
 
       background:
         rgba(255, 255, 255, 0.25);
 
     }
-
 
     .gallery-prev,
     .gallery-next {
@@ -1668,16 +1612,13 @@
 
     }
 
-
     .gallery-prev {
       left: 22px;
     }
 
-
     .gallery-next {
       right: 22px;
     }
-
 
     .gallery-counter {
 
@@ -1707,547 +1648,837 @@
 
 
     /* =========================================================
-       TABLET / MOBILE
+       RESPONSIVE REAL — TABLET / CELULAR
     ========================================================= */
 
-    @media (max-width: 800px) {
+    @media screen and (max-width: 800px) {
 
-      /* -------------------------------------------------------
-         PORTADA
-      ------------------------------------------------------- */
+      html,
+      body {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        min-width: 0 !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        overflow-x: hidden !important;
+
+      }
+
+
+      /* =======================================================
+         HERO
+      ======================================================= */
+
+      .hero {
+
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        overflow: hidden !important;
+
+      }
 
       .hero-image {
 
-        width: 100%;
+        width: 100% !important;
 
-        height:
-          clamp(
-            220px,
-            62vw,
-            360px
-          );
+        max-width: 100% !important;
+
+        height: 62vw !important;
+
+        min-height: 220px !important;
+
+        max-height: 360px !important;
 
       }
-
 
       .hero-background {
 
-        width: 100%;
+        width: 100% !important;
 
-        height: 100%;
+        height: 100% !important;
 
-        background-position: center center;
+        inset: 0 !important;
 
-        background-size: cover;
+        background-position: center center !important;
 
-        background-repeat: no-repeat;
+        background-size: cover !important;
 
-      }
-
-
-      .hero-image-overlay {
-
-        background:
-          linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.02),
-            rgba(0, 0, 0, 0.18)
-          );
+        background-repeat: no-repeat !important;
 
       }
-
-
-      /* -------------------------------------------------------
-         TEXTO PORTADA
-      ------------------------------------------------------- */
 
       .hero-bottom {
 
+        width: 100% !important;
+
         padding:
           28px
-          18px
-          32px;
+          16px
+          32px !important;
 
       }
-
 
       .hero-content {
 
-        width: 100%;
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        margin: 0 auto !important;
 
       }
-
 
       .hero-title {
 
-        font-size:
-          clamp(
-            2rem,
-            8vw,
-            3rem
-          );
+        width: 100% !important;
 
-        line-height: 1.08;
+        max-width: 100% !important;
 
-        letter-spacing: -0.035em;
+        font-size: clamp(
+          2rem,
+          8vw,
+          3rem
+        ) !important;
 
-        margin-bottom: 10px;
+        line-height: 1.08 !important;
+
+        letter-spacing: -0.035em !important;
+
+        overflow-wrap: anywhere !important;
 
       }
-
 
       .hero-subtitle {
 
-        font-size:
-          clamp(
-            1rem,
-            4.5vw,
-            1.25rem
-          );
+        width: 100% !important;
 
-        line-height: 1.45;
+        max-width: 100% !important;
 
-        max-width: 100%;
+        font-size: clamp(
+          1.05rem,
+          4.8vw,
+          1.3rem
+        ) !important;
+
+        line-height: 1.45 !important;
+
+        overflow-wrap: anywhere !important;
 
       }
 
 
-      /* -------------------------------------------------------
+      /* =======================================================
          MAIN
-      ------------------------------------------------------- */
+      ======================================================= */
 
       main {
 
-        width: 100%;
+        width: 100% !important;
 
-        margin: 0;
+        max-width: 100% !important;
+
+        min-width: 0 !important;
+
+        margin: 0 !important;
 
         padding:
-          18px
+          16px
           0
-          90px;
+          100px !important;
+
+        overflow: hidden !important;
 
       }
 
 
-      /* -------------------------------------------------------
+      /* =======================================================
          FILTROS
-      ------------------------------------------------------- */
+      ======================================================= */
 
       .filters {
 
-        margin-left: 10px;
+        width: calc(100% - 20px) !important;
 
-        margin-right: 10px;
+        max-width: none !important;
 
-        padding: 17px;
+        margin:
+          0
+          10px
+          22px !important;
 
-        border-radius: 15px;
+        padding: 18px !important;
+
+        border-radius: 16px !important;
 
       }
-
 
       .filters-header {
 
-        align-items: flex-start;
+        width: 100% !important;
 
-        gap: 12px;
+        display: flex !important;
+
+        flex-direction: column !important;
+
+        align-items: flex-start !important;
+
+        gap: 10px !important;
+
+        margin-bottom: 20px !important;
 
       }
-
 
       .filters-title {
 
-        font-size: 18px;
+        font-size: 20px !important;
+
+        line-height: 1.2 !important;
 
       }
-
 
       .results-count {
 
-        font-size: 14px;
+        font-size: 15px !important;
+
+        line-height: 1.4 !important;
 
       }
 
+      .clear-filters {
+
+        font-size: 15px !important;
+
+        padding: 5px 0 !important;
+
+      }
 
       .filter-grid {
 
-        grid-template-columns: 1fr;
+        width: 100% !important;
 
-        gap: 18px;
+        display: grid !important;
+
+        grid-template-columns: 1fr !important;
+
+        gap: 20px !important;
+
+      }
+
+      .filter-group {
+
+        width: 100% !important;
+
+        min-width: 0 !important;
+
+      }
+
+      .filter-label {
+
+        font-size: 13px !important;
 
       }
 
 
-      /* -------------------------------------------------------
-         AMBIENTES
-      ------------------------------------------------------- */
+      /* =======================================================
+         BOTONES AMBIENTES
+      ======================================================= */
 
       .environment-buttons {
 
+        width: 100% !important;
+
+        display: grid !important;
+
         grid-template-columns:
           repeat(
             2,
             minmax(0, 1fr)
-          );
+          ) !important;
 
-        gap: 8px;
+        gap: 9px !important;
 
       }
-
 
       .environment-button {
 
-        width: 100%;
+        width: 100% !important;
 
-        min-height: 48px;
+        min-width: 0 !important;
 
-        font-size: 15px;
+        min-height: 52px !important;
+
+        padding:
+          8px
+          5px !important;
+
+        font-size: 15px !important;
+
+        line-height: 1.2 !important;
+
+        white-space: normal !important;
+
+        overflow-wrap: anywhere !important;
 
       }
 
 
-      /* -------------------------------------------------------
-         FILTROS AMENITIES
-      ------------------------------------------------------- */
+      /* =======================================================
+         BARRIO
+      ======================================================= */
+
+      .select-wrapper {
+
+        width: 100% !important;
+
+      }
+
+      .neighborhood-select {
+
+        width: 100% !important;
+
+        min-height: 52px !important;
+
+        padding:
+          0
+          42px
+          0
+          15px !important;
+
+        font-size: 16px !important;
+
+      }
+
+      .select-wrapper::after {
+
+        right: 15px !important;
+
+        font-size: 21px !important;
+
+      }
+
+
+      /* =======================================================
+         FILTROS PERRO / GATO / LAVARROPAS
+      ======================================================= */
 
       .amenity-filters {
 
-        display: grid;
+        width: 100% !important;
 
-        grid-template-columns: 1fr;
+        display: grid !important;
 
-        gap: 9px;
+        grid-template-columns: 1fr !important;
 
-        margin-top: 18px;
+        gap: 9px !important;
+
+        margin-top: 20px !important;
 
       }
-
 
       .amenity-button {
 
-        width: 100%;
+        width: 100% !important;
 
-        min-height: 46px;
+        min-height: 52px !important;
 
-        font-size: 15px;
+        padding:
+          0
+          14px !important;
+
+        font-size: 16px !important;
+
+        border-radius: 12px !important;
 
       }
 
 
-      /* -------------------------------------------------------
-         GRID PROPIEDADES
-      ------------------------------------------------------- */
+      /* =======================================================
+         GRID DE PROPIEDADES
+      ======================================================= */
 
       .properties-grid {
 
-        width: 100%;
+        width: 100% !important;
 
-        display: grid;
+        max-width: 100% !important;
 
-        grid-template-columns: 1fr;
+        min-width: 0 !important;
 
-        gap: 18px;
+        display: grid !important;
+
+        grid-template-columns:
+          minmax(0, 1fr) !important;
+
+        gap: 20px !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
 
       }
 
 
-      /* -------------------------------------------------------
-         TARJETA
-      ------------------------------------------------------- */
+      /* =======================================================
+         TARJETA — 100% DE LA PANTALLA
+      ======================================================= */
 
       .property-card {
 
-        width: 100%;
+        width: 100% !important;
 
-        min-width: 0;
+        max-width: 100% !important;
 
-        border-radius: 0;
+        min-width: 0 !important;
 
-        border-left: none;
+        margin: 0 !important;
 
-        border-right: none;
+        border-radius: 0 !important;
+
+        border-left: none !important;
+
+        border-right: none !important;
+
+        overflow: hidden !important;
+
+        transform: none !important;
+
+      }
+
+      .property-card:hover {
+
+        transform: none !important;
 
       }
 
 
-      /* -------------------------------------------------------
-         FOTO PROPIEDAD
-      ------------------------------------------------------- */
+      /* =======================================================
+         FOTO — TODO EL ANCHO
+      ======================================================= */
 
       .property-image-container {
 
-        width: 100%;
+        position: relative !important;
 
-        height: auto;
+        width: 100% !important;
 
-        aspect-ratio: 4 / 3;
+        max-width: 100% !important;
 
-        max-height: none;
+        height: auto !important;
+
+        aspect-ratio: 4 / 3 !important;
+
+        max-height: none !important;
+
+        overflow: hidden !important;
 
       }
-
 
       .property-image {
 
-        width: 100%;
+        display: block !important;
 
-        height: 100%;
+        width: 100% !important;
 
-        object-fit: cover;
+        max-width: none !important;
+
+        height: 100% !important;
+
+        object-fit: cover !important;
+
+        object-position: center center !important;
 
       }
 
 
-      /* -------------------------------------------------------
-         CONTENIDO
-      ------------------------------------------------------- */
+      /* =======================================================
+         BADGES
+      ======================================================= */
+
+      .image-badge {
+
+        top: 12px !important;
+
+        left: 12px !important;
+
+        padding:
+          8px
+          12px !important;
+
+        font-size: 13px !important;
+
+      }
+
+      .photos-badge {
+
+        right: 12px !important;
+
+        bottom: 12px !important;
+
+        padding:
+          8px
+          12px !important;
+
+        font-size: 13px !important;
+
+      }
+
+
+      /* =======================================================
+         CONTENIDO TARJETA
+      ======================================================= */
 
       .property-content {
 
-        padding:
-          20px
-          18px
-          22px;
+        width: 100% !important;
 
-        gap: 15px;
+        max-width: 100% !important;
+
+        min-width: 0 !important;
+
+        padding:
+          22px
+          18px
+          24px !important;
+
+        gap: 16px !important;
+
+        overflow: hidden !important;
 
       }
-
 
       .property-location {
 
-        font-size: 15px;
+        width: 100% !important;
+
+        font-size: 15px !important;
+
+        line-height: 1.4 !important;
 
       }
-
 
       .property-title {
 
-        font-size: 24px;
+        width: 100% !important;
 
-        line-height: 1.2;
+        font-size: 26px !important;
+
+        line-height: 1.2 !important;
+
+        letter-spacing: -0.025em !important;
+
+        overflow-wrap: anywhere !important;
+
+        word-break: break-word !important;
 
       }
-
 
       .property-address {
 
-        font-size: 15px;
+        width: 100% !important;
 
-        line-height: 1.5;
+        font-size: 16px !important;
+
+        line-height: 1.55 !important;
+
+        overflow-wrap: anywhere !important;
+
+        word-break: break-word !important;
 
       }
 
 
-      /* -------------------------------------------------------
+      /* =======================================================
          PRECIO
-      ------------------------------------------------------- */
+      ======================================================= */
 
       .property-price {
 
+        width: 100% !important;
+
+        display: flex !important;
+
+        align-items: flex-start !important;
+
+        justify-content: flex-start !important;
+
+        flex-direction: column !important;
+
+        gap: 7px !important;
+
         padding:
-          17px
-          0;
+          18px
+          0 !important;
 
       }
-
 
       .price-label {
 
-        font-size: 12px;
+        font-size: 12px !important;
 
       }
-
 
       .price-value {
 
-        font-size: 27px;
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        font-size: 29px !important;
+
+        line-height: 1.15 !important;
+
+        text-align: left !important;
+
+        overflow-wrap: anywhere !important;
+
+        word-break: break-word !important;
 
       }
 
 
-      /* -------------------------------------------------------
-         COSTOS
-      ------------------------------------------------------- */
+      /* =======================================================
+         EXPENSAS / GASTOS
+      ======================================================= */
 
       .property-costs {
+
+        width: 100% !important;
+
+        display: grid !important;
 
         grid-template-columns:
           repeat(
             2,
             minmax(0, 1fr)
-          );
+          ) !important;
 
-        gap: 10px;
+        gap: 10px !important;
 
       }
-
 
       .cost-box {
 
-        padding: 12px;
+        min-width: 0 !important;
+
+        padding: 13px !important;
 
       }
-
 
       .cost-label {
 
-        font-size: 10px;
+        font-size: 10px !important;
 
       }
-
 
       .cost-value {
 
-        font-size: 14px;
+        font-size: 14px !important;
 
-        line-height: 1.4;
+        line-height: 1.4 !important;
+
+        overflow-wrap: anywhere !important;
+
+        word-break: break-word !important;
 
       }
 
 
-      /* -------------------------------------------------------
+      /* =======================================================
          AMENITIES
-      ------------------------------------------------------- */
+      ======================================================= */
+
+      .property-amenities {
+
+        width: 100% !important;
+
+        display: flex !important;
+
+        flex-wrap: wrap !important;
+
+        gap: 8px !important;
+
+      }
 
       .amenity-chip {
 
-        font-size: 13px;
+        max-width: 100% !important;
+
+        font-size: 14px !important;
 
         padding:
           8px
-          11px;
+          11px !important;
+
+        overflow-wrap: anywhere !important;
 
       }
 
 
-      /* -------------------------------------------------------
+      /* =======================================================
          DESCRIPCIÓN
-      ------------------------------------------------------- */
+      ======================================================= */
 
       .description-button {
 
-        min-height: 46px;
+        width: 100% !important;
 
-        font-size: 15px;
+        min-height: 52px !important;
+
+        font-size: 16px !important;
 
       }
 
 
-      /* -------------------------------------------------------
+      /* =======================================================
          WHATSAPP
-      ------------------------------------------------------- */
+      ======================================================= */
+
+      .property-actions {
+
+        width: 100% !important;
+
+      }
 
       .whatsapp-button {
 
-        min-height: 52px;
+        width: 100% !important;
 
-        font-size: 15px;
+        min-height: 56px !important;
+
+        font-size: 16px !important;
 
       }
 
 
-      /* -------------------------------------------------------
-         MODAL
-      ------------------------------------------------------- */
+      /* =======================================================
+         MODAL DESCRIPCIÓN
+      ======================================================= */
 
       .description-modal {
 
-        padding: 10px;
+        width: 100% !important;
+
+        height: 100% !important;
+
+        padding: 10px !important;
 
       }
-
 
       .description-panel {
 
-        width: 100%;
+        width: 100% !important;
 
-        max-height: 90vh;
+        max-width: 100% !important;
+
+        max-height: 90vh !important;
 
         padding:
-          22px
-          18px;
+          24px
+          18px !important;
 
-        border-radius: 17px;
+        border-radius: 17px !important;
+
+        overflow-y: auto !important;
 
       }
-
 
       .description-modal-title {
 
-        font-size: 23px;
+        font-size: 24px !important;
+
+        line-height: 1.2 !important;
 
       }
 
+      .description-modal-location {
+
+        font-size: 15px !important;
+
+      }
 
       .description-modal-text {
 
-        font-size: 16px;
+        font-size: 17px !important;
 
-        line-height: 1.7;
+        line-height: 1.7 !important;
 
       }
 
 
-      /* -------------------------------------------------------
+      /* =======================================================
          GALERÍA
-      ------------------------------------------------------- */
+      ======================================================= */
 
       .gallery {
 
-        padding: 10px;
+        width: 100% !important;
+
+        height: 100% !important;
+
+        padding: 8px !important;
 
       }
-
 
       .gallery-image {
 
-        max-width: 100%;
+        width: auto !important;
 
-        max-height: 82vh;
+        max-width: 100% !important;
 
-        border-radius: 7px;
+        max-height: 82vh !important;
+
+        object-fit: contain !important;
 
       }
-
 
       .gallery-close {
 
-        top: 12px;
+        top: 10px !important;
 
-        right: 12px;
+        right: 10px !important;
+
+        width: 46px !important;
+
+        height: 46px !important;
 
       }
-
 
       .gallery-prev {
 
-        left: 8px;
+        left: 7px !important;
 
       }
-
 
       .gallery-next {
 
-        right: 8px;
+        right: 7px !important;
 
       }
 
 
-      /* -------------------------------------------------------
+      /* =======================================================
          WHATSAPP FLOTANTE
-      ------------------------------------------------------- */
+      ======================================================= */
 
       .floating-whatsapp {
 
-        width: 58px;
+        width: 60px !important;
 
-        height: 58px;
+        height: 60px !important;
 
-        right: 15px;
+        right: 14px !important;
 
-        bottom: 15px;
+        bottom: 14px !important;
+
+        z-index: 5000 !important;
 
       }
 
@@ -2258,33 +2489,28 @@
        CELULARES PEQUEÑOS
     ========================================================= */
 
-    @media (max-width: 450px) {
-
-      /* -------------------------------------------------------
-         PORTADA
-      ------------------------------------------------------- */
+    @media screen and (max-width: 450px) {
 
       .hero-image {
 
-        height:
-          clamp(
-            200px,
-            64vw,
-            280px
-          );
+        width: 100% !important;
+
+        height: 64vw !important;
+
+        min-height: 205px !important;
+
+        max-height: 290px !important;
 
       }
-
 
       .hero-bottom {
 
         padding:
           24px
-          15px
-          28px;
+          14px
+          28px !important;
 
       }
-
 
       .hero-title {
 
@@ -2293,161 +2519,152 @@
             1.9rem,
             8.5vw,
             2.5rem
-          );
+          ) !important;
 
       }
-
 
       .hero-subtitle {
 
         font-size:
           clamp(
-            0.98rem,
-            4.3vw,
-            1.1rem
-          );
+            1rem,
+            4.5vw,
+            1.15rem
+          ) !important;
 
       }
-
-
-      /* -------------------------------------------------------
-         MAIN
-      ------------------------------------------------------- */
 
       main {
 
-        padding-top: 14px;
+        width: 100% !important;
+
+        padding:
+          14px
+          0
+          100px !important;
 
       }
-
-
-      /* -------------------------------------------------------
-         FILTROS
-      ------------------------------------------------------- */
 
       .filters {
 
-        margin-left: 6px;
+        width: calc(100% - 12px) !important;
 
-        margin-right: 6px;
+        margin-left: 6px !important;
 
-        padding: 15px;
+        margin-right: 6px !important;
+
+        padding: 15px !important;
+
+        border-radius: 15px !important;
 
       }
 
-
-      /* -------------------------------------------------------
-         AMBIENTES
-      ------------------------------------------------------- */
-
       .environment-buttons {
+
+        width: 100% !important;
 
         grid-template-columns:
           repeat(
             2,
             minmax(0, 1fr)
-          );
+          ) !important;
+
+        gap: 8px !important;
 
       }
-
 
       .environment-button {
 
-        min-height: 48px;
+        min-height: 52px !important;
 
-        font-size: 14px;
+        font-size: 15px !important;
 
       }
-
-
-      /* -------------------------------------------------------
-         TARJETAS
-      ------------------------------------------------------- */
 
       .property-card {
 
-        border-radius: 0;
+        width: 100% !important;
+
+        max-width: 100% !important;
+
+        border-radius: 0 !important;
 
       }
-
 
       .property-image-container {
 
-        aspect-ratio: 4 / 3;
+        width: 100% !important;
+
+        aspect-ratio: 4 / 3 !important;
 
       }
-
 
       .property-content {
 
+        width: 100% !important;
+
         padding:
-          18px
-          16px
-          20px;
+          19px
+          15px
+          21px !important;
 
       }
-
 
       .property-title {
 
-        font-size: 23px;
+        font-size: 24px !important;
 
       }
-
 
       .property-address {
 
-        font-size: 15px;
+        font-size: 16px !important;
 
       }
-
 
       .property-price {
 
-        align-items: flex-start;
+        flex-direction: column !important;
 
-        flex-direction: column;
+        align-items: flex-start !important;
 
-        gap: 7px;
+        gap: 7px !important;
 
       }
-
 
       .price-value {
 
-        font-size: 26px;
+        font-size: 27px !important;
 
-        text-align: left;
+        text-align: left !important;
 
       }
-
 
       .property-costs {
 
-        grid-template-columns: 1fr;
+        width: 100% !important;
+
+        grid-template-columns: 1fr !important;
 
       }
-
 
       .amenity-chip {
 
-        font-size: 13px;
+        font-size: 14px !important;
 
       }
-
 
       .description-button {
 
-        min-height: 48px;
+        min-height: 52px !important;
 
       }
 
-
       .whatsapp-button {
 
-        min-height: 53px;
+        min-height: 55px !important;
 
-        font-size: 15px;
+        font-size: 16px !important;
 
       }
 
@@ -2459,16 +2676,13 @@
 
 
 <body>
-<div style="background:red;color:white;font-size:30px;text-align:center;padding:20px;">
-    VERSION NUEVA
-</div>
+
 
   <!-- =======================================================
        HERO
   ======================================================== -->
 
   <header class="hero">
-
 
     <div class="hero-image">
 
@@ -2480,7 +2694,6 @@
       <div class="hero-image-overlay"></div>
 
     </div>
-
 
     <div
       id="heroBottom"
@@ -2516,13 +2729,7 @@
 
   <main>
 
-
-    <!-- =====================================================
-         FILTERS
-    ====================================================== -->
-
     <section class="filters">
-
 
       <div class="filters-header">
 
@@ -2541,7 +2748,6 @@
 
         </div>
 
-
         <button
           id="clearFilters"
           class="clear-filters"
@@ -2554,7 +2760,6 @@
 
 
       <div class="filter-grid">
-
 
         <div class="filter-group">
 
@@ -2601,7 +2806,6 @@
 
       <div class="amenity-filters">
 
-
         <button
           id="filterDog"
           class="amenity-button"
@@ -2609,7 +2813,6 @@
         >
           🐶 Apto perro
         </button>
-
 
         <button
           id="filterCat"
@@ -2619,7 +2822,6 @@
           🐱 Apto gato
         </button>
 
-
         <button
           id="filterLaundry"
           class="amenity-button"
@@ -2628,15 +2830,10 @@
           🧺 Lavarropas
         </button>
 
-
       </div>
 
     </section>
 
-
-    <!-- =====================================================
-         PROPERTIES
-    ====================================================== -->
 
     <section
       id="propertiesContainer"
@@ -2686,7 +2883,6 @@
 
     <div class="description-panel">
 
-
       <button
         id="descriptionClose"
         class="description-close"
@@ -2696,7 +2892,6 @@
         ×
       </button>
 
-
       <h2
         id="descriptionModalTitle"
         class="description-modal-title"
@@ -2704,18 +2899,15 @@
         Departamento
       </h2>
 
-
       <div
         id="descriptionModalLocation"
         class="description-modal-location"
       ></div>
 
-
       <div
         id="descriptionModalText"
         class="description-modal-text"
       ></div>
-
 
     </div>
 
@@ -2732,7 +2924,6 @@
     aria-hidden="true"
   >
 
-
     <button
       id="galleryClose"
       class="gallery-close"
@@ -2741,7 +2932,6 @@
     >
       ×
     </button>
-
 
     <button
       id="galleryPrev"
@@ -2752,14 +2942,12 @@
       ‹
     </button>
 
-
     <img
       id="galleryImage"
       class="gallery-image"
       src=""
       alt="Foto del departamento"
     >
-
 
     <button
       id="galleryNext"
@@ -2770,14 +2958,12 @@
       ›
     </button>
 
-
     <div
       id="galleryCounter"
       class="gallery-counter"
     >
       1 / 1
     </div>
-
 
   </div>
 
@@ -3003,7 +3189,6 @@
 
       }
 
-
       return String(valor)
 
         .trim()
@@ -3052,7 +3237,6 @@
         const clave =
           normalizarClave(nombre);
 
-
         if (
           Object.prototype.hasOwnProperty.call(
             propiedad,
@@ -3062,7 +3246,6 @@
 
           const valor =
             propiedad[clave];
-
 
           if (
             valor !== null &&
@@ -3078,7 +3261,6 @@
 
       }
 
-
       return "";
 
     }
@@ -3093,13 +3275,11 @@
       const texto =
         normalizarTexto(valor);
 
-
       if (!texto) {
 
         return false;
 
       }
-
 
       return [
 
@@ -3132,49 +3312,41 @@
 
       }
 
-
       const texto =
         String(url).trim();
-
 
       let match =
         texto.match(
           /\/file\/d\/([a-zA-Z0-9_-]+)/
         );
 
-
       if (match) {
 
         return match[1];
 
       }
-
 
       match =
         texto.match(
           /[?&]id=([a-zA-Z0-9_-]+)/
         );
 
-
       if (match) {
 
         return match[1];
 
       }
-
 
       match =
         texto.match(
           /\/d\/([a-zA-Z0-9_-]+)/
         );
 
-
       if (match) {
 
         return match[1];
 
       }
-
 
       if (
         /^[a-zA-Z0-9_-]{20,}$/.test(
@@ -3185,7 +3357,6 @@
         return texto;
 
       }
-
 
       return "";
 
@@ -3200,17 +3371,14 @@
 
       }
 
-
       const id =
         extraerDriveId(url);
-
 
       if (!id) {
 
         return url;
 
       }
-
 
       return (
         "https://drive.google.com/thumbnail" +
@@ -3230,7 +3398,6 @@
 
       const fotos = [];
 
-
       Object.keys(propiedad)
 
         .filter(
@@ -3248,13 +3415,11 @@
 
             }
 
-
             if (b === "fotos") {
 
               return 1;
 
             }
-
 
             const na =
               parseInt(
@@ -3264,7 +3429,6 @@
                 )
               ) || 0;
 
-
             const nb =
               parseInt(
                 b.replace(
@@ -3272,7 +3436,6 @@
                   ""
                 )
               ) || 0;
-
 
             return na - nb;
 
@@ -3285,13 +3448,11 @@
             const valor =
               propiedad[clave];
 
-
             if (!valor) {
 
               return;
 
             }
-
 
             const urls =
               String(valor)
@@ -3306,7 +3467,6 @@
 
                 .filter(Boolean);
 
-
             urls.forEach(
               url => {
 
@@ -3314,7 +3474,6 @@
                   convertirImagenDrive(
                     url
                   );
-
 
                 if (
                   imagen &&
@@ -3334,7 +3493,6 @@
 
           }
         );
-
 
       return fotos;
 
@@ -3391,7 +3549,6 @@
 
       }
 
-
       return String(valor).trim();
 
     }
@@ -3412,7 +3569,6 @@
             Date.now()
           );
 
-
         if (!response.ok) {
 
           throw new Error(
@@ -3421,10 +3577,8 @@
 
         }
 
-
         const data =
           await response.json();
-
 
         if (!data.ok) {
 
@@ -3432,10 +3586,8 @@
 
         }
 
-
         const config =
           data.config || {};
-
 
         if (config.titulo) {
 
@@ -3444,14 +3596,12 @@
 
         }
 
-
         if (config.subtitulo) {
 
           elements.heroSubtitle.textContent =
             config.subtitulo;
 
         }
-
 
         if (config.color_portada) {
 
@@ -3463,14 +3613,12 @@
 
         }
 
-
         if (config.foto_portada) {
 
           const portada =
             convertirImagenDrive(
               config.foto_portada
             );
-
 
           if (portada) {
 
@@ -3481,7 +3629,6 @@
           }
 
         }
-
 
         if (config.whatsapp) {
 
@@ -3494,7 +3641,6 @@
             );
 
         }
-
 
         actualizarWhatsApp();
 
@@ -3522,7 +3668,6 @@
         state.whatsapp ||
         "5491125772852";
 
-
       elements.floatingWhatsapp.href =
         `https://wa.me/${numero}`;
 
@@ -3543,10 +3688,8 @@
       const valor =
         propiedad.valor;
 
-
       let mensaje =
         "Hola! Me interesa un departamento.";
-
 
       if (ambientes) {
 
@@ -3555,14 +3698,12 @@
 
       }
 
-
       if (barrio) {
 
         mensaje +=
           ` Barrio: ${barrio}.`;
 
       }
-
 
       if (direccion) {
 
@@ -3571,7 +3712,6 @@
 
       }
 
-
       if (valor) {
 
         mensaje +=
@@ -3579,14 +3719,12 @@
 
       }
 
-
       const url =
         `https://wa.me/${state.whatsapp}` +
         `?text=` +
         encodeURIComponent(
           mensaje
         );
-
 
       window.open(
         url,
@@ -3607,14 +3745,12 @@
 
         mostrarLoading();
 
-
         const response =
           await fetch(
             CSV_URL +
             "&t=" +
             Date.now()
           );
-
 
         if (!response.ok) {
 
@@ -3624,10 +3760,8 @@
 
         }
 
-
         const csv =
           await response.text();
-
 
         Papa.parse(
           csv,
@@ -3830,7 +3964,6 @@
             }
           );
 
-
       construirFiltros();
 
       aplicarFiltros();
@@ -3854,7 +3987,6 @@
 
           .filter(Boolean);
 
-
       state.environments =
         [
           ...new Set(
@@ -3867,15 +3999,12 @@
           )
         ];
 
-
       state.environments.sort(
         ordenarValores
       );
 
-
       elements.environmentButtons
         .innerHTML = "";
-
 
       elements.environmentButtons
         .appendChild(
@@ -3884,7 +4013,6 @@
             ""
           )
         );
-
 
       state.environments
         .forEach(
@@ -3901,7 +4029,6 @@
           }
         );
 
-
       const barrios =
         state.properties
 
@@ -3911,7 +4038,6 @@
           )
 
           .filter(Boolean);
-
 
       state.neighborhoods =
         [
@@ -3926,7 +4052,6 @@
           )
         ];
 
-
       state.neighborhoods.sort(
         (a, b) =>
           a.localeCompare(
@@ -3939,7 +4064,6 @@
           )
       );
 
-
       elements.neighborhoodSelect
         .innerHTML =
         `
@@ -3947,7 +4071,6 @@
             Todos los barrios
           </option>
         `;
-
 
       state.neighborhoods
         .forEach(
@@ -3958,14 +4081,11 @@
                 "option"
               );
 
-
             option.value =
               barrio;
 
-
             option.textContent =
               barrio;
-
 
             elements.neighborhoodSelect
               .appendChild(
@@ -3989,13 +4109,11 @@
             .replace(",", ".")
         );
 
-
       const nb =
         parseFloat(
           String(b)
             .replace(",", ".")
         );
-
 
       if (
         !Number.isNaN(na) &&
@@ -4005,7 +4123,6 @@
         return na - nb;
 
       }
-
 
       return String(a)
         .localeCompare(
@@ -4034,22 +4151,17 @@
           "button"
         );
 
-
       button.type =
         "button";
-
 
       button.className =
         "environment-button";
 
-
       button.textContent =
         texto;
 
-
       button.dataset.value =
         valor;
-
 
       if (
         state.selectedEnvironment ===
@@ -4062,7 +4174,6 @@
 
       }
 
-
       button.addEventListener(
         "click",
         () => {
@@ -4070,14 +4181,12 @@
           state.selectedEnvironment =
             valor;
 
-
           actualizarBotonesAmbientes();
 
           aplicarFiltros();
 
         }
       );
-
 
       return button;
 
@@ -4096,7 +4205,6 @@
 
             const valor =
               button.dataset.value;
-
 
             button.classList.toggle(
               "active",
@@ -4121,12 +4229,10 @@
           state.selectedEnvironment
         );
 
-
       const barrioSeleccionado =
         normalizarTexto(
           state.neighborhood
         );
-
 
       state.filteredProperties =
         state.properties.filter(
@@ -4141,7 +4247,6 @@
                   propiedad.ambientes
                 );
 
-
               if (
                 ambiente !==
                 ambienteSeleccionado
@@ -4153,7 +4258,6 @@
 
             }
 
-
             if (
               barrioSeleccionado
             ) {
@@ -4162,7 +4266,6 @@
                 normalizarTexto(
                   propiedad.barrio
                 );
-
 
               if (
                 barrio !==
@@ -4175,7 +4278,6 @@
 
             }
 
-
             if (
               state.dog &&
               !esVerdadero(
@@ -4186,7 +4288,6 @@
               return false;
 
             }
-
 
             if (
               state.cat &&
@@ -4199,7 +4300,6 @@
 
             }
 
-
             if (
               state.laundry &&
               !esVerdadero(
@@ -4211,12 +4311,10 @@
 
             }
 
-
             return true;
 
           }
         );
-
 
       renderizarPropiedades();
 
@@ -4233,7 +4331,6 @@
 
       const cantidad =
         state.filteredProperties.length;
-
 
       if (cantidad === 1) {
 
@@ -4261,7 +4358,6 @@
       elements.propertiesContainer
         .innerHTML = "";
 
-
       if (
         state.filteredProperties.length ===
         0
@@ -4272,7 +4368,6 @@
         return;
 
       }
-
 
       state.filteredProperties
         .forEach(
@@ -4306,7 +4401,6 @@
           "article"
         );
 
-
       card.className =
         "property-card";
 
@@ -4320,10 +4414,8 @@
           "div"
         );
 
-
       imageContainer.className =
         "property-image-container";
-
 
       if (
         propiedad.disponibilidad
@@ -4334,21 +4426,17 @@
             "div"
           );
 
-
         badge.className =
           "image-badge available";
 
-
         badge.textContent =
           propiedad.disponibilidad;
-
 
         imageContainer.appendChild(
           badge
         );
 
       }
-
 
       if (
         propiedad.fotos.length > 0
@@ -4359,14 +4447,11 @@
             "img"
           );
 
-
         img.className =
           "property-image";
 
-
         img.src =
           propiedad.fotos[0];
-
 
         img.alt =
           `Departamento en ${
@@ -4374,16 +4459,13 @@
             "alquiler"
           }`;
 
-
         img.loading =
           index < 3
             ? "eager"
             : "lazy";
 
-
         img.decoding =
           "async";
-
 
         img.onerror =
           () => {
@@ -4391,16 +4473,13 @@
             img.style.display =
               "none";
 
-
             const placeholder =
               document.createElement(
                 "div"
               );
 
-
             placeholder.className =
               "property-image-placeholder";
-
 
             placeholder.innerHTML =
               `
@@ -4413,14 +4492,12 @@
                 </div>
               `;
 
-
             imageContainer
               .appendChild(
                 placeholder
               );
 
           };
-
 
         img.addEventListener(
           "click",
@@ -4434,11 +4511,9 @@
           }
         );
 
-
         imageContainer.appendChild(
           img
         );
-
 
         if (
           propiedad.fotos.length > 1
@@ -4449,16 +4524,13 @@
               "div"
             );
 
-
           photosBadge.className =
             "photos-badge";
-
 
           photosBadge.textContent =
             `📷 ${
               propiedad.fotos.length
             } fotos`;
-
 
           imageContainer
             .appendChild(
@@ -4490,7 +4562,6 @@
 
       }
 
-
       card.appendChild(
         imageContainer
       );
@@ -4505,10 +4576,8 @@
           "div"
         );
 
-
       content.className =
         "property-content";
-
 
       if (
         propiedad.barrio
@@ -4519,10 +4588,8 @@
             "div"
           );
 
-
         location.className =
           "property-location";
-
 
         location.innerHTML =
           `
@@ -4534,7 +4601,6 @@
               )}
             </span>
           `;
-
 
         content.appendChild(
           location
@@ -4552,10 +4618,8 @@
           "h2"
         );
 
-
       title.className =
         "property-title";
-
 
       if (
         propiedad.ambientes
@@ -4564,12 +4628,10 @@
         const ambiente =
           propiedad.ambientes;
 
-
         const ambienteNormalizado =
           normalizarTexto(
             ambiente
           );
-
 
         title.textContent =
           ambienteNormalizado.includes(
@@ -4593,7 +4655,6 @@
 
       }
 
-
       content.appendChild(
         title
       );
@@ -4612,16 +4673,13 @@
             "div"
           );
 
-
         address.className =
           "property-address";
-
 
         address.textContent =
           `📍 ${
             propiedad.direccion
           }`;
-
 
         content.appendChild(
           address
@@ -4639,10 +4697,8 @@
           "div"
         );
 
-
       price.className =
         "property-price";
-
 
       price.innerHTML =
         `
@@ -4663,7 +4719,6 @@
           </div>
         `;
 
-
       content.appendChild(
         price
       );
@@ -4683,10 +4738,8 @@
             "div"
           );
 
-
         costs.className =
           "property-costs";
-
 
         if (
           propiedad.expensas
@@ -4711,7 +4764,6 @@
 
         }
 
-
         if (
           propiedad.gastos
         ) {
@@ -4735,7 +4787,6 @@
 
         }
 
-
         content.appendChild(
           costs
         );
@@ -4749,7 +4800,6 @@
 
       const amenities = [];
 
-
       if (
         esVerdadero(
           propiedad.perro
@@ -4761,7 +4811,6 @@
         );
 
       }
-
 
       if (
         esVerdadero(
@@ -4775,7 +4824,6 @@
 
       }
 
-
       if (
         esVerdadero(
           propiedad.lavado
@@ -4788,7 +4836,6 @@
 
       }
 
-
       if (
         amenities.length > 0
       ) {
@@ -4798,10 +4845,8 @@
             "div"
           );
 
-
         amenitiesContainer.className =
           "property-amenities";
-
 
         amenities.forEach(
           amenity => {
@@ -4811,14 +4856,11 @@
                 "span"
               );
 
-
             chip.className =
               "amenity-chip";
 
-
             chip.textContent =
               amenity;
-
 
             amenitiesContainer
               .appendChild(
@@ -4827,7 +4869,6 @@
 
           }
         );
-
 
         content.appendChild(
           amenitiesContainer
@@ -4849,14 +4890,11 @@
             "button"
           );
 
-
         descriptionButton.type =
           "button";
 
-
         descriptionButton.className =
           "description-button";
-
 
         descriptionButton.innerHTML =
           `
@@ -4869,7 +4907,6 @@
             <span>→</span>
           `;
 
-
         descriptionButton.addEventListener(
           "click",
           () => {
@@ -4880,7 +4917,6 @@
 
           }
         );
-
 
         content.appendChild(
           descriptionButton
@@ -4898,24 +4934,19 @@
           "div"
         );
 
-
       actions.className =
         "property-actions";
-
 
       const button =
         document.createElement(
           "button"
         );
 
-
       button.type =
         "button";
 
-
       button.className =
         "whatsapp-button";
-
 
       button.innerHTML =
         `
@@ -4925,7 +4956,6 @@
             Consultar por WhatsApp
           </span>
         `;
-
 
       button.addEventListener(
         "click",
@@ -4938,21 +4968,17 @@
         }
       );
 
-
       actions.appendChild(
         button
       );
-
 
       content.appendChild(
         actions
       );
 
-
       card.appendChild(
         content
       );
-
 
       return card;
 
@@ -4976,22 +5002,17 @@
 
       }
 
-
       state.description.property =
         propiedad;
-
 
       state.description.scrollPosition =
         window.scrollY;
 
-
       state.description.open =
         true;
 
-
       const ambiente =
         propiedad.ambientes;
-
 
       if (ambiente) {
 
@@ -4999,7 +5020,6 @@
           normalizarTexto(
             ambiente
           );
-
 
         elements.descriptionModalTitle
           .textContent =
@@ -5025,9 +5045,7 @@
 
       }
 
-
       const ubicacion = [];
-
 
       if (
         propiedad.barrio
@@ -5039,7 +5057,6 @@
 
       }
 
-
       if (
         propiedad.direccion
       ) {
@@ -5050,18 +5067,15 @@
 
       }
 
-
       elements.descriptionModalLocation
         .textContent =
         ubicacion.join(
           " · "
         );
 
-
       elements.descriptionModalText
         .textContent =
         propiedad.descripcion;
-
 
       history.pushState(
         {
@@ -5071,17 +5085,14 @@
         "#descripcion"
       );
 
-
       document.body.classList.add(
         "modal-open"
       );
-
 
       elements.descriptionModal
         .classList.add(
           "active"
         );
-
 
       elements.descriptionModal
         .setAttribute(
@@ -5104,32 +5115,26 @@
 
       }
 
-
       state.description.open =
         false;
-
 
       state.description.property =
         null;
 
-
       document.body.classList.remove(
         "modal-open"
       );
-
 
       elements.descriptionModal
         .classList.remove(
           "active"
         );
 
-
       elements.descriptionModal
         .setAttribute(
           "aria-hidden",
           "true"
         );
-
 
       if (
         usarHistorial &&
@@ -5140,7 +5145,6 @@
         history.back();
 
       }
-
 
       requestAnimationFrame(
         () => {
@@ -5190,7 +5194,6 @@
 
           </div>
         `;
-
 
       document
         .getElementById(
@@ -5268,7 +5271,6 @@
           </div>
         `;
 
-
       elements.resultsCount.textContent =
         "No se pudieron cargar las propiedades";
 
@@ -5296,28 +5298,23 @@
       state.laundry =
         false;
 
-
       elements.neighborhoodSelect.value =
         "";
-
 
       elements.filterDog
         .classList.remove(
           "active"
         );
 
-
       elements.filterCat
         .classList.remove(
           "active"
         );
 
-
       elements.filterLaundry
         .classList.remove(
           "active"
         );
-
 
       actualizarBotonesAmbientes();
 
@@ -5338,7 +5335,6 @@
           state.neighborhood =
             event.target.value;
 
-
           aplicarFiltros();
 
         }
@@ -5353,13 +5349,11 @@
           state.dog =
             !state.dog;
 
-
           elements.filterDog
             .classList.toggle(
               "active",
               state.dog
             );
-
 
           aplicarFiltros();
 
@@ -5375,13 +5369,11 @@
           state.cat =
             !state.cat;
 
-
           elements.filterCat
             .classList.toggle(
               "active",
               state.cat
             );
-
 
           aplicarFiltros();
 
@@ -5397,13 +5389,11 @@
           state.laundry =
             !state.laundry;
 
-
           elements.filterLaundry
             .classList.toggle(
               "active",
               state.laundry
             );
-
 
           aplicarFiltros();
 
@@ -5436,22 +5426,17 @@
 
       }
 
-
       state.gallery.images =
         fotos;
-
 
       state.gallery.index =
         indice;
 
-
       state.gallery.scrollPosition =
         window.scrollY;
 
-
       state.gallery.open =
         true;
-
 
       history.pushState(
         {
@@ -5461,24 +5446,20 @@
         "#galeria"
       );
 
-
       document.body.classList.add(
         "modal-open"
       );
-
 
       elements.gallery
         .classList.add(
           "active"
         );
 
-
       elements.gallery
         .setAttribute(
           "aria-hidden",
           "false"
         );
-
 
       actualizarGaleria();
 
@@ -5497,28 +5478,23 @@
 
       }
 
-
       state.gallery.open =
         false;
-
 
       document.body.classList.remove(
         "modal-open"
       );
-
 
       elements.gallery
         .classList.remove(
           "active"
         );
 
-
       elements.gallery
         .setAttribute(
           "aria-hidden",
           "true"
         );
-
 
       if (
         usarHistorial &&
@@ -5529,7 +5505,6 @@
         history.back();
 
       }
-
 
       requestAnimationFrame(
         () => {
@@ -5550,10 +5525,8 @@
       const fotos =
         state.gallery.images;
 
-
       const indice =
         state.gallery.index;
-
 
       if (
         !fotos.length
@@ -5563,16 +5536,13 @@
 
       }
 
-
       elements.galleryImage.src =
         fotos[indice];
-
 
       elements.galleryImage.alt =
         `Foto ${
           indice + 1
         } del departamento`;
-
 
       elements.galleryCounter.textContent =
         `${
@@ -5581,12 +5551,10 @@
           fotos.length
         }`;
 
-
       elements.galleryPrev.style.display =
         fotos.length > 1
           ? "block"
           : "none";
-
 
       elements.galleryNext.style.display =
         fotos.length > 1
@@ -5601,7 +5569,6 @@
       const cantidad =
         state.gallery.images.length;
 
-
       if (
         cantidad <= 1
       ) {
@@ -5610,7 +5577,6 @@
 
       }
 
-
       state.gallery.index =
         (
           state.gallery.index -
@@ -5618,7 +5584,6 @@
           cantidad
         ) %
         cantidad;
-
 
       actualizarGaleria();
 
@@ -5630,7 +5595,6 @@
       const cantidad =
         state.gallery.images.length;
 
-
       if (
         cantidad <= 1
       ) {
@@ -5639,14 +5603,12 @@
 
       }
 
-
       state.gallery.index =
         (
           state.gallery.index +
           1
         ) %
         cantidad;
-
 
       actualizarGaleria();
 
@@ -5758,7 +5720,6 @@
 
         }
 
-
         if (
           !state.gallery.open
         ) {
@@ -5766,7 +5727,6 @@
           return;
 
         }
-
 
         if (
           event.key ===
@@ -5777,7 +5737,6 @@
 
         }
 
-
         if (
           event.key ===
           "ArrowLeft"
@@ -5786,7 +5745,6 @@
           fotoAnterior();
 
         }
-
 
         if (
           event.key ===
@@ -5819,7 +5777,6 @@
 
         }
 
-
         if (
           state.description.open
         ) {
@@ -5840,7 +5797,6 @@
 
     let touchStartX =
       0;
-
 
     let touchEndX =
       0;
@@ -5871,11 +5827,9 @@
             event.changedTouches[0]
               .screenX;
 
-
           const diferencia =
             touchEndX -
             touchStartX;
-
 
           if (
             Math.abs(
@@ -5886,7 +5840,6 @@
             return;
 
           }
-
 
           if (
             diferencia > 0
@@ -5925,6 +5878,6 @@
     iniciar();
 
   </script>
- 
+
 </body>
 </html>
