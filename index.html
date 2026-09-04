@@ -138,10 +138,6 @@
     }
 
 
-    /*
-     * FOTO SUPERIOR
-     */
-
     .hero-image {
 
       position: relative;
@@ -194,10 +190,6 @@
 
     }
 
-
-    /*
-     * ZONA UNIFORME
-     */
 
     .hero-bottom {
 
@@ -446,10 +438,6 @@
 
     }
 
-
-    /*
-     * ACTIVO = VERDE
-     */
 
     .environment-button.active {
 
@@ -1719,44 +1707,142 @@
 
 
     /* =========================================================
-       MOBILE
+       TABLET / MOBILE
     ========================================================= */
 
     @media (max-width: 800px) {
 
+      /* -------------------------------------------------------
+         PORTADA
+      ------------------------------------------------------- */
+
       .hero-image {
 
-        height: 270px;
+        width: 100%;
+
+        height:
+          clamp(
+            220px,
+            62vw,
+            360px
+          );
 
       }
 
+
+      .hero-background {
+
+        width: 100%;
+
+        height: 100%;
+
+        background-position: center center;
+
+        background-size: cover;
+
+        background-repeat: no-repeat;
+
+      }
+
+
+      .hero-image-overlay {
+
+        background:
+          linear-gradient(
+            180deg,
+            rgba(0, 0, 0, 0.02),
+            rgba(0, 0, 0, 0.18)
+          );
+
+      }
+
+
+      /* -------------------------------------------------------
+         TEXTO PORTADA
+      ------------------------------------------------------- */
 
       .hero-bottom {
 
         padding:
-          25px 16px 29px;
+          28px
+          18px
+          32px;
 
       }
 
+
+      .hero-content {
+
+        width: 100%;
+
+      }
+
+
+      .hero-title {
+
+        font-size:
+          clamp(
+            2rem,
+            8vw,
+            3rem
+          );
+
+        line-height: 1.08;
+
+        letter-spacing: -0.035em;
+
+        margin-bottom: 10px;
+
+      }
+
+
+      .hero-subtitle {
+
+        font-size:
+          clamp(
+            1rem,
+            4.5vw,
+            1.25rem
+          );
+
+        line-height: 1.45;
+
+        max-width: 100%;
+
+      }
+
+
+      /* -------------------------------------------------------
+         MAIN
+      ------------------------------------------------------- */
 
       main {
 
-        width:
-          min(
-            calc(100% - 20px),
-            1200px
-          );
+        width: 100%;
 
-        padding-top: 20px;
+        margin: 0;
+
+        padding:
+          18px
+          0
+          90px;
 
       }
 
 
+      /* -------------------------------------------------------
+         FILTROS
+      ------------------------------------------------------- */
+
       .filters {
 
-        padding: 16px;
+        margin-left: 10px;
 
-        border-radius: 14px;
+        margin-right: 10px;
+
+        padding: 17px;
+
+        border-radius: 15px;
 
       }
 
@@ -1765,17 +1851,26 @@
 
         align-items: flex-start;
 
+        gap: 12px;
+
+      }
+
+
+      .filters-title {
+
+        font-size: 18px;
+
+      }
+
+
+      .results-count {
+
+        font-size: 14px;
+
       }
 
 
       .filter-grid {
-
-        grid-template-columns: 1fr;
-
-      }
-
-
-      .properties-grid {
 
         grid-template-columns: 1fr;
 
@@ -1784,79 +1879,525 @@
       }
 
 
-      .property-image-container {
+      /* -------------------------------------------------------
+         AMBIENTES
+      ------------------------------------------------------- */
 
-        height: 235px;
+      .environment-buttons {
+
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+
+        gap: 8px;
 
       }
 
 
-      .floating-whatsapp {
+      .environment-button {
 
-        width: 56px;
+        width: 100%;
 
-        height: 56px;
+        min-height: 48px;
 
-        right: 16px;
+        font-size: 15px;
 
-        bottom: 16px;
+      }
+
+
+      /* -------------------------------------------------------
+         FILTROS AMENITIES
+      ------------------------------------------------------- */
+
+      .amenity-filters {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 9px;
+
+        margin-top: 18px;
+
+      }
+
+
+      .amenity-button {
+
+        width: 100%;
+
+        min-height: 46px;
+
+        font-size: 15px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         GRID PROPIEDADES
+      ------------------------------------------------------- */
+
+      .properties-grid {
+
+        width: 100%;
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         TARJETA
+      ------------------------------------------------------- */
+
+      .property-card {
+
+        width: 100%;
+
+        min-width: 0;
+
+        border-radius: 0;
+
+        border-left: none;
+
+        border-right: none;
+
+      }
+
+
+      /* -------------------------------------------------------
+         FOTO PROPIEDAD
+      ------------------------------------------------------- */
+
+      .property-image-container {
+
+        width: 100%;
+
+        height: auto;
+
+        aspect-ratio: 4 / 3;
+
+        max-height: none;
+
+      }
+
+
+      .property-image {
+
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+
+      }
+
+
+      /* -------------------------------------------------------
+         CONTENIDO
+      ------------------------------------------------------- */
+
+      .property-content {
+
+        padding:
+          20px
+          18px
+          22px;
+
+        gap: 15px;
+
+      }
+
+
+      .property-location {
+
+        font-size: 15px;
+
+      }
+
+
+      .property-title {
+
+        font-size: 24px;
+
+        line-height: 1.2;
+
+      }
+
+
+      .property-address {
+
+        font-size: 15px;
+
+        line-height: 1.5;
+
+      }
+
+
+      /* -------------------------------------------------------
+         PRECIO
+      ------------------------------------------------------- */
+
+      .property-price {
+
+        padding:
+          17px
+          0;
+
+      }
+
+
+      .price-label {
+
+        font-size: 12px;
+
+      }
+
+
+      .price-value {
+
+        font-size: 27px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         COSTOS
+      ------------------------------------------------------- */
+
+      .property-costs {
+
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+
+        gap: 10px;
+
+      }
+
+
+      .cost-box {
+
+        padding: 12px;
+
+      }
+
+
+      .cost-label {
+
+        font-size: 10px;
+
+      }
+
+
+      .cost-value {
+
+        font-size: 14px;
+
+        line-height: 1.4;
+
+      }
+
+
+      /* -------------------------------------------------------
+         AMENITIES
+      ------------------------------------------------------- */
+
+      .amenity-chip {
+
+        font-size: 13px;
+
+        padding:
+          8px
+          11px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         DESCRIPCIÓN
+      ------------------------------------------------------- */
+
+      .description-button {
+
+        min-height: 46px;
+
+        font-size: 15px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         WHATSAPP
+      ------------------------------------------------------- */
+
+      .whatsapp-button {
+
+        min-height: 52px;
+
+        font-size: 15px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         MODAL
+      ------------------------------------------------------- */
+
+      .description-modal {
+
+        padding: 10px;
 
       }
 
 
       .description-panel {
 
-        max-height: 88vh;
+        width: 100%;
 
-        padding: 22px;
+        max-height: 90vh;
+
+        padding:
+          22px
+          18px;
 
         border-radius: 17px;
 
       }
 
 
+      .description-modal-title {
+
+        font-size: 23px;
+
+      }
+
+
+      .description-modal-text {
+
+        font-size: 16px;
+
+        line-height: 1.7;
+
+      }
+
+
+      /* -------------------------------------------------------
+         GALERÍA
+      ------------------------------------------------------- */
+
+      .gallery {
+
+        padding: 10px;
+
+      }
+
+
+      .gallery-image {
+
+        max-width: 100%;
+
+        max-height: 82vh;
+
+        border-radius: 7px;
+
+      }
+
+
+      .gallery-close {
+
+        top: 12px;
+
+        right: 12px;
+
+      }
+
+
       .gallery-prev {
 
-        left: 10px;
+        left: 8px;
 
       }
 
 
       .gallery-next {
 
-        right: 10px;
+        right: 8px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         WHATSAPP FLOTANTE
+      ------------------------------------------------------- */
+
+      .floating-whatsapp {
+
+        width: 58px;
+
+        height: 58px;
+
+        right: 15px;
+
+        bottom: 15px;
 
       }
 
     }
 
 
+    /* =========================================================
+       CELULARES PEQUEÑOS
+    ========================================================= */
+
     @media (max-width: 450px) {
+
+      /* -------------------------------------------------------
+         PORTADA
+      ------------------------------------------------------- */
 
       .hero-image {
 
-        height: 230px;
+        height:
+          clamp(
+            200px,
+            64vw,
+            280px
+          );
+
+      }
+
+
+      .hero-bottom {
+
+        padding:
+          24px
+          15px
+          28px;
 
       }
 
 
       .hero-title {
 
-        font-size: 2rem;
+        font-size:
+          clamp(
+            1.9rem,
+            8.5vw,
+            2.5rem
+          );
 
       }
 
 
       .hero-subtitle {
 
-        font-size: 0.95rem;
+        font-size:
+          clamp(
+            0.98rem,
+            4.3vw,
+            1.1rem
+          );
+
+      }
+
+
+      /* -------------------------------------------------------
+         MAIN
+      ------------------------------------------------------- */
+
+      main {
+
+        padding-top: 14px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         FILTROS
+      ------------------------------------------------------- */
+
+      .filters {
+
+        margin-left: 6px;
+
+        margin-right: 6px;
+
+        padding: 15px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         AMBIENTES
+      ------------------------------------------------------- */
+
+      .environment-buttons {
+
+        grid-template-columns:
+          repeat(
+            2,
+            minmax(0, 1fr)
+          );
+
+      }
+
+
+      .environment-button {
+
+        min-height: 48px;
+
+        font-size: 14px;
+
+      }
+
+
+      /* -------------------------------------------------------
+         TARJETAS
+      ------------------------------------------------------- */
+
+      .property-card {
+
+        border-radius: 0;
+
+      }
+
+
+      .property-image-container {
+
+        aspect-ratio: 4 / 3;
 
       }
 
 
       .property-content {
 
-        padding: 17px;
+        padding:
+          18px
+          16px
+          20px;
+
+      }
+
+
+      .property-title {
+
+        font-size: 23px;
+
+      }
+
+
+      .property-address {
+
+        font-size: 15px;
 
       }
 
@@ -1867,12 +2408,14 @@
 
         flex-direction: column;
 
-        gap: 6px;
+        gap: 7px;
 
       }
 
 
       .price-value {
+
+        font-size: 26px;
 
         text-align: left;
 
@@ -1886,18 +2429,25 @@
       }
 
 
-      .amenity-filters {
+      .amenity-chip {
 
-        display: grid;
-
-        grid-template-columns: 1fr;
+        font-size: 13px;
 
       }
 
 
-      .amenity-button {
+      .description-button {
 
-        width: 100%;
+        min-height: 48px;
+
+      }
+
+
+      .whatsapp-button {
+
+        min-height: 53px;
+
+        font-size: 15px;
 
       }
 
@@ -1918,8 +2468,6 @@
   <header class="hero">
 
 
-    <!-- FOTO -->
-
     <div class="hero-image">
 
       <div
@@ -1931,8 +2479,6 @@
 
     </div>
 
-
-    <!-- FONDO UNIFORME -->
 
     <div
       id="heroBottom"
@@ -2008,8 +2554,6 @@
       <div class="filter-grid">
 
 
-        <!-- AMBIENTES -->
-
         <div class="filter-group">
 
           <label class="filter-label">
@@ -2023,8 +2567,6 @@
 
         </div>
 
-
-        <!-- BARRIO -->
 
         <div class="filter-group">
 
@@ -2054,8 +2596,6 @@
 
       </div>
 
-
-      <!-- AMENITIES -->
 
       <div class="amenity-filters">
 
@@ -2895,8 +3435,6 @@
           data.config || {};
 
 
-        /* TITULO */
-
         if (config.titulo) {
 
           elements.heroTitle.textContent =
@@ -2905,8 +3443,6 @@
         }
 
 
-        /* SUBTITULO */
-
         if (config.subtitulo) {
 
           elements.heroSubtitle.textContent =
@@ -2914,8 +3450,6 @@
 
         }
 
-
-        /* COLOR */
 
         if (config.color_portada) {
 
@@ -2927,8 +3461,6 @@
 
         }
 
-
-        /* FOTO */
 
         if (config.foto_portada) {
 
@@ -2948,8 +3480,6 @@
 
         }
 
-
-        /* WHATSAPP */
 
         if (config.whatsapp) {
 
@@ -3312,11 +3842,6 @@
 
     function construirFiltros() {
 
-
-      /*
-       * AMBIENTES
-       */
-
       const ambientes =
         state.properties
 
@@ -3374,10 +3899,6 @@
           }
         );
 
-
-      /*
-       * BARRIOS
-       */
 
       const barrios =
         state.properties
@@ -3524,6 +4045,10 @@
         texto;
 
 
+      button.dataset.value =
+        valor;
+
+
       if (
         state.selectedEnvironment ===
         valor
@@ -3583,50 +4108,6 @@
     }
 
 
-    /*
-     * Corrección: guardar valor real
-     */
-
-    const crearBotonAmbientesOriginal =
-      crearBotonAmbientes;
-
-
-    /* =========================================================
-       APLICAR DATA-VALUE
-    ========================================================= */
-
-    function prepararBotonesAmbientes() {
-
-      document
-        .querySelectorAll(
-          ".environment-button"
-        )
-        .forEach(
-          button => {
-
-            if (
-              button.textContent ===
-              "Todos"
-            ) {
-
-              button.dataset.value =
-                "";
-
-            }
-
-            else {
-
-              button.dataset.value =
-                button.textContent;
-
-            }
-
-          }
-        );
-
-    }
-
-
     /* =========================================================
        APLICAR FILTROS
     ========================================================= */
@@ -3648,11 +4129,6 @@
       state.filteredProperties =
         state.properties.filter(
           propiedad => {
-
-
-            /*
-             * AMBIENTES
-             */
 
             if (
               ambienteSeleccionado
@@ -3676,10 +4152,6 @@
             }
 
 
-            /*
-             * BARRIO
-             */
-
             if (
               barrioSeleccionado
             ) {
@@ -3702,10 +4174,6 @@
             }
 
 
-            /*
-             * PERRO
-             */
-
             if (
               state.dog &&
               !esVerdadero(
@@ -3718,10 +4186,6 @@
             }
 
 
-            /*
-             * GATO
-             */
-
             if (
               state.cat &&
               !esVerdadero(
@@ -3733,10 +4197,6 @@
 
             }
 
-
-            /*
-             * LAVARROPAS
-             */
 
             if (
               state.laundry &&
@@ -3863,10 +4323,6 @@
         "property-image-container";
 
 
-      /*
-       * DISPONIBILIDAD
-       */
-
       if (
         propiedad.disponibilidad
       ) {
@@ -3891,10 +4347,6 @@
 
       }
 
-
-      /*
-       * IMAGEN
-       */
 
       if (
         propiedad.fotos.length > 0
@@ -3986,10 +4438,6 @@
         );
 
 
-        /*
-         * CANTIDAD DE FOTOS
-         */
-
         if (
           propiedad.fotos.length > 1
         ) {
@@ -4060,10 +4508,6 @@
         "property-content";
 
 
-      /*
-       * BARRIO
-       */
-
       if (
         propiedad.barrio
       ) {
@@ -4097,9 +4541,9 @@
       }
 
 
-      /*
-       * TITULO
-       */
+      /* =====================================================
+         TITULO
+      ===================================================== */
 
       const title =
         document.createElement(
@@ -4119,14 +4563,24 @@
           propiedad.ambientes;
 
 
-title.textContent =
-  normalizarTexto(ambiente).includes("amb")
-    ? ambiente
-    : (
-        normalizarTexto(ambiente) === "1"
-          ? "1 ambiente"
-          : `${ambiente} ambientes`
-      );
+        const ambienteNormalizado =
+          normalizarTexto(
+            ambiente
+          );
+
+
+        title.textContent =
+          ambienteNormalizado.includes(
+            "amb"
+          )
+
+            ? ambiente
+
+            : ambienteNormalizado === "1"
+
+              ? "1 ambiente"
+
+              : `${ambiente} ambientes`;
 
       }
 
@@ -4143,9 +4597,9 @@ title.textContent =
       );
 
 
-      /*
-       * DIRECCIÓN
-       */
+      /* =====================================================
+         DIRECCIÓN
+      ===================================================== */
 
       if (
         propiedad.direccion
@@ -4174,9 +4628,9 @@ title.textContent =
       }
 
 
-      /*
-       * PRECIO
-       */
+      /* =====================================================
+         PRECIO
+      ===================================================== */
 
       const price =
         document.createElement(
@@ -4213,9 +4667,9 @@ title.textContent =
       );
 
 
-      /*
-       * EXPENSAS / GASTOS
-       */
+      /* =====================================================
+         EXPENSAS / GASTOS
+      ===================================================== */
 
       if (
         propiedad.expensas ||
@@ -4287,9 +4741,9 @@ title.textContent =
       }
 
 
-      /*
-       * AMENITIES
-       */
+      /* =====================================================
+         AMENITIES
+      ===================================================== */
 
       const amenities = [];
 
@@ -4380,9 +4834,9 @@ title.textContent =
       }
 
 
-      /*
-       * DESCRIPCIÓN
-       */
+      /* =====================================================
+         DESCRIPCIÓN
+      ===================================================== */
 
       if (
         propiedad.descripcion
@@ -4433,9 +4887,9 @@ title.textContent =
       }
 
 
-      /*
-       * WHATSAPP
-       */
+      /* =====================================================
+         WHATSAPP
+      ===================================================== */
 
       const actions =
         document.createElement(
@@ -4533,19 +4987,41 @@ title.textContent =
         true;
 
 
-      elements.descriptionModalTitle
-        .textContent =
-        propiedad.ambientes
-          ? (
-              normalizarTexto(
-                propiedad.ambientes
-              ).includes(
-                "amb"
-              )
-                ? propiedad.ambientes
-                : `${propiedad.ambientes} ambientes`
-            )
-          : "Departamento";
+      const ambiente =
+        propiedad.ambientes;
+
+
+      if (ambiente) {
+
+        const ambienteNormalizado =
+          normalizarTexto(
+            ambiente
+          );
+
+
+        elements.descriptionModalTitle
+          .textContent =
+          ambienteNormalizado.includes(
+            "amb"
+          )
+
+            ? ambiente
+
+            : ambienteNormalizado === "1"
+
+              ? "1 ambiente"
+
+              : `${ambiente} ambientes`;
+
+      }
+
+      else {
+
+        elements.descriptionModalTitle
+          .textContent =
+          "Departamento";
+
+      }
 
 
       const ubicacion = [];
@@ -4584,10 +5060,6 @@ title.textContent =
         .textContent =
         propiedad.descripcion;
 
-
-      /*
-       * HISTORIAL
-       */
 
       history.pushState(
         {
@@ -5267,10 +5739,6 @@ title.textContent =
       "keydown",
       event => {
 
-        /*
-         * DESCRIPCIÓN
-         */
-
         if (
           state.description.open
         ) {
@@ -5288,10 +5756,6 @@ title.textContent =
 
         }
 
-
-        /*
-         * GALERÍA
-         */
 
         if (
           !state.gallery.open
@@ -5453,15 +5917,8 @@ title.textContent =
 
       await cargarPropiedades();
 
-      /*
-       * Asignamos data-value
-       * después de crear los botones.
-       */
-
-      prepararBotonesAmbientes();
-
     }
- 
+
 
     iniciar();
 
