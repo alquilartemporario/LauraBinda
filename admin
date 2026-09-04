@@ -1,0 +1,2905 @@
+html
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Administrador del catálogo</title>
+
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #eeeeee;
+
+    color: #222;
+
+}
+
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+===================================================== */
+
+.admin {
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding:
+        30px
+        20px
+        70px;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.admin-header {
+
+    margin-bottom: 28px;
+
+}
+
+.admin-header h1 {
+
+    margin: 0;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.5px;
+
+}
+
+.admin-header p {
+
+    margin:
+        8px
+        0
+        0;
+
+    color: #666;
+
+    font-size: 15px;
+
+}
+
+
+/* =====================================================
+   VISTA PREVIA
+===================================================== */
+
+.preview-container {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 5px 25px
+        rgba(0,0,0,.08);
+
+}
+
+
+.preview-heading {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 15px;
+
+}
+
+
+.preview-heading-title {
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+}
+
+
+.preview-heading-badge {
+
+    background: #f1f1f1;
+
+    padding:
+        6px
+        10px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    color: #666;
+
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+.preview {
+
+    width: 100%;
+
+    min-height: 600px;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    background: #006eff;
+
+    display: flex;
+
+    flex-direction: column;
+
+    position: relative;
+
+    transition:
+        background .2s ease;
+
+}
+
+
+/* =====================================================
+   FOTO PREVIEW
+===================================================== */
+
+.preview-image-container {
+
+    width: 100%;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #ddd;
+
+}
+
+
+.preview-image {
+
+    width: 100%;
+
+    height: 300px;
+
+    display: none;
+
+    object-fit: cover;
+
+}
+
+
+.preview-image-placeholder {
+
+    height: 300px;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ddd,
+            #cfcfcf
+        );
+
+    color: #777;
+
+    font-size: 14px;
+
+}
+
+
+/* =====================================================
+   INFORMACION DE PORTADA
+===================================================== */
+
+.preview-info {
+
+    width: 100%;
+
+    background: #006eff;
+
+    padding:
+        35px
+        30px
+        40px;
+
+    color: white;
+
+}
+
+
+.preview-title-text {
+
+    margin: 0;
+
+    width: 100%;
+
+    line-height: 1.1;
+
+    transition: all .2s ease;
+
+}
+
+
+.preview-subtitle-text {
+
+    margin:
+        14px
+        0
+        0;
+
+    width: 100%;
+
+    line-height: 1.3;
+
+    transition: all .2s ease;
+
+}
+
+
+/* =====================================================
+   GRID CONFIGURACIONES
+===================================================== */
+
+.config-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 20px;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.config-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 23px;
+
+    box-shadow:
+        0 4px 20px
+        rgba(0,0,0,.06);
+
+}
+
+
+.config-card.full {
+
+    grid-column:
+        1 / -1;
+
+}
+
+
+.config-card h2 {
+
+    margin:
+        0
+        0
+        20px;
+
+    font-size: 19px;
+
+    font-weight: 800;
+
+    border-bottom:
+        1px solid #e3e3e3;
+
+    padding-bottom: 13px;
+
+}
+
+
+/* =====================================================
+   DESCRIPCION DE SECCION
+===================================================== */
+
+.section-description {
+
+    margin:
+        -8px
+        0
+        20px;
+
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   CAMPOS
+===================================================== */
+
+.field {
+
+    margin-bottom: 18px;
+
+}
+
+
+.field:last-child {
+
+    margin-bottom: 0;
+
+}
+
+
+.field label {
+
+    display: block;
+
+    font-weight: 700;
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+
+    color: #333;
+
+}
+
+
+input,
+select {
+
+    width: 100%;
+
+    padding:
+        11px
+        12px;
+
+    border:
+        1px solid #ccc;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    background: white;
+
+    color: #222;
+
+    outline: none;
+
+    transition:
+        border .15s,
+        box-shadow .15s;
+
+}
+
+
+input:focus,
+select:focus {
+
+    border-color: #777;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(0,0,0,.05);
+
+}
+
+
+input[type="color"] {
+
+    height: 48px;
+
+    padding: 4px;
+
+    cursor: pointer;
+
+}
+
+
+input[type="range"] {
+
+    padding: 0;
+
+    cursor: pointer;
+
+}
+
+
+/* =====================================================
+   RANGE
+===================================================== */
+
+.range-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+
+.range-row input {
+
+    flex: 1;
+
+}
+
+
+.range-value {
+
+    min-width: 62px;
+
+    text-align: center;
+
+    background: #f1f1f1;
+
+    padding:
+        8px
+        7px;
+
+    border-radius: 7px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   COLOR + HEX
+===================================================== */
+
+.color-row {
+
+    display: grid;
+
+    grid-template-columns:
+        70px 1fr;
+
+    gap: 10px;
+
+    align-items: center;
+
+}
+
+
+.color-row input[type="color"] {
+
+    width: 70px;
+
+}
+
+
+/* =====================================================
+   ALINEACION
+===================================================== */
+
+.alignment-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 8px;
+
+}
+
+
+.alignment-buttons button {
+
+    border:
+        1px solid #ccc;
+
+    background: white;
+
+    padding: 10px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 700;
+
+    transition:
+        .15s ease;
+
+}
+
+
+.alignment-buttons button:hover {
+
+    background: #f4f4f4;
+
+}
+
+
+.alignment-buttons button.active {
+
+    background: #222;
+
+    color: white;
+
+    border-color: #222;
+
+}
+
+
+/* =====================================================
+   TIPOGRAFIAS
+===================================================== */
+
+.font-preview {
+
+    margin-top: 8px;
+
+    padding: 9px;
+
+    background: #f5f5f5;
+
+    border-radius: 8px;
+
+    color: #555;
+
+    font-size: 13px;
+
+}
+
+
+/* =====================================================
+   FOTO
+===================================================== */
+
+.image-upload {
+
+    border:
+        2px dashed #ccc;
+
+    border-radius: 13px;
+
+    padding: 20px;
+
+    text-align: center;
+
+}
+
+
+.image-upload input {
+
+    margin-bottom: 12px;
+
+}
+
+
+.current-image {
+
+    margin-top: 15px;
+
+    display: none;
+
+}
+
+
+.current-image img {
+
+    width: 100%;
+
+    max-height: 180px;
+
+    object-fit: cover;
+
+    border-radius: 10px;
+
+}
+
+
+.current-image-text {
+
+    margin-top: 8px;
+
+    font-size: 12px;
+
+    color: #777;
+
+}
+
+
+/* =====================================================
+   BOTONES
+===================================================== */
+
+button {
+
+    font-family: inherit;
+
+}
+
+
+button.main-button {
+
+    width: 100%;
+
+    border: none;
+
+    background: #111;
+
+    color: white;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .15s ease;
+
+}
+
+
+button.main-button:hover {
+
+    opacity: .88;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+button.secondary-button {
+
+    width: 100%;
+
+    border: none;
+
+    background: #e9e9e9;
+
+    color: #222;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .15s ease;
+
+}
+
+
+button.secondary-button:hover {
+
+    background: #ddd;
+
+}
+
+
+button:disabled {
+
+    opacity: .5;
+
+    cursor: not-allowed;
+
+}
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+.status {
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    background: #f1f1f1;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    display: none;
+
+}
+
+
+.status.show {
+
+    display: block;
+
+}
+
+
+/* =====================================================
+   SEPARADOR
+===================================================== */
+
+.divider {
+
+    height: 1px;
+
+    background: #eee;
+
+    margin:
+        20px
+        0;
+
+}
+
+
+/* =====================================================
+   MINI INFO
+===================================================== */
+
+.info-box {
+
+    background: #f7f7f7;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    font-size: 13px;
+
+    color: #666;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 800px) {
+
+    .config-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .config-card.full {
+
+        grid-column: auto;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .admin {
+
+        padding:
+            20px
+            12px
+            50px;
+
+    }
+
+    .admin-header h1 {
+
+        font-size: 25px;
+
+    }
+
+    .preview {
+
+        min-height: 500px;
+
+    }
+
+    .preview-info {
+
+        padding:
+            28px
+            20px
+            32px;
+
+    }
+
+    .preview-image {
+
+        height: 230px;
+
+    }
+
+    .preview-image-placeholder {
+
+        height: 230px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="admin">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="admin-header">
+
+        <h1>
+            Administrador del catálogo
+        </h1>
+
+        <p>
+            Personalizá cada elemento de tu catálogo
+            y visualizá los cambios en tiempo real.
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         VISTA PREVIA
+    ================================================== -->
+
+    <div class="preview-container">
+
+        <div class="preview-heading">
+
+            <div class="preview-heading-title">
+                Vista previa
+            </div>
+
+            <div class="preview-heading-badge">
+                Tiempo real
+            </div>
+
+        </div>
+
+
+        <div
+            id="preview"
+            class="preview"
+        >
+
+
+            <!-- FOTO -->
+
+            <div
+                id="previewImageContainer"
+                class="preview-image-container"
+            >
+
+                <div
+                    id="previewImagePlaceholder"
+                    class="preview-image-placeholder"
+                >
+                    Foto de portada
+                </div>
+
+                <img
+                    id="previewImagen"
+                    class="preview-image"
+                    alt="Vista previa de portada"
+                >
+
+            </div>
+
+
+            <!-- INFORMACION -->
+
+            <div
+                id="previewInfo"
+                class="preview-info"
+            >
+
+                <h1
+                    id="previewTitulo"
+                    class="preview-title-text"
+                >
+                    Alquiler Temporarios
+                </h1>
+
+
+                <div
+                    id="previewSubtitulo"
+                    class="preview-subtitle-text"
+                >
+                    Encontrá tu próximo hogar
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         CONFIGURACIONES
+    ================================================== -->
+
+    <div class="config-grid">
+
+
+        <!-- =============================================
+             TITULO
+        ============================================== -->
+
+        <div class="config-card">
+
+            <h2>
+                Título
+            </h2>
+
+            <p class="section-description">
+                Personalizá completamente el título
+                principal de tu catálogo.
+            </p>
+
+
+            <!-- TEXTO -->
+
+            <div class="field">
+
+                <label>
+                    Texto
+                </label>
+
+                <input
+                    id="titulo"
+                    type="text"
+                    placeholder="Título del catálogo"
+                >
+
+            </div>
+
+
+            <!-- TAMAÑO -->
+
+            <div class="field">
+
+                <label>
+                    Tamaño
+                </label>
+
+                <div class="range-row">
+
+                    <input
+                        id="tituloTamano"
+                        type="range"
+                        min="16"
+                        max="100"
+                        value="40"
+                    >
+
+                    <div
+                        id="tituloTamanoValor"
+                        class="range-value"
+                    >
+                        40px
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- COLOR -->
+
+            <div class="field">
+
+                <label>
+                    Color
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="tituloColor"
+                        type="color"
+                        value="#ffffff"
+                    >
+
+                    <input
+                        id="tituloColorHex"
+                        type="text"
+                        value="#ffffff"
+                        maxlength="7"
+                        placeholder="#ffffff"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- FUENTE -->
+
+            <div class="field">
+
+                <label>
+                    Tipografía
+                </label>
+
+                <select id="tituloFuente">
+
+                    <option value="Arial">
+                        Arial
+                    </option>
+
+                    <option value="Helvetica">
+                        Helvetica
+                    </option>
+
+                    <option value="Georgia">
+                        Georgia
+                    </option>
+
+                    <option value="Times New Roman">
+                        Times New Roman
+                    </option>
+
+                    <option value="Verdana">
+                        Verdana
+                    </option>
+
+                    <option value="Trebuchet MS">
+                        Trebuchet MS
+                    </option>
+
+                    <option value="Courier New">
+                        Courier New
+                    </option>
+
+                    <option value="Impact">
+                        Impact
+                    </option>
+
+                    <option value="Tahoma">
+                        Tahoma
+                    </option>
+
+                    <option value="Lucida Console">
+                        Lucida Console
+                    </option>
+
+                </select>
+
+
+                <div
+                    id="tituloFuentePreview"
+                    class="font-preview"
+                >
+                    Vista previa de tipografía
+                </div>
+
+            </div>
+
+
+            <!-- GROSOR -->
+
+            <div class="field">
+
+                <label>
+                    Grosor
+                </label>
+
+                <select id="tituloGrosor">
+
+                    <option value="300">
+                        Delgado
+                    </option>
+
+                    <option value="400">
+                        Normal
+                    </option>
+
+                    <option value="500">
+                        Medio
+                    </option>
+
+                    <option value="600">
+                        Semi negrita
+                    </option>
+
+                    <option value="700">
+                        Negrita
+                    </option>
+
+                    <option value="800">
+                        Extra negrita
+                    </option>
+
+                    <option value="900">
+                        Máximo
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ALINEACION -->
+
+            <div class="field">
+
+                <label>
+                    Alineación
+                </label>
+
+                <div class="alignment-buttons">
+
+                    <button
+                        type="button"
+                        data-align="left"
+                        onclick="setTituloAlign('left', this)"
+                    >
+                        Izq.
+                    </button>
+
+                    <button
+                        type="button"
+                        data-align="center"
+                        class="active"
+                        onclick="setTituloAlign('center', this)"
+                    >
+                        Centro
+                    </button>
+
+                    <button
+                        type="button"
+                        data-align="right"
+                        onclick="setTituloAlign('right', this)"
+                    >
+                        Der.
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             SUBTITULO
+        ============================================== -->
+
+        <div class="config-card">
+
+            <h2>
+                Subtítulo
+            </h2>
+
+            <p class="section-description">
+                Configurá el texto que aparece debajo
+                del título.
+            </p>
+
+
+            <!-- TEXTO -->
+
+            <div class="field">
+
+                <label>
+                    Texto
+                </label>
+
+                <input
+                    id="subtitulo"
+                    type="text"
+                    placeholder="Subtítulo del catálogo"
+                >
+
+            </div>
+
+
+            <!-- TAMAÑO -->
+
+            <div class="field">
+
+                <label>
+                    Tamaño
+                </label>
+
+                <div class="range-row">
+
+                    <input
+                        id="subtituloTamano"
+                        type="range"
+                        min="10"
+                        max="60"
+                        value="20"
+                    >
+
+                    <div
+                        id="subtituloTamanoValor"
+                        class="range-value"
+                    >
+                        20px
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- COLOR -->
+
+            <div class="field">
+
+                <label>
+                    Color
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="subtituloColor"
+                        type="color"
+                        value="#ffffff"
+                    >
+
+                    <input
+                        id="subtituloColorHex"
+                        type="text"
+                        value="#ffffff"
+                        maxlength="7"
+                        placeholder="#ffffff"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- FUENTE -->
+
+            <div class="field">
+
+                <label>
+                    Tipografía
+                </label>
+
+                <select id="subtituloFuente">
+
+                    <option value="Arial">
+                        Arial
+                    </option>
+
+                    <option value="Helvetica">
+                        Helvetica
+                    </option>
+
+                    <option value="Georgia">
+                        Georgia
+                    </option>
+
+                    <option value="Times New Roman">
+                        Times New Roman
+                    </option>
+
+                    <option value="Verdana">
+                        Verdana
+                    </option>
+
+                    <option value="Trebuchet MS">
+                        Trebuchet MS
+                    </option>
+
+                    <option value="Courier New">
+                        Courier New
+                    </option>
+
+                    <option value="Tahoma">
+                        Tahoma
+                    </option>
+
+                </select>
+
+
+                <div
+                    id="subtituloFuentePreview"
+                    class="font-preview"
+                >
+                    Vista previa de tipografía
+                </div>
+
+            </div>
+
+
+            <!-- GROSOR -->
+
+            <div class="field">
+
+                <label>
+                    Grosor
+                </label>
+
+                <select id="subtituloGrosor">
+
+                    <option value="300">
+                        Delgado
+                    </option>
+
+                    <option value="400">
+                        Normal
+                    </option>
+
+                    <option value="500">
+                        Medio
+                    </option>
+
+                    <option value="600">
+                        Semi negrita
+                    </option>
+
+                    <option value="700">
+                        Negrita
+                    </option>
+
+                    <option value="800">
+                        Extra negrita
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ALINEACION -->
+
+            <div class="field">
+
+                <label>
+                    Alineación
+                </label>
+
+                <div class="alignment-buttons">
+
+                    <button
+                        type="button"
+                        data-align="left"
+                        onclick="setSubtituloAlign('left', this)"
+                    >
+                        Izq.
+                    </button>
+
+                    <button
+                        type="button"
+                        data-align="center"
+                        class="active"
+                        onclick="setSubtituloAlign('center', this)"
+                    >
+                        Centro
+                    </button>
+
+                    <button
+                        type="button"
+                        data-align="right"
+                        onclick="setSubtituloAlign('right', this)"
+                    >
+                        Der.
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             FONDO
+        ============================================== -->
+
+        <div class="config-card">
+
+            <h2>
+                Fondo de portada
+            </h2>
+
+            <p class="section-description">
+                Este color se utiliza en el bloque
+                uniforme que aparece debajo de la foto.
+            </p>
+
+
+            <div class="field">
+
+                <label>
+                    Color del fondo
+                </label>
+
+                <div class="color-row">
+
+                    <input
+                        id="colorPortada"
+                        type="color"
+                        value="#006eff"
+                    >
+
+                    <input
+                        id="colorPortadaHex"
+                        type="text"
+                        value="#006eff"
+                        maxlength="7"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                El título y el subtítulo se muestran
+                sobre este fondo, debajo de la imagen
+                de portada.
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             PORTADA
+        ============================================== -->
+
+        <div class="config-card">
+
+            <h2>
+                Foto de portada
+            </h2>
+
+            <p class="section-description">
+                Esta imagen aparecerá en la parte
+                superior del catálogo.
+            </p>
+
+
+            <div class="image-upload">
+
+                <div class="field">
+
+                    <label>
+                        Seleccionar nueva imagen
+                    </label>
+
+                    <input
+                        id="fotoPortada"
+                        type="file"
+                        accept="image/*"
+                    >
+
+                </div>
+
+
+                <button
+                    id="btnSubir"
+                    class="secondary-button"
+                    type="button"
+                    onclick="subirPortada()"
+                >
+                    Subir nueva portada
+                </button>
+
+
+                <div
+                    id="currentImage"
+                    class="current-image"
+                >
+
+                    <img
+                        id="currentImagePreview"
+                        alt="Portada actual"
+                    >
+
+                    <div class="current-image-text">
+                        Portada actualmente guardada
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             ALTURA FOTO
+        ============================================== -->
+
+        <div class="config-card">
+
+            <h2>
+                Tamaño de portada
+            </h2>
+
+            <p class="section-description">
+                Controlá cuánto espacio ocupa la
+                imagen de portada.
+            </p>
+
+
+            <div class="field">
+
+                <label>
+                    Altura de la imagen
+                </label>
+
+                <div class="range-row">
+
+                    <input
+                        id="portadaAltura"
+                        type="range"
+                        min="150"
+                        max="600"
+                        value="300"
+                    >
+
+                    <div
+                        id="portadaAlturaValor"
+                        class="range-value"
+                    >
+                        300px
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                Una imagen más alta genera una portada
+                más visual. Una más baja permite mostrar
+                más contenido rápidamente.
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             WHATSAPP
+        ============================================== -->
+
+        <div class="config-card">
+
+            <h2>
+                Contacto
+            </h2>
+
+            <p class="section-description">
+                Número utilizado para los botones
+                de contacto del catálogo.
+            </p>
+
+
+            <div class="field">
+
+                <label>
+                    WhatsApp
+                </label>
+
+                <input
+                    id="whatsapp"
+                    type="text"
+                    placeholder="5491125772852"
+                >
+
+            </div>
+
+        </div>
+
+
+        <!-- =============================================
+             GUARDAR
+        ============================================== -->
+
+        <div class="config-card full">
+
+            <h2>
+                Guardar configuración
+            </h2>
+
+            <p class="section-description">
+                Los cambios realizados en la vista previa
+                son temporales hasta que presiones guardar.
+            </p>
+
+
+            <button
+                class="main-button"
+                onclick="guardarConfiguracion()"
+            >
+                GUARDAR CONFIGURACIÓN
+            </button>
+
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   API
+===================================================== */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbzmDMeHM4DDO_mtVnJQXyRs7r_3V4VIzdpBhYNKHwYw-WKAzHrWofsF_7N6Ub3nh17Hwg/exec";
+
+
+/* =====================================================
+   ELEMENTOS
+===================================================== */
+
+const titulo =
+document.getElementById("titulo");
+
+const subtitulo =
+document.getElementById("subtitulo");
+
+const tituloTamano =
+document.getElementById("tituloTamano");
+
+const tituloTamanoValor =
+document.getElementById("tituloTamanoValor");
+
+const tituloColor =
+document.getElementById("tituloColor");
+
+const tituloColorHex =
+document.getElementById("tituloColorHex");
+
+const tituloFuente =
+document.getElementById("tituloFuente");
+
+const tituloGrosor =
+document.getElementById("tituloGrosor");
+
+const subtituloTamano =
+document.getElementById("subtituloTamano");
+
+const subtituloTamanoValor =
+document.getElementById("subtituloTamanoValor");
+
+const subtituloColor =
+document.getElementById("subtituloColor");
+
+const subtituloColorHex =
+document.getElementById("subtituloColorHex");
+
+const subtituloFuente =
+document.getElementById("subtituloFuente");
+
+const subtituloGrosor =
+document.getElementById("subtituloGrosor");
+
+const colorPortada =
+document.getElementById("colorPortada");
+
+const colorPortadaHex =
+document.getElementById("colorPortadaHex");
+
+const portadaAltura =
+document.getElementById("portadaAltura");
+
+const portadaAlturaValor =
+document.getElementById("portadaAlturaValor");
+
+const fotoPortada =
+document.getElementById("fotoPortada");
+
+const whatsapp =
+document.getElementById("whatsapp");
+
+const preview =
+document.getElementById("preview");
+
+const previewInfo =
+document.getElementById("previewInfo");
+
+const previewTitulo =
+document.getElementById("previewTitulo");
+
+const previewSubtitulo =
+document.getElementById("previewSubtitulo");
+
+const previewImagen =
+document.getElementById("previewImagen");
+
+const previewImagePlaceholder =
+document.getElementById(
+    "previewImagePlaceholder"
+);
+
+const currentImage =
+document.getElementById(
+    "currentImage"
+);
+
+const currentImagePreview =
+document.getElementById(
+    "currentImagePreview"
+);
+
+const status =
+document.getElementById("status");
+
+const tituloFuentePreview =
+document.getElementById(
+    "tituloFuentePreview"
+);
+
+const subtituloFuentePreview =
+document.getElementById(
+    "subtituloFuentePreview"
+);
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let fotoPortadaActual = "";
+
+let tituloAlineacion = "center";
+
+let subtituloAlineacion = "center";
+
+
+/* =====================================================
+   ESTADO
+===================================================== */
+
+function mostrarEstado(texto) {
+
+    status.textContent = texto;
+
+    status.classList.add("show");
+
+}
+
+
+/* =====================================================
+   ACTUALIZAR TITULO
+===================================================== */
+
+function actualizarTitulo() {
+
+    previewTitulo.textContent =
+        titulo.value ||
+        "Título del catálogo";
+
+
+    previewTitulo.style.fontSize =
+        tituloTamano.value + "px";
+
+
+    previewTitulo.style.color =
+        tituloColor.value;
+
+
+    previewTitulo.style.fontFamily =
+        tituloFuente.value;
+
+
+    previewTitulo.style.fontWeight =
+        tituloGrosor.value;
+
+
+    previewTitulo.style.textAlign =
+        tituloAlineacion;
+
+
+    tituloTamanoValor.textContent =
+        tituloTamano.value + "px";
+
+
+    tituloFuentePreview.style.fontFamily =
+        tituloFuente.value;
+
+
+    tituloFuentePreview.style.fontWeight =
+        tituloGrosor.value;
+
+
+    tituloFuentePreview.textContent =
+        "Así se verá esta tipografía";
+
+}
+
+
+/* =====================================================
+   ACTUALIZAR SUBTITULO
+===================================================== */
+
+function actualizarSubtitulo() {
+
+    previewSubtitulo.textContent =
+        subtitulo.value ||
+        "Subtítulo del catálogo";
+
+
+    previewSubtitulo.style.fontSize =
+        subtituloTamano.value + "px";
+
+
+    previewSubtitulo.style.color =
+        subtituloColor.value;
+
+
+    previewSubtitulo.style.fontFamily =
+        subtituloFuente.value;
+
+
+    previewSubtitulo.style.fontWeight =
+        subtituloGrosor.value;
+
+
+    previewSubtitulo.style.textAlign =
+        subtituloAlineacion;
+
+
+    subtituloTamanoValor.textContent =
+        subtituloTamano.value + "px";
+
+
+    subtituloFuentePreview.style.fontFamily =
+        subtituloFuente.value;
+
+
+    subtituloFuentePreview.style.fontWeight =
+        subtituloGrosor.value;
+
+
+    subtituloFuentePreview.textContent =
+        "Así se verá esta tipografía";
+
+}
+
+
+/* =====================================================
+   ACTUALIZAR FONDO
+===================================================== */
+
+function actualizarFondo() {
+
+    preview.style.background =
+        colorPortada.value;
+
+
+    previewInfo.style.background =
+        colorPortada.value;
+
+
+    colorPortadaHex.value =
+        colorPortada.value;
+
+}
+
+
+/* =====================================================
+   ACTUALIZAR ALTURA PORTADA
+===================================================== */
+
+function actualizarAlturaPortada() {
+
+    const altura =
+        portadaAltura.value + "px";
+
+
+    previewImagen.style.height =
+        altura;
+
+
+    previewImagePlaceholder.style.height =
+        altura;
+
+
+    portadaAlturaValor.textContent =
+        altura;
+
+}
+
+
+/* =====================================================
+   ALINEACION TITULO
+===================================================== */
+
+function setTituloAlign(
+    alignment,
+    button
+) {
+
+    tituloAlineacion =
+        alignment;
+
+
+    const card =
+        button.closest(".config-card");
+
+
+    card
+        .querySelectorAll(
+            ".alignment-buttons button"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    actualizarTitulo();
+
+}
+
+
+/* =====================================================
+   ALINEACION SUBTITULO
+===================================================== */
+
+function setSubtituloAlign(
+    alignment,
+    button
+) {
+
+    subtituloAlineacion =
+        alignment;
+
+
+    const card =
+        button.closest(".config-card");
+
+
+    card
+        .querySelectorAll(
+            ".alignment-buttons button"
+        )
+        .forEach(btn => {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    actualizarSubtitulo();
+
+}
+
+
+/* =====================================================
+   SINCRONIZAR COLOR
+===================================================== */
+
+function sincronizarColor(
+    colorInput,
+    hexInput,
+    callback
+) {
+
+    colorInput.addEventListener(
+        "input",
+        function() {
+
+            hexInput.value =
+                colorInput.value;
+
+            callback();
+
+        }
+    );
+
+
+    hexInput.addEventListener(
+        "input",
+        function() {
+
+            const valor =
+                hexInput.value.trim();
+
+
+            if (
+                /^#[0-9A-Fa-f]{6}$/.test(
+                    valor
+                )
+            ) {
+
+                colorInput.value =
+                    valor;
+
+                callback();
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   EVENTOS TITULO
+===================================================== */
+
+titulo.addEventListener(
+    "input",
+    actualizarTitulo
+);
+
+
+tituloTamano.addEventListener(
+    "input",
+    actualizarTitulo
+);
+
+
+tituloColor.addEventListener(
+    "input",
+    actualizarTitulo
+);
+
+
+tituloFuente.addEventListener(
+    "change",
+    actualizarTitulo
+);
+
+
+tituloGrosor.addEventListener(
+    "change",
+    actualizarTitulo
+);
+
+
+/* =====================================================
+   EVENTOS SUBTITULO
+===================================================== */
+
+subtitulo.addEventListener(
+    "input",
+    actualizarSubtitulo
+);
+
+
+subtituloTamano.addEventListener(
+    "input",
+    actualizarSubtitulo
+);
+
+
+subtituloColor.addEventListener(
+    "input",
+    actualizarSubtitulo
+);
+
+
+subtituloFuente.addEventListener(
+    "change",
+    actualizarSubtitulo
+);
+
+
+subtituloGrosor.addEventListener(
+    "change",
+    actualizarSubtitulo
+);
+
+
+/* =====================================================
+   EVENTOS FONDO
+===================================================== */
+
+sincronizarColor(
+    colorPortada,
+    colorPortadaHex,
+    actualizarFondo
+);
+
+
+sincronizarColor(
+    tituloColor,
+    tituloColorHex,
+    actualizarTitulo
+);
+
+
+sincronizarColor(
+    subtituloColor,
+    subtituloColorHex,
+    actualizarSubtitulo
+);
+
+
+/* =====================================================
+   ALTURA
+===================================================== */
+
+portadaAltura.addEventListener(
+    "input",
+    actualizarAlturaPortada
+);
+
+
+/* =====================================================
+   PREVISUALIZAR FOTO
+===================================================== */
+
+fotoPortada.addEventListener(
+    "change",
+    function() {
+
+        const archivo =
+            fotoPortada.files[0];
+
+
+        if (!archivo) {
+            return;
+        }
+
+
+        const lector =
+            new FileReader();
+
+
+        lector.onload =
+            function(e) {
+
+                previewImagen.src =
+                    e.target.result;
+
+
+                previewImagen.style.display =
+                    "block";
+
+
+                previewImagePlaceholder.style.display =
+                    "none";
+
+
+            };
+
+
+        lector.readAsDataURL(
+            archivo
+        );
+
+    }
+);
+
+
+/* =====================================================
+   CARGAR CONFIGURACION
+===================================================== */
+
+async function cargarConfiguracion() {
+
+    try {
+
+        mostrarEstado(
+            "Cargando configuración..."
+        );
+
+
+        const respuesta =
+            await fetch(API_URL);
+
+
+        const datos =
+            await respuesta.json();
+
+
+        if (!datos.ok) {
+
+            throw new Error(
+                "No se pudo cargar la configuración"
+            );
+
+        }
+
+
+        const config =
+            datos.config || {};
+
+
+        /* =============================================
+           TITULO
+        ============================================== */
+
+        titulo.value =
+            config.titulo ||
+            "Alquiler Temporarios";
+
+
+        /* =============================================
+           SUBTITULO
+        ============================================== */
+
+        subtitulo.value =
+            config.subtitulo ||
+            "Encontrá tu próximo hogar";
+
+
+        /* =============================================
+           FONDO
+        ============================================== */
+
+        colorPortada.value =
+            config.color_portada ||
+            "#006eff";
+
+
+        colorPortadaHex.value =
+            colorPortada.value;
+
+
+        /* =============================================
+           WHATSAPP
+        ============================================== */
+
+        whatsapp.value =
+            String(
+                config.whatsapp || ""
+            );
+
+
+        /* =============================================
+           FOTO
+        ============================================== */
+
+        fotoPortadaActual =
+            config.foto_portada ||
+            "";
+
+
+        if (fotoPortadaActual) {
+
+            previewImagen.src =
+                fotoPortadaActual;
+
+
+            previewImagen.style.display =
+                "block";
+
+
+            previewImagePlaceholder.style.display =
+                "none";
+
+
+            currentImagePreview.src =
+                fotoPortadaActual;
+
+
+            currentImage.style.display =
+                "block";
+
+        }
+
+
+        /* =============================================
+           TITULO
+        ============================================== */
+
+        tituloTamano.value =
+            config.titulo_tamano ||
+            40;
+
+
+        tituloColor.value =
+            config.titulo_color ||
+            "#ffffff";
+
+
+        tituloColorHex.value =
+            tituloColor.value;
+
+
+        tituloFuente.value =
+            config.titulo_fuente ||
+            "Arial";
+
+
+        tituloGrosor.value =
+            config.titulo_grosor ||
+            "700";
+
+
+        tituloAlineacion =
+            config.titulo_alineacion ||
+            "center";
+
+
+        /* =============================================
+           SUBTITULO
+        ============================================== */
+
+        subtituloTamano.value =
+            config.subtitulo_tamano ||
+            20;
+
+
+        subtituloColor.value =
+            config.subtitulo_color ||
+            "#ffffff";
+
+
+        subtituloColorHex.value =
+            subtituloColor.value;
+
+
+        subtituloFuente.value =
+            config.subtitulo_fuente ||
+            "Arial";
+
+
+        subtituloGrosor.value =
+            config.subtitulo_grosor ||
+            "400";
+
+
+        subtituloAlineacion =
+            config.subtitulo_alineacion ||
+            "center";
+
+
+        /* =============================================
+           ALTURA
+        ============================================== */
+
+        portadaAltura.value =
+            config.portada_altura ||
+            300;
+
+
+        /* =============================================
+           ACTUALIZAR PREVIEW
+        ============================================== */
+
+        actualizarTitulo();
+
+        actualizarSubtitulo();
+
+        actualizarFondo();
+
+        actualizarAlturaPortada();
+
+
+        /* =============================================
+           ACTUALIZAR BOTONES ALINEACION
+        ============================================== */
+
+        actualizarBotonesAlineacion();
+
+
+        status.classList.remove(
+            "show"
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        mostrarEstado(
+            "Error cargando configuración: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   BOTONES ALINEACION
+===================================================== */
+
+function actualizarBotonesAlineacion() {
+
+    document
+        .querySelectorAll(
+            ".config-card"
+        )
+        .forEach(card => {
+
+            const buttons =
+                card.querySelectorAll(
+                    ".alignment-buttons button"
+                );
+
+
+            if (!buttons.length) {
+                return;
+            }
+
+
+            const esTitulo =
+                card.querySelector(
+                    "#titulo"
+                );
+
+
+            const alineacion =
+                esTitulo
+                    ? tituloAlineacion
+                    : subtituloAlineacion;
+
+
+            buttons.forEach(
+                button => {
+
+                    button.classList.toggle(
+                        "active",
+                        button.dataset.align ===
+                        alineacion
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =====================================================
+   CONVERTIR BASE64
+===================================================== */
+
+function convertirBase64(
+    archivo
+) {
+
+    return new Promise(
+        (resolve, reject) => {
+
+            const lector =
+                new FileReader();
+
+
+            lector.onload =
+                function() {
+
+                    const resultado =
+                        lector.result;
+
+
+                    const base64 =
+                        resultado.split(",")[1];
+
+
+                    resolve(
+                        base64
+                    );
+
+                };
+
+
+            lector.onerror =
+                reject;
+
+
+            lector.readAsDataURL(
+                archivo
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SUBIR PORTADA
+===================================================== */
+
+async function subirPortada() {
+
+    const archivo =
+        fotoPortada.files[0];
+
+
+    if (!archivo) {
+
+        alert(
+            "Seleccioná primero una imagen."
+        );
+
+        return;
+
+    }
+
+
+    const boton =
+        document.getElementById(
+            "btnSubir"
+        );
+
+
+    boton.disabled =
+        true;
+
+
+    boton.textContent =
+        "Subiendo...";
+
+
+    try {
+
+        const base64 =
+            await convertirBase64(
+                archivo
+            );
+
+
+        const respuesta =
+            await fetch(
+                API_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers:
+                        {
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+                        },
+
+                    body:
+                        JSON.stringify({
+
+                            accion:
+                                "subir_portada",
+
+                            nombre:
+                                archivo.name,
+
+                            mimeType:
+                                archivo.type,
+
+                            base64:
+                                base64
+
+                        })
+
+                }
+            );
+
+
+        const datos =
+            await respuesta.json();
+
+
+        if (!datos.ok) {
+
+            throw new Error(
+                datos.error ||
+                "No se pudo subir la imagen"
+            );
+
+        }
+
+
+        fotoPortadaActual =
+            datos.archivo.url;
+
+
+        previewImagen.src =
+            fotoPortadaActual;
+
+
+        previewImagen.style.display =
+            "block";
+
+
+        previewImagePlaceholder.style.display =
+            "none";
+
+
+        currentImagePreview.src =
+            fotoPortadaActual;
+
+
+        currentImage.style.display =
+            "block";
+
+
+        mostrarEstado(
+            "✓ Portada subida correctamente. " +
+            "Recordá guardar la configuración."
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        mostrarEstado(
+            "Error subiendo la portada: " +
+            error.message
+        );
+
+    }
+
+
+    boton.disabled =
+        false;
+
+
+    boton.textContent =
+        "Subir nueva portada";
+
+}
+
+
+/* =====================================================
+   GUARDAR CONFIGURACION
+===================================================== */
+
+async function guardarConfiguracion() {
+
+    try {
+
+        mostrarEstado(
+            "Guardando configuración..."
+        );
+
+
+        const configuracion = {
+
+            /* ==========================
+               GENERAL
+            ========================== */
+
+            titulo:
+                titulo.value.trim(),
+
+            subtitulo:
+                subtitulo.value.trim(),
+
+            color_portada:
+                colorPortada.value,
+
+            foto_portada:
+                fotoPortadaActual,
+
+            whatsapp:
+                String(
+                    whatsapp.value.trim()
+                ),
+
+
+            /* ==========================
+               TITULO
+            ========================== */
+
+            titulo_tamano:
+                tituloTamano.value,
+
+            titulo_color:
+                tituloColor.value,
+
+            titulo_fuente:
+                tituloFuente.value,
+
+            titulo_grosor:
+                tituloGrosor.value,
+
+            titulo_alineacion:
+                tituloAlineacion,
+
+
+            /* ==========================
+               SUBTITULO
+            ========================== */
+
+            subtitulo_tamano:
+                subtituloTamano.value,
+
+            subtitulo_color:
+                subtituloColor.value,
+
+            subtitulo_fuente:
+                subtituloFuente.value,
+
+            subtitulo_grosor:
+                subtituloGrosor.value,
+
+            subtitulo_alineacion:
+                subtituloAlineacion,
+
+
+            /* ==========================
+               PORTADA
+            ========================== */
+
+            portada_altura:
+                portadaAltura.value
+
+        };
+
+
+        const respuesta =
+            await fetch(
+                API_URL,
+                {
+
+                    method:
+                        "POST",
+
+                    headers:
+                        {
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+                        },
+
+                    body:
+                        JSON.stringify(
+                            configuracion
+                        )
+
+                }
+            );
+
+
+        const datos =
+            await respuesta.json();
+
+
+        if (!datos.ok) {
+
+            throw new Error(
+                datos.error ||
+                "No se pudo guardar"
+            );
+
+        }
+
+
+        mostrarEstado(
+            "✓ Configuración guardada correctamente."
+        );
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        mostrarEstado(
+            "Error guardando: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   INICIO
+===================================================== */
+
+cargarConfiguracion();
+
+
+</script>
+
+</body>
+
+</html>
