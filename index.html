@@ -1,2805 +1,1960 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-  >
-
-  <title>Alquiler Temporarios</title>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+>
 
-  <meta
-    name="description"
-    content="Encontrá departamentos temporarios disponibles."
-  >
-
-  <meta
-    name="theme-color"
-    content="#006eff"
-  >
+<title>Alquiler Temporarios</title>
 
-  <style>
+<meta
+  name="description"
+  content="Encontrá departamentos temporarios disponibles."
+>
 
-    /* =========================================================
-       RESET
-    ========================================================= */
+<meta
+  name="theme-color"
+  content="#006eff"
+>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
 
-    html {
-      scroll-behavior: smooth;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
+/* =========================================================
+   RESET
+========================================================= */
 
-    body {
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-      font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
+html{
+  scroll-behavior:smooth;
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 
-      background: #f5f7fa;
+  background:#f5f7fa;
+  color:#172033;
+  line-height:1.5;
 
-      color: #172033;
+  -webkit-font-smoothing:antialiased;
 
-      line-height: 1.5;
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
 
-      -webkit-font-smoothing: antialiased;
+body.modal-open{
+  overflow:hidden;
+}
 
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
+button,
+input,
+select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
 
-    }
 
-    body.modal-open {
-      overflow: hidden;
-    }
+/* =========================================================
+   VARIABLES
+========================================================= */
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
+:root{
 
-    button {
-      cursor: pointer;
-    }
+  --primary:#006eff;
+  --primary-dark:#0056cc;
 
-    img {
-      max-width: 100%;
-      display: block;
-    }
+  --active:#16a34a;
+  --active-dark:#15803d;
 
+  --text:#172033;
+  --text-soft:#667085;
 
-    /* =========================================================
-       VARIABLES
-    ========================================================= */
+  --background:#f5f7fa;
+  --white:#ffffff;
+
+  --border:#e5e7eb;
+
+  --success:#16a34a;
+  --danger:#dc3545;
+
+  --shadow-sm:
+    0 3px 12px rgba(16,24,40,.07);
+
+  --shadow:
+    0 8px 28px rgba(16,24,40,.09);
 
-    :root {
+  --shadow-lg:
+    0 20px 60px rgba(16,24,40,.16);
+
+  --radius:18px;
+  --radius-sm:12px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  width:100%;
+  max-width:100%;
+  background:var(--primary);
+  overflow:hidden;
+}
+
+.hero-image{
+  position:relative;
+  width:100%;
+  height:330px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e8edf3,
+      #dfe5ec
+    );
+
+  overflow:hidden;
+}
 
-      --primary: #006eff;
-      --primary-dark: #0056cc;
-      --active: #16a34a;
-      --active-dark: #15803d;
-      --text: #172033;
-      --text-soft: #667085;
-      --background: #f5f7fa;
-      --white: #ffffff;
-      --border: #e5e7eb;
-      --success: #16a34a;
-      --danger: #dc3545;
+.hero-background{
+  position:absolute;
+  inset:0;
 
-      --shadow-sm:
-        0 2px 8px rgba(16, 24, 40, 0.06);
+  width:100%;
+  height:100%;
 
-      --shadow:
-        0 8px 30px rgba(16, 24, 40, 0.08);
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
 
-      --shadow-lg:
-        0 20px 60px rgba(16, 24, 40, 0.16);
+  transition:
+    opacity .25s ease;
+}
 
-      --radius: 18px;
-      --radius-sm: 12px;
+.hero-image-overlay{
+  position:absolute;
+  inset:0;
 
-    }
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,0,0,.04),
+      rgba(0,0,0,.22)
+    );
 
+  pointer-events:none;
+}
 
-    /* =========================================================
-       HERO
-    ========================================================= */
+.hero-bottom{
+  width:100%;
 
-    .hero {
+  background:var(--primary);
+  color:white;
 
-      width: 100%;
-      max-width: 100%;
+  text-align:center;
 
-      background: var(--primary);
+  padding:
+    30px 20px 34px;
+}
 
-      overflow: hidden;
+.hero-content{
+  width:min(
+    1100px,
+    calc(100% - 20px)
+  );
 
-    }
+  margin:0 auto;
+}
 
-    .hero-image {
+.hero-title{
+  font-size:
+    clamp(
+      2rem,
+      5vw,
+      3.8rem
+    );
 
-      position: relative;
+  font-weight:800;
+  letter-spacing:-.04em;
+  line-height:1.05;
 
-      width: 100%;
+  margin-bottom:10px;
+}
 
-      height: 330px;
+.hero-subtitle{
+  font-size:
+    clamp(
+      1rem,
+      2vw,
+      1.25rem
+    );
 
-      background:
-        linear-gradient(
-          135deg,
-          #e8edf3,
-          #dfe5ec
-        );
+  font-weight:400;
+  opacity:.95;
 
-      overflow: hidden;
+  max-width:700px;
+  margin:0 auto;
+}
 
-    }
 
-    .hero-background {
+/* =========================================================
+   MAIN
+========================================================= */
 
-      position: absolute;
+main{
+  width:min(
+    1200px,
+    calc(100% - 32px)
+  );
 
-      inset: 0;
+  margin:0 auto;
 
-      background-position: center;
+  padding:
+    30px 0 100px;
+}
 
-      background-size: cover;
 
-      background-repeat: no-repeat;
+/* =========================================================
+   FILTER PANEL
+========================================================= */
 
-    }
+.filters{
+  background:white;
 
-    .hero-image-overlay {
+  border:
+    1px solid
+    var(--border);
 
-      position: absolute;
+  border-radius:var(--radius);
 
-      inset: 0;
+  box-shadow:var(--shadow);
 
-      background:
-        linear-gradient(
-          180deg,
-          rgba(0, 0, 0, 0.04),
-          rgba(0, 0, 0, 0.20)
-        );
+  padding:20px;
 
-      pointer-events: none;
+  margin-bottom:28px;
 
-    }
+  position:relative;
+  z-index:10;
+}
 
-    .hero-bottom {
+.filters-header{
+  display:flex;
 
-      width: 100%;
+  justify-content:space-between;
+  align-items:center;
 
-      background: var(--primary);
+  gap:16px;
 
-      color: white;
+  margin-bottom:17px;
+}
 
-      text-align: center;
+.filters-title{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-.02em;
+}
 
-      padding:
-        30px 20px 34px;
+.results-count{
+  color:var(--text-soft);
+  font-size:13px;
+  margin-top:2px;
+}
 
-    }
+.filter-grid{
+  display:grid;
 
-    .hero-content {
+  grid-template-columns:
+    minmax(0,1.25fr)
+    minmax(250px,.75fr);
 
-      width:
-        min(
-          1100px,
-          calc(100% - 20px)
-        );
+  gap:18px;
+}
 
-      margin: 0 auto;
+.filter-group{
+  display:flex;
+  flex-direction:column;
 
-    }
+  gap:8px;
 
-    .hero-title {
+  min-width:0;
+}
 
-      font-size:
-        clamp(
-          2rem,
-          5vw,
-          3.8rem
-        );
+.filter-label{
+  font-size:11px;
+  font-weight:800;
 
-      font-weight: 800;
+  color:var(--text-soft);
 
-      letter-spacing: -0.04em;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+}
 
-      line-height: 1.05;
 
-      margin-bottom: 10px;
+/* =========================================================
+   ENVIRONMENT BUTTONS
+========================================================= */
 
-    }
+.environment-buttons{
+  display:grid;
 
-    .hero-subtitle {
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(85px,1fr)
+    );
 
-      font-size:
-        clamp(
-          1rem,
-          2vw,
-          1.25rem
-        );
+  gap:8px;
 
-      font-weight: 400;
+  width:100%;
+}
 
-      opacity: 0.95;
+.environment-button{
+  min-height:42px;
 
-      max-width: 700px;
+  border:
+    1px solid
+    var(--border);
 
-      margin: 0 auto;
+  background:#fff;
+  color:var(--text);
 
-    }
+  border-radius:10px;
 
+  font-weight:700;
 
-    /* =========================================================
-       MAIN
-    ========================================================= */
+  transition:
+    background .2s ease,
+    color .2s ease,
+    border-color .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+}
 
-    main {
+.environment-button:hover{
+  border-color:var(--active);
+  transform:translateY(-1px);
+}
 
-      width:
-        min(
-          1200px,
-          calc(100% - 32px)
-        );
+.environment-button.active{
+  background:var(--active);
+  border-color:var(--active);
+  color:white;
 
-      margin: 0 auto;
+  box-shadow:
+    0 4px 12px
+    rgba(22,163,74,.22);
+}
 
-      padding:
-        32px 0 100px;
 
-    }
+/* =========================================================
+   BARRIO
+========================================================= */
 
+.select-wrapper{
+  position:relative;
+  width:100%;
+}
 
-    /* =========================================================
-       FILTER PANEL
-    ========================================================= */
+.select-wrapper::after{
+  content:"⌄";
 
-    .filters {
+  position:absolute;
 
-      background: white;
+  right:15px;
+  top:50%;
 
-      border:
-        1px solid
-        var(--border);
+  transform:translateY(-55%);
 
-      border-radius: var(--radius);
+  color:#667085;
 
-      box-shadow: var(--shadow);
+  pointer-events:none;
 
-      padding: 22px;
+  font-size:18px;
+}
 
-      margin-bottom: 32px;
+.neighborhood-select{
+  width:100%;
+  min-height:44px;
 
-      position: relative;
+  border:
+    1px solid
+    var(--border);
 
-      z-index: 10;
+  border-radius:11px;
 
-    }
+  background:white;
 
-    .filters-header {
+  padding:
+    0 42px 0 14px;
 
-      display: flex;
+  outline:none;
 
-      justify-content: space-between;
+  color:var(--text);
 
-      align-items: center;
+  appearance:none;
 
-      gap: 16px;
+  cursor:pointer;
 
-      margin-bottom: 20px;
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
 
-    }
+.neighborhood-select:focus{
+  border-color:var(--active);
 
-    .filters-title {
+  box-shadow:
+    0 0 0 3px
+    rgba(22,163,76,.12);
+}
 
-      font-size: 19px;
 
-      font-weight: 800;
+/* =========================================================
+   AMENITY FILTERS
+========================================================= */
 
-      letter-spacing: -0.02em;
+.amenity-filters{
+  display:flex;
+  flex-wrap:wrap;
 
-    }
+  gap:8px;
 
-    .results-count {
+  margin-top:16px;
 
-      color: var(--text-soft);
+  width:100%;
+}
 
-      font-size: 14px;
+.amenity-button{
+  display:inline-flex;
 
-      margin-top: 2px;
+  align-items:center;
+  justify-content:center;
 
-    }
+  gap:7px;
 
-    .filter-grid {
+  min-height:40px;
 
-      display: grid;
+  padding:
+    0 14px;
 
-      grid-template-columns:
-        minmax(0, 1.25fr)
-        minmax(250px, 0.75fr);
+  border:
+    1px solid
+    var(--border);
 
-      gap: 20px;
+  background:#fff;
 
-    }
+  color:var(--text);
 
-    .filter-group {
+  border-radius:999px;
 
-      display: flex;
+  font-size:13px;
+  font-weight:700;
 
-      flex-direction: column;
+  transition:all .2s ease;
+}
 
-      gap: 9px;
+.amenity-button:hover{
+  border-color:var(--active);
+}
 
-      min-width: 0;
+.amenity-button.active{
+  background:var(--active);
+  color:white;
+  border-color:var(--active);
 
-    }
+  box-shadow:
+    0 4px 12px
+    rgba(22,163,74,.20);
+}
 
-    .filter-label {
 
-      font-size: 12px;
+/* =========================================================
+   CLEAR FILTERS
+========================================================= */
 
-      font-weight: 800;
+.clear-filters{
+  border:none;
 
-      color: var(--text-soft);
+  background:transparent;
 
-      text-transform: uppercase;
+  color:var(--text-soft);
 
-      letter-spacing: 0.06em;
+  font-weight:700;
+  font-size:13px;
 
-    }
+  padding:4px 0;
 
+  transition:color .2s ease;
+}
 
-    /* =========================================================
-       ENVIRONMENT BUTTONS
-    ========================================================= */
+.clear-filters:hover{
+  color:var(--active);
+  text-decoration:underline;
+}
 
-    .environment-buttons {
 
-      display: grid;
+/* =========================================================
+   PROPERTY GRID
+========================================================= */
 
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(85px, 1fr)
-        );
+.properties-grid{
+  display:grid;
 
-      gap: 8px;
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(320px,1fr)
+    );
 
-      width: 100%;
+  gap:22px;
 
-    }
+  width:100%;
+}
 
-    .environment-button {
 
-      min-height: 44px;
+/* =========================================================
+   PROPERTY CARD
+========================================================= */
 
-      border:
-        1px solid
-        var(--border);
+.property-card{
+  background:white;
 
-      background: #fff;
+  border:
+    1px solid
+    var(--border);
 
-      color: var(--text);
+  border-radius:var(--radius);
 
-      border-radius: 10px;
+  overflow:hidden;
 
-      font-weight: 700;
+  /* SOMBRA TENUE SOLICITADA */
+  box-shadow:
+    0 6px 20px
+    rgba(16,24,40,.075);
 
-      transition:
-        background 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
 
-    }
+  display:flex;
+  flex-direction:column;
 
-    .environment-button:hover {
+  min-width:0;
+  width:100%;
+}
 
-      border-color: var(--active);
+.property-card:hover{
+  transform:translateY(-3px);
 
-      transform: translateY(-1px);
+  box-shadow:
+    0 12px 32px
+    rgba(16,24,40,.11);
+}
 
-    }
 
-    .environment-button.active {
+/* =========================================================
+   PROPERTY IMAGE
+========================================================= */
 
-      background: var(--active);
+.property-image-container{
+  position:relative;
 
-      border-color: var(--active);
+  width:100%;
+  height:245px;
 
-      color: white;
+  background:
+    linear-gradient(
+      135deg,
+      #e8edf3,
+      #f5f7fa
+    );
 
-      box-shadow:
-        0 4px 12px
-        rgba(22, 163, 74, 0.22);
+  overflow:hidden;
+}
 
-    }
+.property-image{
+  width:100%;
+  height:100%;
 
+  object-fit:cover;
 
-    /* =========================================================
-       BARRIO SELECT
-    ========================================================= */
+  transition:
+    transform .5s ease;
 
-    .select-wrapper {
+  cursor:pointer;
+}
 
-      position: relative;
+.property-card:hover
+.property-image{
+  transform:scale(1.025);
+}
 
-      width: 100%;
+.property-image-placeholder{
+  width:100%;
+  height:100%;
 
-    }
+  display:flex;
 
-    .select-wrapper::after {
+  align-items:center;
+  justify-content:center;
 
-      content: "⌄";
+  flex-direction:column;
 
-      position: absolute;
+  gap:8px;
 
-      right: 15px;
+  color:#98a2b3;
 
-      top: 50%;
+  font-size:14px;
+}
 
-      transform: translateY(-55%);
 
-      color: #667085;
+/* =========================================================
+   IMAGE BADGES
+========================================================= */
 
-      pointer-events: none;
+.image-badge{
+  position:absolute;
 
-      font-size: 18px;
+  top:13px;
+  left:13px;
 
-    }
+  z-index:2;
 
-    .neighborhood-select {
+  padding:
+    6px 10px;
 
-      width: 100%;
+  border-radius:999px;
 
-      min-height: 46px;
+  background:
+    rgba(255,255,255,.94);
 
-      border:
-        1px solid
-        var(--border);
+  backdrop-filter:blur(8px);
 
-      border-radius: 11px;
+  color:var(--text);
 
-      background: white;
+  font-size:11px;
+  font-weight:800;
 
-      padding:
-        0 42px 0 14px;
+  box-shadow:
+    0 4px 12px
+    rgba(0,0,0,.10);
+}
 
-      outline: none;
+.image-badge.available{
+  color:var(--success);
+}
 
-      color: var(--text);
+.photos-badge{
+  position:absolute;
 
-      appearance: none;
+  right:13px;
+  bottom:13px;
 
-      cursor: pointer;
+  z-index:2;
 
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
+  padding:
+    6px 10px;
 
-    }
+  border-radius:999px;
 
-    .neighborhood-select:focus {
+  background:
+    rgba(0,0,0,.68);
 
-      border-color: var(--active);
+  color:white;
 
-      box-shadow:
-        0 0 0 3px
-        rgba(22, 163, 76, 0.12);
+  font-size:11px;
+  font-weight:700;
 
-    }
+  backdrop-filter:blur(8px);
+}
 
 
-    /* =========================================================
-       AMENITIES FILTERS
-    ========================================================= */
+/* =========================================================
+   CARD CONTENT
+========================================================= */
 
-    .amenity-filters {
+.property-content{
+  padding:
+    17px 18px 18px;
 
-      display: flex;
+  display:flex;
+  flex-direction:column;
 
-      flex-wrap: wrap;
+  gap:11px;
 
-      gap: 9px;
+  flex:1;
 
-      margin-top: 18px;
+  min-width:0;
+}
 
-      width: 100%;
+.property-location{
+  display:flex;
 
-    }
+  align-items:center;
 
-    .amenity-button {
+  gap:5px;
 
-      display: inline-flex;
+  color:var(--text-soft);
 
-      align-items: center;
+  font-size:13px;
+  font-weight:650;
+}
 
-      justify-content: center;
+.property-title{
+  font-size:21px;
 
-      gap: 7px;
+  font-weight:850;
 
-      min-height: 42px;
+  line-height:1.15;
 
-      padding:
-        0 15px;
+  color:var(--text);
 
-      border:
-        1px solid
-        var(--border);
+  letter-spacing:-.025em;
+}
 
-      background: #fff;
+.property-address{
+  color:var(--text-soft);
 
-      color: var(--text);
+  font-size:13px;
 
-      border-radius: 999px;
+  line-height:1.4;
 
-      font-size: 14px;
+  min-height:18px;
+}
 
-      font-weight: 700;
 
-      transition: all 0.2s ease;
+/* =========================================================
+   PRICE
+========================================================= */
 
-    }
+.property-price{
+  display:flex;
 
-    .amenity-button:hover {
+  align-items:center;
+  justify-content:space-between;
 
-      border-color: var(--active);
+  gap:10px;
 
-    }
+  padding:
+    12px 0;
 
-    .amenity-button.active {
+  border-top:
+    1px solid
+    var(--border);
 
-      background: var(--active);
+  border-bottom:
+    1px solid
+    var(--border);
+}
 
-      color: white;
+.price-label{
+  font-size:10px;
 
-      border-color: var(--active);
+  color:var(--text-soft);
 
-      box-shadow:
-        0 4px 12px
-        rgba(22, 163, 76, 0.20);
+  text-transform:uppercase;
 
-    }
+  font-weight:800;
 
+  letter-spacing:.06em;
+}
 
-    /* =========================================================
-       CLEAR FILTERS
-    ========================================================= */
+.price-value{
+  color:var(--primary);
 
-    .clear-filters {
+  font-size:22px;
 
-      border: none;
+  font-weight:850;
 
-      background: transparent;
+  text-align:right;
 
-      color: var(--text-soft);
+  line-height:1.1;
+}
 
-      font-weight: 700;
 
-      font-size: 14px;
+/* =========================================================
+   COSTS
+========================================================= */
 
-      padding: 4px 0;
+.property-costs{
+  display:grid;
 
-      transition: color 0.2s ease;
+  grid-template-columns:
+    repeat(2,1fr);
 
-    }
+  gap:8px;
+}
 
-    .clear-filters:hover {
+.cost-box{
+  background:#f8fafc;
 
-      color: var(--active);
+  border:
+    1px solid
+    #eef1f5;
 
-      text-decoration: underline;
+  border-radius:10px;
 
-    }
+  padding:9px;
+}
 
+.cost-label{
+  display:block;
 
-    /* =========================================================
-       PROPERTY GRID
-    ========================================================= */
+  color:var(--text-soft);
 
-    .properties-grid {
+  font-size:9px;
 
-      display: grid;
+  font-weight:800;
 
-      grid-template-columns:
-        repeat(
-          auto-fill,
-          minmax(340px, 1fr)
-        );
+  text-transform:uppercase;
 
-      gap: 24px;
+  margin-bottom:2px;
 
-      width: 100%;
+  letter-spacing:.04em;
+}
 
-    }
+.cost-value{
+  display:block;
 
+  color:var(--text);
 
-    /* =========================================================
-       PROPERTY CARD
-    ========================================================= */
+  font-size:13px;
 
-    .property-card {
+  font-weight:750;
 
-      background: white;
+  word-break:break-word;
+}
 
-      border:
-        1px solid
-        var(--border);
 
-      border-radius: var(--radius);
+/* =========================================================
+   PET / AMENITIES
+========================================================= */
 
-      overflow: hidden;
+.property-amenities{
+  display:grid;
 
-      box-shadow: var(--shadow-sm);
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
 
-      transition:
-        transform 0.25s ease,
-        box-shadow 0.25s ease;
+  gap:7px;
+}
 
-      display: flex;
+.amenity-chip{
+  display:flex;
 
-      flex-direction: column;
+  align-items:center;
 
-      min-width: 0;
+  gap:5px;
 
-      width: 100%;
+  padding:
+    7px 9px;
 
-    }
+  border-radius:8px;
 
-    .property-card:hover {
+  background:#f2f4f7;
 
-      transform: translateY(-4px);
+  color:#475467;
 
-      box-shadow: var(--shadow-lg);
+  font-size:12px;
 
-    }
+  font-weight:650;
 
+  min-width:0;
+}
 
-    /* =========================================================
-       PROPERTY IMAGE
-    ========================================================= */
+.amenity-chip.yes{
+  color:#15803d;
+  background:#f0fdf4;
+}
 
-    .property-image-container {
+.amenity-chip.no{
+  color:#b42318;
+  background:#fff5f5;
+}
 
-      position: relative;
 
-      width: 100%;
+/* =========================================================
+   DESCRIPTION BUTTON
+========================================================= */
 
-      height: 255px;
+.description-button{
+  width:100%;
 
-      background:
-        linear-gradient(
-          135deg,
-          #e8edf3,
-          #f5f7fa
-        );
+  min-height:39px;
 
-      overflow: hidden;
+  border:
+    1px solid
+    var(--border);
 
-    }
+  background:white;
 
-    .property-image {
+  color:var(--text);
 
-      width: 100%;
+  border-radius:10px;
 
-      height: 100%;
+  font-size:13px;
+  font-weight:750;
 
-      object-fit: cover;
+  display:flex;
 
-      transition:
-        transform 0.5s ease;
+  align-items:center;
+  justify-content:center;
 
-      cursor: pointer;
+  gap:7px;
 
-    }
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease;
+}
 
-    .property-card:hover
-    .property-image {
+.description-button:hover{
+  background:#f8fafc;
+  border-color:var(--active);
+  color:var(--active);
+}
 
-      transform: scale(1.035);
 
-    }
+/* =========================================================
+   WHATSAPP BUTTON
+========================================================= */
 
-    .property-image-placeholder {
+.property-actions{
+  margin-top:auto;
+  padding-top:1px;
+}
 
-      width: 100%;
+.whatsapp-button{
+  width:100%;
 
-      height: 100%;
+  min-height:46px;
 
-      display: flex;
+  border:none;
 
-      align-items: center;
+  border-radius:10px;
 
-      justify-content: center;
+  background:#18b957;
 
-      flex-direction: column;
+  color:white;
 
-      gap: 8px;
+  font-weight:800;
 
-      color: #98a2b3;
+  display:flex;
 
-      font-size: 14px;
+  align-items:center;
+  justify-content:center;
 
-    }
+  gap:8px;
 
+  transition:
+    background .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
 
-    /* =========================================================
-       IMAGE BADGES
-    ========================================================= */
+  box-shadow:
+    0 5px 15px
+    rgba(24,185,87,.15);
+}
 
-    .image-badge {
+.whatsapp-button:hover{
+  background:#109b49;
 
-      position: absolute;
+  transform:translateY(-1px);
 
-      top: 14px;
+  box-shadow:
+    0 7px 18px
+    rgba(24,185,87,.23);
+}
 
-      left: 14px;
 
-      z-index: 2;
+/* =========================================================
+   DESCRIPTION MODAL
+========================================================= */
 
-      padding:
-        7px 11px;
+.description-modal{
+  position:fixed;
 
-      border-radius: 999px;
+  inset:0;
 
-      background:
-        rgba(255, 255, 255, 0.94);
+  z-index:2000;
 
-      backdrop-filter: blur(8px);
+  display:none;
 
-      color: var(--text);
+  align-items:center;
+  justify-content:center;
 
-      font-size: 12px;
+  padding:20px;
 
-      font-weight: 800;
+  background:
+    rgba(0,0,0,.55);
 
-      box-shadow:
-        0 4px 12px
-        rgba(0, 0, 0, 0.10);
+  backdrop-filter:blur(5px);
+}
 
-    }
+.description-modal.active{
+  display:flex;
+}
 
-    .image-badge.available {
+.description-panel{
+  width:min(
+    680px,
+    100%
+  );
 
-      color: var(--success);
+  max-height:
+    min(
+      720px,
+      85vh
+    );
 
-    }
+  overflow-y:auto;
 
-    .photos-badge {
+  background:white;
 
-      position: absolute;
+  border-radius:20px;
 
-      right: 14px;
+  box-shadow:var(--shadow-lg);
 
-      bottom: 14px;
+  padding:26px;
 
-      z-index: 2;
+  position:relative;
 
-      padding:
-        7px 11px;
+  animation:
+    modalIn .22s ease both;
+}
 
-      border-radius: 999px;
+@keyframes modalIn{
 
-      background:
-        rgba(0, 0, 0, 0.68);
+  from{
+    opacity:0;
 
-      color: white;
+    transform:
+      translateY(15px)
+      scale(.98);
+  }
 
-      font-size: 12px;
+  to{
+    opacity:1;
 
-      font-weight: 700;
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
 
-      backdrop-filter: blur(8px);
+.description-close{
+  position:absolute;
 
-    }
+  top:14px;
+  right:14px;
 
+  width:40px;
+  height:40px;
 
-    /* =========================================================
-       CARD CONTENT
-    ========================================================= */
+  border:none;
 
-    .property-content {
+  border-radius:50%;
 
-      padding: 20px;
+  background:#f2f4f7;
 
-      display: flex;
+  color:var(--text);
 
-      flex-direction: column;
+  font-size:24px;
 
-      gap: 14px;
+  line-height:1;
+}
 
-      flex: 1;
+.description-close:hover{
+  background:#e5e7eb;
+}
 
-      min-width: 0;
+.description-modal-title{
+  padding-right:48px;
 
-    }
+  font-size:24px;
 
-    .property-location {
+  font-weight:850;
 
-      display: flex;
+  line-height:1.2;
 
-      align-items: center;
+  margin-bottom:7px;
+}
 
-      gap: 6px;
+.description-modal-location{
+  color:var(--text-soft);
 
-      color: var(--text-soft);
+  font-size:14px;
 
-      font-size: 14px;
+  margin-bottom:20px;
+}
 
-      font-weight: 650;
+.description-modal-text{
+  color:#344054;
 
-    }
+  font-size:15px;
 
-    .property-title {
+  line-height:1.7;
 
-      font-size: 22px;
+  white-space:pre-line;
+}
 
-      font-weight: 850;
 
-      line-height: 1.15;
+/* =========================================================
+   EMPTY
+========================================================= */
 
-      color: var(--text);
+.empty-state{
+  grid-column:1 / -1;
 
-      letter-spacing: -0.025em;
+  background:white;
 
-    }
+  border:
+    1px solid
+    var(--border);
 
-    .property-address {
+  border-radius:var(--radius);
 
-      color: var(--text-soft);
+  padding:70px 20px;
 
-      font-size: 14px;
+  text-align:center;
 
-      line-height: 1.45;
+  box-shadow:
+    0 6px 20px
+    rgba(16,24,40,.055);
+}
 
-      min-height: 20px;
+.empty-icon{
+  font-size:42px;
+  margin-bottom:15px;
+}
 
-    }
+.empty-title{
+  font-size:21px;
+  font-weight:800;
+  margin-bottom:7px;
+}
 
+.empty-text{
+  color:var(--text-soft);
+  margin-bottom:20px;
+}
 
-    /* =========================================================
-       PRICE
-    ========================================================= */
 
-    .property-price {
+/* =========================================================
+   LOADING
+========================================================= */
 
-      display: flex;
+.loading{
+  grid-column:1 / -1;
 
-      align-items: center;
+  display:flex;
 
-      justify-content: space-between;
+  align-items:center;
+  justify-content:center;
 
-      gap: 12px;
+  min-height:300px;
 
-      padding:
-        15px 0;
+  flex-direction:column;
 
-      border-top:
-        1px solid
-        var(--border);
+  gap:14px;
 
-      border-bottom:
-        1px solid
-        var(--border);
+  color:var(--text-soft);
+}
 
-    }
+.spinner{
+  width:42px;
+  height:42px;
 
-    .price-label {
+  border:
+    4px solid
+    #e5e7eb;
 
-      font-size: 11px;
+  border-top-color:
+    var(--primary);
 
-      color: var(--text-soft);
+  border-radius:50%;
 
-      text-transform: uppercase;
+  animation:
+    spin .8s linear infinite;
+}
 
-      font-weight: 800;
+@keyframes spin{
 
-      letter-spacing: 0.06em;
+  to{
+    transform:rotate(360deg);
+  }
 
-    }
+}
 
-    .price-value {
 
-      color: var(--primary);
+/* =========================================================
+   ERROR
+========================================================= */
 
-      font-size: 25px;
+.error-state{
+  grid-column:1 / -1;
 
-      font-weight: 850;
+  background:white;
 
-      text-align: right;
+  border:
+    1px solid
+    #fecaca;
 
-      line-height: 1.1;
+  border-radius:var(--radius);
 
-    }
+  padding:40px 20px;
 
+  text-align:center;
 
-    /* =========================================================
-       COSTS
-    ========================================================= */
+  color:#991b1b;
+}
 
-    .property-costs {
+.retry-button{
+  margin-top:18px;
 
-      display: grid;
+  padding:
+    10px 17px;
 
-      grid-template-columns:
-        repeat(2, 1fr);
+  border:none;
 
-      gap: 10px;
+  border-radius:9px;
 
-    }
+  background:var(--primary);
 
-    .cost-box {
+  color:white;
 
-      background: #f8fafc;
+  font-weight:700;
 
-      border:
-        1px solid
-        #eef1f5;
+  cursor:pointer;
+}
 
-      border-radius: 11px;
 
-      padding: 11px;
+/* =========================================================
+   WHATSAPP FLOTANTE
+========================================================= */
 
-    }
+.floating-whatsapp{
+  position:fixed;
 
-    .cost-label {
+  right:22px;
+  bottom:22px;
 
-      display: block;
+  width:60px;
+  height:60px;
 
-      color: var(--text-soft);
+  border-radius:50%;
 
-      font-size: 10px;
+  display:flex;
 
-      font-weight: 800;
+  align-items:center;
+  justify-content:center;
 
-      text-transform: uppercase;
+  background:#18b957;
 
-      margin-bottom: 3px;
+  color:white;
 
-      letter-spacing: 0.04em;
+  text-decoration:none;
 
-    }
+  font-size:28px;
 
-    .cost-value {
+  box-shadow:
+    0 8px 24px
+    rgba(0,0,0,.20);
 
-      display: block;
+  z-index:100;
 
-      color: var(--text);
+  transition:
+    transform .2s ease;
+}
 
-      font-size: 14px;
+.floating-whatsapp:hover{
+  transform:scale(1.07);
+}
 
-      font-weight: 750;
 
-      word-break: break-word;
+/* =========================================================
+   GALLERY
+========================================================= */
 
-    }
+.gallery{
+  position:fixed;
 
+  inset:0;
 
-    /* =========================================================
-       AMENITIES
-    ========================================================= */
+  background:
+    rgba(0,0,0,.94);
 
-    .property-amenities {
+  z-index:3000;
 
-      display: flex;
+  display:none;
 
-      flex-wrap: wrap;
+  align-items:center;
+  justify-content:center;
 
-      gap: 7px;
+  padding:20px;
+}
 
-    }
+.gallery.active{
+  display:flex;
+}
 
-    .amenity-chip {
+.gallery-image{
+  max-width:min(
+    1100px,
+    92vw
+  );
 
-      display: inline-flex;
+  max-height:85vh;
 
-      align-items: center;
+  object-fit:contain;
 
-      gap: 5px;
+  border-radius:10px;
 
-      padding:
-        7px 10px;
+  user-select:none;
+}
 
-      border-radius: 8px;
+.gallery-close{
+  position:absolute;
 
-      background: #f2f4f7;
+  top:18px;
+  right:22px;
 
-      color: #475467;
+  width:46px;
+  height:46px;
 
-      font-size: 12px;
+  border:none;
 
-      font-weight: 650;
+  border-radius:50%;
 
-    }
+  background:
+    rgba(255,255,255,.14);
 
+  color:white;
 
-    /* =========================================================
-       DESCRIPTION BUTTON
-    ========================================================= */
+  font-size:26px;
 
-    .description-button {
+  z-index:10;
+}
 
-      width: 100%;
+.gallery-close:hover{
+  background:
+    rgba(255,255,255,.25);
+}
 
-      min-height: 42px;
+.gallery-prev,
+.gallery-next{
+  position:absolute;
 
-      border:
-        1px solid
-        var(--border);
+  top:50%;
 
-      background: white;
+  transform:translateY(-50%);
 
-      color: var(--text);
+  width:48px;
+  height:48px;
 
-      border-radius: 10px;
+  border:none;
 
-      font-size: 14px;
+  border-radius:50%;
 
-      font-weight: 750;
+  background:
+    rgba(255,255,255,.14);
 
-      display: flex;
+  color:white;
 
-      align-items: center;
+  font-size:24px;
 
-      justify-content: center;
+  z-index:10;
+}
 
-      gap: 7px;
+.gallery-prev{
+  left:22px;
+}
 
-      transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        color 0.2s ease;
+.gallery-next{
+  right:22px;
+}
 
-    }
+.gallery-counter{
+  position:absolute;
 
-    .description-button:hover {
+  bottom:20px;
+  left:50%;
 
-      background: #f8fafc;
+  transform:translateX(-50%);
 
-      border-color: var(--active);
+  color:white;
 
-      color: var(--active);
+  background:
+    rgba(0,0,0,.45);
 
-    }
+  padding:
+    7px 12px;
 
+  border-radius:999px;
 
-    /* =========================================================
-       CARD BUTTON
-    ========================================================= */
+  font-size:13px;
+  font-weight:700;
+}
 
-    .property-actions {
 
-      margin-top: auto;
+/* =========================================================
+   MOBILE
+========================================================= */
 
-      padding-top: 2px;
+@media screen and (max-width:800px){
 
-    }
+  html,
+  body{
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow-x:hidden !important;
+  }
 
-    .whatsapp-button {
 
-      width: 100%;
+  /* HERO */
 
-      min-height: 49px;
+  .hero{
+    width:100% !important;
+    overflow:hidden !important;
+  }
 
-      border: none;
+  .hero-image{
+    width:100% !important;
 
-      border-radius: 11px;
+    height:62vw !important;
 
-      background: #18b957;
+    min-height:220px !important;
+    max-height:360px !important;
+  }
 
-      color: white;
+  .hero-background{
+    width:100% !important;
+    height:100% !important;
 
-      font-weight: 800;
+    inset:0 !important;
 
-      display: flex;
+    background-position:center center !important;
+    background-size:cover !important;
+  }
 
-      align-items: center;
+  .hero-bottom{
+    width:100% !important;
 
-      justify-content: center;
+    padding:
+      27px 16px 30px !important;
+  }
 
-      gap: 9px;
+  .hero-content{
+    width:100% !important;
+    max-width:100% !important;
+  }
 
-      transition:
-        background 0.2s ease,
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+  .hero-title{
+    width:100% !important;
 
-      box-shadow:
-        0 5px 15px
-        rgba(24, 185, 87, 0.16);
+    font-size:
+      clamp(
+        2rem,
+        8vw,
+        3rem
+      ) !important;
 
-    }
+    line-height:1.08 !important;
 
-    .whatsapp-button:hover {
+    letter-spacing:-.035em !important;
 
-      background: #109b49;
+    overflow-wrap:anywhere !important;
+  }
 
-      transform: translateY(-1px);
+  .hero-subtitle{
+    width:100% !important;
 
-      box-shadow:
-        0 7px 18px
-        rgba(24, 185, 87, 0.23);
+    font-size:
+      clamp(
+        1.05rem,
+        4.8vw,
+        1.3rem
+      ) !important;
 
-    }
+    line-height:1.4 !important;
+  }
 
 
-    /* =========================================================
-       DESCRIPTION MODAL
-    ========================================================= */
+  /* MAIN */
 
-    .description-modal {
+  main{
+    width:100% !important;
 
-      position: fixed;
+    max-width:100% !important;
 
-      inset: 0;
+    margin:0 !important;
 
-      z-index: 2000;
+    padding:
+      14px 0 100px !important;
 
-      display: none;
+    overflow:hidden !important;
+  }
 
-      align-items: center;
 
-      justify-content: center;
+  /* FILTER */
 
-      padding: 20px;
+  .filters{
+    width:
+      calc(100% - 20px) !important;
 
-      background:
-        rgba(0, 0, 0, 0.55);
+    margin:
+      0 10px 20px !important;
 
-      backdrop-filter: blur(5px);
+    padding:16px !important;
 
-    }
+    border-radius:16px !important;
+  }
 
-    .description-modal.active {
+  .filters-header{
+    flex-direction:column !important;
 
-      display: flex;
+    align-items:flex-start !important;
 
-    }
+    gap:8px !important;
 
-    .description-panel {
+    margin-bottom:18px !important;
+  }
 
-      width:
-        min(
-          680px,
-          100%
-        );
+  .filters-title{
+    font-size:19px !important;
+  }
 
-      max-height:
-        min(
-          720px,
-          85vh
-        );
+  .results-count{
+    font-size:14px !important;
+  }
 
-      overflow-y: auto;
+  .clear-filters{
+    font-size:14px !important;
+  }
 
-      background: white;
+  .filter-grid{
+    grid-template-columns:1fr !important;
+    gap:18px !important;
+  }
 
-      border-radius: 20px;
 
-      box-shadow: var(--shadow-lg);
+  /* AMBIENTES */
 
-      padding: 26px;
+  .environment-buttons{
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      ) !important;
 
-      position: relative;
+    gap:8px !important;
+  }
 
-      animation:
-        modalIn
-        0.22s
-        ease
-        both;
+  .environment-button{
+    min-height:49px !important;
 
-    }
+    font-size:14px !important;
 
-    @keyframes modalIn {
+    padding:
+      7px 5px !important;
+  }
 
-      from {
 
-        opacity: 0;
+  /* BARRIO */
 
-        transform:
-          translateY(15px)
-          scale(0.98);
+  .neighborhood-select{
+    min-height:49px !important;
 
-      }
+    font-size:15px !important;
+  }
 
-      to {
 
-        opacity: 1;
+  /* AMENITIES FILTER */
 
-        transform:
-          translateY(0)
-          scale(1);
+  .amenity-filters{
+    display:grid !important;
 
-      }
+    grid-template-columns:
+      1fr !important;
 
-    }
+    gap:8px !important;
 
-    .description-close {
+    margin-top:18px !important;
+  }
 
-      position: absolute;
+  .amenity-button{
+    width:100% !important;
 
-      top: 14px;
+    min-height:48px !important;
 
-      right: 14px;
+    font-size:15px !important;
+  }
 
-      width: 40px;
 
-      height: 40px;
+  /* GRID */
 
-      border: none;
+  .properties-grid{
+    width:100% !important;
 
-      border-radius: 50%;
+    grid-template-columns:
+      minmax(0,1fr) !important;
 
-      background: #f2f4f7;
+    gap:18px !important;
 
-      color: var(--text);
+    margin:0 !important;
+    padding:0 !important;
+  }
 
-      font-size: 24px;
 
-      line-height: 1;
+  /* CARD */
 
-    }
+  .property-card{
+    width:100% !important;
 
-    .description-close:hover {
+    margin:0 !important;
 
-      background: #e5e7eb;
+    border-radius:16px !important;
 
-    }
+    transform:none !important;
 
-    .description-modal-title {
+    box-shadow:
+      0 5px 18px
+      rgba(16,24,40,.075) !important;
+  }
 
-      padding-right: 48px;
+  .property-card:hover{
+    transform:none !important;
+  }
 
-      font-size: 24px;
 
-      font-weight: 850;
+  /* IMAGE */
 
-      line-height: 1.2;
+  .property-image-container{
+    width:100% !important;
 
-      margin-bottom: 7px;
+    height:auto !important;
 
-    }
+    aspect-ratio:4 / 3 !important;
+  }
 
-    .description-modal-location {
+  .property-image{
+    width:100% !important;
+    height:100% !important;
 
-      color: var(--text-soft);
+    object-fit:cover !important;
+  }
 
-      font-size: 14px;
 
-      margin-bottom: 20px;
+  /* CONTENT */
 
-    }
+  .property-content{
+    width:100% !important;
 
-    .description-modal-text {
+    padding:
+      18px 16px 18px !important;
 
-      color: #344054;
+    gap:12px !important;
+  }
 
-      font-size: 15px;
+  .property-location{
+    font-size:14px !important;
+  }
 
-      line-height: 1.7;
+  .property-title{
+    font-size:25px !important;
+  }
 
-      white-space: pre-line;
+  .property-address{
+    font-size:15px !important;
+  }
 
-    }
 
+  /* PRICE */
 
-    /* =========================================================
-       EMPTY STATE
-    ========================================================= */
+  .property-price{
+    flex-direction:column !important;
 
-    .empty-state {
+    align-items:flex-start !important;
 
-      grid-column: 1 / -1;
+    gap:5px !important;
 
-      background: white;
+    padding:
+      14px 0 !important;
+  }
 
-      border:
-        1px solid
-        var(--border);
+  .price-label{
+    font-size:11px !important;
+  }
 
-      border-radius: var(--radius);
+  .price-value{
+    width:100% !important;
 
-      padding: 70px 20px;
+    font-size:27px !important;
 
-      text-align: center;
+    text-align:left !important;
+  }
 
-    }
 
-    .empty-icon {
+  /* COSTS */
 
-      font-size: 42px;
+  .property-costs{
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      ) !important;
 
-      margin-bottom: 15px;
+    gap:8px !important;
+  }
 
-    }
+  .cost-box{
+    padding:10px !important;
+  }
 
-    .empty-title {
 
-      font-size: 21px;
+  /* PETS */
 
-      font-weight: 800;
+  .property-amenities{
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      ) !important;
 
-      margin-bottom: 7px;
+    gap:7px !important;
+  }
 
-    }
+  .amenity-chip{
+    font-size:12px !important;
 
-    .empty-text {
+    padding:
+      7px 8px !important;
+  }
 
-      color: var(--text-soft);
 
-      margin-bottom: 20px;
+  /* BUTTONS */
 
-    }
+  .description-button{
+    min-height:47px !important;
 
+    font-size:15px !important;
+  }
 
-    /* =========================================================
-       LOADING
-    ========================================================= */
+  .whatsapp-button{
+    min-height:52px !important;
 
-    .loading {
+    font-size:15px !important;
+  }
 
-      grid-column: 1 / -1;
 
-      display: flex;
+  /* MODAL */
 
-      align-items: center;
+  .description-modal{
+    width:100% !important;
+    height:100% !important;
 
-      justify-content: center;
+    padding:10px !important;
+  }
 
-      min-height: 300px;
+  .description-panel{
+    width:100% !important;
 
-      flex-direction: column;
+    max-width:100% !important;
 
-      gap: 14px;
+    max-height:90vh !important;
 
-      color: var(--text-soft);
+    padding:
+      24px 18px !important;
 
-    }
+    border-radius:17px !important;
+  }
 
-    .spinner {
+  .description-modal-title{
+    font-size:23px !important;
+  }
 
-      width: 42px;
+  .description-modal-text{
+    font-size:16px !important;
+  }
 
-      height: 42px;
 
-      border:
-        4px solid
-        #e5e7eb;
+  /* GALLERY */
 
-      border-top-color:
-        var(--primary);
+  .gallery{
+    width:100% !important;
+    height:100% !important;
 
-      border-radius: 50%;
+    padding:8px !important;
+  }
 
-      animation:
-        spin
-        0.8s
-        linear
-        infinite;
+  .gallery-image{
+    width:auto !important;
 
-    }
+    max-width:100% !important;
 
-    @keyframes spin {
+    max-height:82vh !important;
+  }
 
-      to {
-        transform: rotate(360deg);
-      }
+  .gallery-close{
+    top:10px !important;
+    right:10px !important;
+  }
 
-    }
+  .gallery-prev{
+    left:7px !important;
+  }
 
+  .gallery-next{
+    right:7px !important;
+  }
 
-    /* =========================================================
-       ERROR
-    ========================================================= */
 
-    .error-state {
+  /* FLOAT WHATSAPP */
 
-      grid-column: 1 / -1;
+  .floating-whatsapp{
+    width:58px !important;
+    height:58px !important;
 
-      background: white;
+    right:14px !important;
+    bottom:14px !important;
 
-      border:
-        1px solid
-        #fecaca;
+    z-index:5000 !important;
+  }
 
-      border-radius: var(--radius);
+}
 
-      padding: 40px 20px;
 
-      text-align: center;
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
 
-      color: #991b1b;
+@media screen and (max-width:450px){
 
-    }
+  .hero-image{
+    height:64vw !important;
 
-    .retry-button {
+    min-height:205px !important;
+    max-height:290px !important;
+  }
 
-      margin-top: 18px;
+  .hero-bottom{
+    padding:
+      23px 14px 27px !important;
+  }
 
-      padding:
-        10px 17px;
+  main{
+    padding:
+      12px 0 100px !important;
+  }
 
-      border: none;
+  .filters{
+    width:
+      calc(100% - 12px) !important;
 
-      border-radius: 9px;
+    margin-left:6px !important;
+    margin-right:6px !important;
 
-      background: var(--primary);
+    padding:14px !important;
+  }
 
-      color: white;
+  .property-card{
+    border-radius:15px !important;
+  }
 
-      font-weight: 700;
+  .property-content{
+    padding:
+      17px 14px 18px !important;
 
-      cursor: pointer;
+    gap:11px !important;
+  }
 
-    }
+  .property-title{
+    font-size:24px !important;
+  }
 
+  .property-address{
+    font-size:15px !important;
+  }
 
-    /* =========================================================
-       FLOATING WHATSAPP
-    ========================================================= */
+  .price-value{
+    font-size:26px !important;
+  }
 
-    .floating-whatsapp {
+  .property-costs{
+    grid-template-columns:1fr !important;
+  }
 
-      position: fixed;
+}
 
-      right: 22px;
 
-      bottom: 22px;
+/* =========================================================
+   VERY SMALL
+========================================================= */
 
-      width: 60px;
+@media screen and (max-width:380px){
 
-      height: 60px;
+  .property-content{
+    padding:
+      16px 12px 17px !important;
+  }
 
-      border-radius: 50%;
+  .property-title{
+    font-size:22px !important;
+  }
 
-      display: flex;
+  .property-address{
+    font-size:14px !important;
+  }
 
-      align-items: center;
+  .price-value{
+    font-size:24px !important;
+  }
 
-      justify-content: center;
+  .amenity-chip{
+    font-size:11px !important;
+  }
 
-      background: #18b957;
+  .description-button,
+  .whatsapp-button{
+    font-size:14px !important;
+  }
 
-      color: white;
+}
 
-      text-decoration: none;
-
-      font-size: 27px;
-
-      box-shadow:
-        0 8px 24px
-        rgba(0, 0, 0, 0.20);
-
-      z-index: 100;
-
-      transition:
-        transform 0.2s ease;
-
-    }
-
-    .floating-whatsapp:hover {
-
-      transform: scale(1.07);
-
-    }
-
-
-    /* =========================================================
-       GALLERY
-    ========================================================= */
-
-    .gallery {
-
-      position: fixed;
-
-      inset: 0;
-
-      background:
-        rgba(0, 0, 0, 0.94);
-
-      z-index: 3000;
-
-      display: none;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 20px;
-
-    }
-
-    .gallery.active {
-
-      display: flex;
-
-    }
-
-    .gallery-image {
-
-      max-width:
-        min(
-          1100px,
-          92vw
-        );
-
-      max-height: 85vh;
-
-      object-fit: contain;
-
-      border-radius: 10px;
-
-      user-select: none;
-
-    }
-
-    .gallery-close {
-
-      position: absolute;
-
-      top: 18px;
-
-      right: 22px;
-
-      width: 46px;
-
-      height: 46px;
-
-      border: none;
-
-      border-radius: 50%;
-
-      background:
-        rgba(255, 255, 255, 0.14);
-
-      color: white;
-
-      font-size: 26px;
-
-      z-index: 10;
-
-    }
-
-    .gallery-close:hover {
-
-      background:
-        rgba(255, 255, 255, 0.25);
-
-    }
-
-    .gallery-prev,
-    .gallery-next {
-
-      position: absolute;
-
-      top: 50%;
-
-      transform: translateY(-50%);
-
-      width: 48px;
-
-      height: 48px;
-
-      border: none;
-
-      border-radius: 50%;
-
-      background:
-        rgba(255, 255, 255, 0.14);
-
-      color: white;
-
-      font-size: 24px;
-
-      z-index: 10;
-
-    }
-
-    .gallery-prev {
-      left: 22px;
-    }
-
-    .gallery-next {
-      right: 22px;
-    }
-
-    .gallery-counter {
-
-      position: absolute;
-
-      bottom: 20px;
-
-      left: 50%;
-
-      transform: translateX(-50%);
-
-      color: white;
-
-      background:
-        rgba(0, 0, 0, 0.45);
-
-      padding:
-        7px 12px;
-
-      border-radius: 999px;
-
-      font-size: 13px;
-
-      font-weight: 700;
-
-    }
-
-
-    /* =========================================================
-       RESPONSIVE — TABLET / CELULAR
-       
-       UNA SOLA CONFIGURACIÓN MOBILE
-    ========================================================= */
-
-    @media screen and (max-width: 800px) {
-
-      html,
-      body {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        min-width: 0 !important;
-
-        margin: 0 !important;
-
-        padding: 0 !important;
-
-        overflow-x: hidden !important;
-
-      }
-
-
-      /* =======================================================
-         HERO
-      ======================================================= */
-
-      .hero {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        overflow: hidden !important;
-
-      }
-
-      .hero-image {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        height: 62vw !important;
-
-        min-height: 220px !important;
-
-        max-height: 360px !important;
-
-      }
-
-      .hero-background {
-
-        width: 100% !important;
-
-        height: 100% !important;
-
-        inset: 0 !important;
-
-        background-position: center center !important;
-
-        background-size: cover !important;
-
-        background-repeat: no-repeat !important;
-
-      }
-
-      .hero-bottom {
-
-        width: 100% !important;
-
-        padding:
-          28px
-          16px
-          32px !important;
-
-      }
-
-      .hero-content {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        margin: 0 auto !important;
-
-      }
-
-      .hero-title {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        font-size:
-          clamp(
-            2rem,
-            8vw,
-            3rem
-          ) !important;
-
-        line-height: 1.08 !important;
-
-        letter-spacing: -0.035em !important;
-
-        overflow-wrap: anywhere !important;
-
-      }
-
-      .hero-subtitle {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        font-size:
-          clamp(
-            1.05rem,
-            4.8vw,
-            1.3rem
-          ) !important;
-
-        line-height: 1.45 !important;
-
-        overflow-wrap: anywhere !important;
-
-      }
-
-
-      /* =======================================================
-         MAIN
-      ======================================================= */
-
-      main {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        min-width: 0 !important;
-
-        margin: 0 !important;
-
-        padding:
-          16px
-          0
-          100px !important;
-
-        overflow: hidden !important;
-
-      }
-
-
-      /* =======================================================
-         FILTROS
-      ======================================================= */
-
-      .filters {
-
-        width:
-          calc(100% - 20px) !important;
-
-        max-width: none !important;
-
-        margin:
-          0
-          10px
-          22px !important;
-
-        padding: 18px !important;
-
-        border-radius: 16px !important;
-
-      }
-
-      .filters-header {
-
-        width: 100% !important;
-
-        display: flex !important;
-
-        flex-direction: column !important;
-
-        align-items: flex-start !important;
-
-        gap: 10px !important;
-
-        margin-bottom: 20px !important;
-
-      }
-
-      .filters-title {
-
-        font-size: 20px !important;
-
-        line-height: 1.2 !important;
-
-      }
-
-      .results-count {
-
-        font-size: 15px !important;
-
-        line-height: 1.4 !important;
-
-      }
-
-      .clear-filters {
-
-        font-size: 15px !important;
-
-        padding: 5px 0 !important;
-
-      }
-
-      .filter-grid {
-
-        width: 100% !important;
-
-        display: grid !important;
-
-        grid-template-columns: 1fr !important;
-
-        gap: 20px !important;
-
-      }
-
-      .filter-group {
-
-        width: 100% !important;
-
-        min-width: 0 !important;
-
-      }
-
-      .filter-label {
-
-        font-size: 13px !important;
-
-      }
-
-
-      /* =======================================================
-         BOTONES AMBIENTES
-      ======================================================= */
-
-      .environment-buttons {
-
-        width: 100% !important;
-
-        display: grid !important;
-
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          ) !important;
-
-        gap: 9px !important;
-
-      }
-
-      .environment-button {
-
-        width: 100% !important;
-
-        min-width: 0 !important;
-
-        min-height: 52px !important;
-
-        padding:
-          8px
-          5px !important;
-
-        font-size: 15px !important;
-
-        line-height: 1.2 !important;
-
-        white-space: normal !important;
-
-        overflow-wrap: anywhere !important;
-
-      }
-
-
-      /* =======================================================
-         BARRIO
-      ======================================================= */
-
-      .select-wrapper {
-
-        width: 100% !important;
-
-      }
-
-      .neighborhood-select {
-
-        width: 100% !important;
-
-        min-height: 52px !important;
-
-        padding:
-          0
-          42px
-          0
-          15px !important;
-
-        font-size: 16px !important;
-
-      }
-
-      .select-wrapper::after {
-
-        right: 15px !important;
-
-        font-size: 21px !important;
-
-      }
-
-
-      /* =======================================================
-         FILTROS DE MASCOTAS / LAVARROPAS
-      ======================================================= */
-
-      .amenity-filters {
-
-        width: 100% !important;
-
-        display: grid !important;
-
-        grid-template-columns: 1fr !important;
-
-        gap: 9px !important;
-
-        margin-top: 20px !important;
-
-      }
-
-      .amenity-button {
-
-        width: 100% !important;
-
-        min-height: 52px !important;
-
-        padding:
-          0
-          14px !important;
-
-        font-size: 16px !important;
-
-        border-radius: 12px !important;
-
-      }
-
-
-      /* =======================================================
-         GRID PROPIEDADES
-      ======================================================= */
-
-      .properties-grid {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        min-width: 0 !important;
-
-        display: grid !important;
-
-        grid-template-columns:
-          minmax(0, 1fr) !important;
-
-        gap: 20px !important;
-
-        margin: 0 !important;
-
-        padding: 0 !important;
-
-      }
-
-
-      /* =======================================================
-         TARJETA
-         
-         OCUPA TODO EL ANCHO.
-         Mantiene estética blanca/redondeada.
-      ======================================================= */
-
-      .property-card {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        min-width: 0 !important;
-
-        margin: 0 !important;
-
-        display: flex !important;
-
-        flex-direction: column !important;
-
-        border-radius: 16px !important;
-
-        border:
-          1px solid
-          var(--border) !important;
-
-        overflow: hidden !important;
-
-        transform: none !important;
-
-        box-shadow:
-          0 4px 18px
-          rgba(16, 24, 40, 0.08) !important;
-
-      }
-
-      .property-card:hover {
-
-        transform: none !important;
-
-      }
-
-
-      /* =======================================================
-         FOTO — TODO EL ANCHO
-      ======================================================= */
-
-      .property-image-container {
-
-        position: relative !important;
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        height: auto !important;
-
-        aspect-ratio: 4 / 3 !important;
-
-        min-height: 0 !important;
-
-        max-height: none !important;
-
-        overflow: hidden !important;
-
-      }
-
-      .property-image {
-
-        display: block !important;
-
-        width: 100% !important;
-
-        max-width: none !important;
-
-        height: 100% !important;
-
-        min-height: 0 !important;
-
-        object-fit: cover !important;
-
-        object-position: center center !important;
-
-      }
-
-
-      /* =======================================================
-         BADGES
-      ======================================================= */
-
-      .image-badge {
-
-        top: 12px !important;
-
-        left: 12px !important;
-
-        padding:
-          8px
-          12px !important;
-
-        font-size: 13px !important;
-
-      }
-
-      .photos-badge {
-
-        right: 12px !important;
-
-        bottom: 12px !important;
-
-        padding:
-          8px
-          12px !important;
-
-        font-size: 13px !important;
-
-      }
-
-
-      /* =======================================================
-         CONTENIDO
-      ======================================================= */
-
-      .property-content {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        min-width: 0 !important;
-
-        padding:
-          22px
-          18px
-          24px !important;
-
-        display: flex !important;
-
-        flex-direction: column !important;
-
-        gap: 16px !important;
-
-        overflow: hidden !important;
-
-      }
-
-
-      /* =======================================================
-         BARRIO
-      ======================================================= */
-
-      .property-location {
-
-        width: 100% !important;
-
-        font-size: 15px !important;
-
-        line-height: 1.4 !important;
-
-        overflow-wrap: anywhere !important;
-
-      }
-
-
-      /* =======================================================
-         AMBIENTES
-      ======================================================= */
-
-      .property-title {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        font-size: 28px !important;
-
-        line-height: 1.18 !important;
-
-        font-weight: 850 !important;
-
-        letter-spacing: -0.025em !important;
-
-        overflow-wrap: anywhere !important;
-
-        word-break: break-word !important;
-
-      }
-
-
-      /* =======================================================
-         DIRECCIÓN
-      ======================================================= */
-
-      .property-address {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        font-size: 17px !important;
-
-        line-height: 1.5 !important;
-
-        overflow-wrap: anywhere !important;
-
-        word-break: break-word !important;
-
-      }
-
-
-      /* =======================================================
-         PRECIO
-      ======================================================= */
-
-      .property-price {
-
-        width: 100% !important;
-
-        display: flex !important;
-
-        align-items: flex-start !important;
-
-        justify-content: flex-start !important;
-
-        flex-direction: column !important;
-
-        gap: 7px !important;
-
-        padding:
-          18px
-          0 !important;
-
-      }
-
-      .price-label {
-
-        font-size: 12px !important;
-
-      }
-
-      .price-value {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        font-size: 30px !important;
-
-        line-height: 1.15 !important;
-
-        text-align: left !important;
-
-        overflow-wrap: anywhere !important;
-
-        word-break: break-word !important;
-
-      }
-
-
-      /* =======================================================
-         EXPENSAS / GASTOS
-      ======================================================= */
-
-      .property-costs {
-
-        width: 100% !important;
-
-        display: grid !important;
-
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          ) !important;
-
-        gap: 10px !important;
-
-      }
-
-      .cost-box {
-
-        width: 100% !important;
-
-        min-width: 0 !important;
-
-        padding: 13px !important;
-
-      }
-
-      .cost-label {
-
-        font-size: 10px !important;
-
-      }
-
-      .cost-value {
-
-        font-size: 14px !important;
-
-        line-height: 1.4 !important;
-
-        overflow-wrap: anywhere !important;
-
-        word-break: break-word !important;
-
-      }
-
-
-      /* =======================================================
-         AMENITIES
-      ======================================================= */
-
-      .property-amenities {
-
-        width: 100% !important;
-
-        display: flex !important;
-
-        flex-wrap: wrap !important;
-
-        gap: 8px !important;
-
-      }
-
-      .amenity-chip {
-
-        max-width: 100% !important;
-
-        font-size: 14px !important;
-
-        padding:
-          8px
-          11px !important;
-
-        overflow-wrap: anywhere !important;
-
-      }
-
-
-      /* =======================================================
-         DESCRIPCIÓN
-      ======================================================= */
-
-      .description-button {
-
-        width: 100% !important;
-
-        min-height: 52px !important;
-
-        padding:
-          8px
-          12px !important;
-
-        font-size: 16px !important;
-
-      }
-
-
-      /* =======================================================
-         WHATSAPP
-      ======================================================= */
-
-      .property-actions {
-
-        width: 100% !important;
-
-        margin-top: 0 !important;
-
-      }
-
-      .whatsapp-button {
-
-        width: 100% !important;
-
-        min-height: 56px !important;
-
-        padding:
-          8px
-          12px !important;
-
-        font-size: 16px !important;
-
-        white-space: normal !important;
-
-      }
-
-
-      /* =======================================================
-         MODAL DESCRIPCIÓN
-      ======================================================= */
-
-      .description-modal {
-
-        width: 100% !important;
-
-        height: 100% !important;
-
-        padding: 10px !important;
-
-      }
-
-      .description-panel {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        max-height: 90vh !important;
-
-        padding:
-          24px
-          18px !important;
-
-        border-radius: 17px !important;
-
-        overflow-y: auto !important;
-
-      }
-
-      .description-modal-title {
-
-        font-size: 24px !important;
-
-        line-height: 1.2 !important;
-
-      }
-
-      .description-modal-location {
-
-        font-size: 15px !important;
-
-      }
-
-      .description-modal-text {
-
-        font-size: 17px !important;
-
-        line-height: 1.7 !important;
-
-      }
-
-
-      /* =======================================================
-         GALERÍA
-      ======================================================= */
-
-      .gallery {
-
-        width: 100% !important;
-
-        height: 100% !important;
-
-        padding: 8px !important;
-
-      }
-
-      .gallery-image {
-
-        width: auto !important;
-
-        max-width: 100% !important;
-
-        max-height: 82vh !important;
-
-        object-fit: contain !important;
-
-      }
-
-      .gallery-close {
-
-        top: 10px !important;
-
-        right: 10px !important;
-
-        width: 46px !important;
-
-        height: 46px !important;
-
-      }
-
-      .gallery-prev {
-
-        left: 7px !important;
-
-      }
-
-      .gallery-next {
-
-        right: 7px !important;
-
-      }
-
-
-      /* =======================================================
-         WHATSAPP FLOTANTE
-      ======================================================= */
-
-      .floating-whatsapp {
-
-        width: 60px !important;
-
-        height: 60px !important;
-
-        right: 14px !important;
-
-        bottom: 14px !important;
-
-        z-index: 5000 !important;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       CELULARES PEQUEÑOS
-    ========================================================= */
-
-    @media screen and (max-width: 450px) {
-
-      .hero-image {
-
-        width: 100% !important;
-
-        height: 64vw !important;
-
-        min-height: 205px !important;
-
-        max-height: 290px !important;
-
-      }
-
-      .hero-bottom {
-
-        padding:
-          24px
-          14px
-          28px !important;
-
-      }
-
-      .hero-title {
-
-        font-size:
-          clamp(
-            1.9rem,
-            8.5vw,
-            2.5rem
-          ) !important;
-
-      }
-
-      .hero-subtitle {
-
-        font-size:
-          clamp(
-            1rem,
-            4.5vw,
-            1.15rem
-          ) !important;
-
-      }
-
-      main {
-
-        width: 100% !important;
-
-        padding:
-          14px
-          0
-          100px !important;
-
-      }
-
-      .filters {
-
-        width:
-          calc(100% - 12px) !important;
-
-        margin-left: 6px !important;
-
-        margin-right: 6px !important;
-
-        padding: 15px !important;
-
-        border-radius: 15px !important;
-
-      }
-
-      .environment-buttons {
-
-        width: 100% !important;
-
-        grid-template-columns:
-          repeat(
-            2,
-            minmax(0, 1fr)
-          ) !important;
-
-        gap: 8px !important;
-
-      }
-
-      .environment-button {
-
-        min-height: 52px !important;
-
-        font-size: 15px !important;
-
-      }
-
-      .property-card {
-
-        width: 100% !important;
-
-        max-width: 100% !important;
-
-        border-radius: 15px !important;
-
-      }
-
-      .property-image-container {
-
-        width: 100% !important;
-
-        aspect-ratio: 4 / 3 !important;
-
-      }
-
-      .property-content {
-
-        width: 100% !important;
-
-        padding:
-          20px
-          15px
-          22px !important;
-
-        gap: 15px !important;
-
-      }
-
-      .property-location {
-
-        font-size: 15px !important;
-
-      }
-
-      .property-title {
-
-        font-size: 25px !important;
-
-      }
-
-      .property-address {
-
-        font-size: 16px !important;
-
-      }
-
-      .property-price {
-
-        flex-direction: column !important;
-
-        align-items: flex-start !important;
-
-        gap: 7px !important;
-
-      }
-
-      .price-value {
-
-        font-size: 28px !important;
-
-        text-align: left !important;
-
-      }
-
-      .property-costs {
-
-        width: 100% !important;
-
-        grid-template-columns:
-          1fr !important;
-
-      }
-
-      .amenity-chip {
-
-        font-size: 14px !important;
-
-      }
-
-      .description-button {
-
-        min-height: 52px !important;
-
-      }
-
-      .whatsapp-button {
-
-        min-height: 55px !important;
-
-        font-size: 16px !important;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       CELULARES MUY PEQUEÑOS
-    ========================================================= */
-
-    @media screen and (max-width: 380px) {
-
-      .property-content {
-
-        padding:
-          18px
-          13px
-          20px !important;
-
-      }
-
-      .property-title {
-
-        font-size: 23px !important;
-
-      }
-
-      .property-address {
-
-        font-size: 15px !important;
-
-      }
-
-      .price-value {
-
-        font-size: 25px !important;
-
-      }
-
-      .cost-value {
-
-        font-size: 13px !important;
-
-      }
-
-      .description-button {
-
-        font-size: 14px !important;
-
-      }
-
-      .whatsapp-button {
-
-        font-size: 14px !important;
-
-      }
-
-    }
-
-  </style>
+</style>
 
 </head>
 
@@ -2807,78 +1962,2721 @@
 <body>
 
 
-  <!-- =======================================================
-       HERO
-  ======================================================== -->
+<!-- =======================================================
+     HERO
+======================================================== -->
 
-  <header class="hero">
+<header class="hero">
 
-    <div class="hero-image">
+  <div class="hero-image">
 
-      <div
-        id="heroBackground"
-        class="hero-background"
-      ></div>
+    <div
+      id="heroBackground"
+      class="hero-background"
+    ></div>
 
-      <div class="hero-image-overlay"></div>
+    <div class="hero-image-overlay"></div>
+
+  </div>
+
+
+  <div
+    id="heroBottom"
+    class="hero-bottom"
+  >
+
+    <div class="hero-content">
+
+      <h1
+        id="heroTitle"
+        class="hero-title"
+      >
+        Alquiler Temporarios
+      </h1>
+
+      <p
+        id="heroSubtitle"
+        class="hero-subtitle"
+      >
+        Encontrá tu próximo hogar
+      </p>
 
     </div>
 
-    <div
-      id="heroBottom"
-      class="hero-bottom"
+  </div>
+
+</header>
+
+
+<!-- =======================================================
+     MAIN
+======================================================== -->
+
+<main>
+
+<section class="filters">
+
+  <div class="filters-header">
+
+    <div>
+
+      <div class="filters-title">
+        Encontrá tu departamento
+      </div>
+
+      <div
+        id="resultsCount"
+        class="results-count"
+      >
+        Cargando propiedades...
+      </div>
+
+    </div>
+
+    <button
+      id="clearFilters"
+      class="clear-filters"
+      type="button"
     >
+      Limpiar filtros
+    </button>
 
-      <div class="hero-content">
+  </div>
 
-        <h1
-          id="heroTitle"
-          class="hero-title"
+
+  <div class="filter-grid">
+
+    <div class="filter-group">
+
+      <label class="filter-label">
+        Ambientes
+      </label>
+
+      <div
+        id="environmentButtons"
+        class="environment-buttons"
+      ></div>
+
+    </div>
+
+
+    <div class="filter-group">
+
+      <label
+        class="filter-label"
+        for="neighborhoodSelect"
+      >
+        Barrio
+      </label>
+
+      <div class="select-wrapper">
+
+        <select
+          id="neighborhoodSelect"
+          class="neighborhood-select"
         >
-          Alquiler Temporarios
-        </h1>
 
-        <p
-          id="heroSubtitle"
-          class="hero-subtitle"
-        >
-          Encontrá tu próximo hogar
-        </p>
+          <option value="">
+            Todos los barrios
+          </option>
+
+        </select>
 
       </div>
 
     </div>
 
-  </header>
+  </div>
 
 
-  <!-- =======================================================
-       MAIN
-  ======================================================== -->
+  <div class="amenity-filters">
 
-  <main>
+    <button
+      id="filterDog"
+      class="amenity-button"
+      type="button"
+    >
+      🐶 Apto perro
+    </button>
 
-    <section class="filters">
+    <button
+      id="filterCat"
+      class="amenity-button"
+      type="button"
+    >
+      🐱 Apto gato
+    </button>
 
-      <div class="filters-header">
+    <button
+      id="filterLaundry"
+      class="amenity-button"
+      type="button"
+    >
+      🧺 Lavarropas
+    </button>
 
-        <div>
+  </div>
 
-          <div class="filters-title">
-            Encontrá tu departamento
+</section>
+
+
+<section
+  id="propertiesContainer"
+  class="properties-grid"
+>
+
+  <div class="loading">
+
+    <div class="spinner"></div>
+
+    <div>
+      Cargando departamentos...
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<!-- =======================================================
+     FLOATING WHATSAPP
+======================================================== -->
+
+<a
+  id="floatingWhatsapp"
+  class="floating-whatsapp"
+  href="#"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Contactar por WhatsApp"
+>
+  💬
+</a>
+
+
+<!-- =======================================================
+     DESCRIPTION MODAL
+======================================================== -->
+
+<div
+  id="descriptionModal"
+  class="description-modal"
+  aria-hidden="true"
+>
+
+  <div class="description-panel">
+
+    <button
+      id="descriptionClose"
+      class="description-close"
+      type="button"
+      aria-label="Cerrar descripción"
+    >
+      ×
+    </button>
+
+    <h2
+      id="descriptionModalTitle"
+      class="description-modal-title"
+    >
+      Departamento
+    </h2>
+
+    <div
+      id="descriptionModalLocation"
+      class="description-modal-location"
+    ></div>
+
+    <div
+      id="descriptionModalText"
+      class="description-modal-text"
+    ></div>
+
+  </div>
+
+</div>
+
+
+<!-- =======================================================
+     GALLERY
+======================================================== -->
+
+<div
+  id="gallery"
+  class="gallery"
+  aria-hidden="true"
+>
+
+  <button
+    id="galleryClose"
+    class="gallery-close"
+    type="button"
+    aria-label="Cerrar"
+  >
+    ×
+  </button>
+
+  <button
+    id="galleryPrev"
+    class="gallery-prev"
+    type="button"
+    aria-label="Foto anterior"
+  >
+    ‹
+  </button>
+
+  <img
+    id="galleryImage"
+    class="gallery-image"
+    src=""
+    alt="Foto del departamento"
+  >
+
+  <button
+    id="galleryNext"
+    class="gallery-next"
+    type="button"
+    aria-label="Foto siguiente"
+  >
+    ›
+  </button>
+
+  <div
+    id="galleryCounter"
+    class="gallery-counter"
+  >
+    1 / 1
+  </div>
+
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURACIÓN
+========================================================= */
+
+const CSV_URL =
+  "https://docs.google.com/spreadsheets/d/e/2PACX-1vQka5UoeTB1hjGIhr237hfo2CkU78GdtdjIwY21Y2BvxuqghragitmjCSDspPv9cD14JBuYcu1mgQ2Z/pub?output=csv";
+
+
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbzmDMeHM4DDO_mtVnJQXyRs7r_3V4VIzdpBhYNKHYwW-WKAzHrWofsF_7N6Ub3nh17Hwg/exec";
+
+
+/* =========================================================
+   ESTADO
+========================================================= */
+
+const state = {
+
+  properties:[],
+  filteredProperties:[],
+
+  environments:[],
+  neighborhoods:[],
+
+  selectedEnvironment:"",
+  neighborhood:"",
+
+  dog:false,
+  cat:false,
+  laundry:false,
+
+  whatsapp:"5491125772852",
+
+  description:{
+    open:false,
+    property:null,
+    scrollPosition:0
+  },
+
+  gallery:{
+    open:false,
+    images:[],
+    index:0,
+    scrollPosition:0
+  }
+
+};
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const elements = {
+
+  heroBackground:
+    document.getElementById("heroBackground"),
+
+  heroTitle:
+    document.getElementById("heroTitle"),
+
+  heroSubtitle:
+    document.getElementById("heroSubtitle"),
+
+  propertiesContainer:
+    document.getElementById("propertiesContainer"),
+
+  environmentButtons:
+    document.getElementById("environmentButtons"),
+
+  neighborhoodSelect:
+    document.getElementById("neighborhoodSelect"),
+
+  filterDog:
+    document.getElementById("filterDog"),
+
+  filterCat:
+    document.getElementById("filterCat"),
+
+  filterLaundry:
+    document.getElementById("filterLaundry"),
+
+  clearFilters:
+    document.getElementById("clearFilters"),
+
+  resultsCount:
+    document.getElementById("resultsCount"),
+
+  floatingWhatsapp:
+    document.getElementById("floatingWhatsapp"),
+
+  descriptionModal:
+    document.getElementById("descriptionModal"),
+
+  descriptionClose:
+    document.getElementById("descriptionClose"),
+
+  descriptionModalTitle:
+    document.getElementById("descriptionModalTitle"),
+
+  descriptionModalLocation:
+    document.getElementById("descriptionModalLocation"),
+
+  descriptionModalText:
+    document.getElementById("descriptionModalText"),
+
+  gallery:
+    document.getElementById("gallery"),
+
+  galleryImage:
+    document.getElementById("galleryImage"),
+
+  galleryClose:
+    document.getElementById("galleryClose"),
+
+  galleryPrev:
+    document.getElementById("galleryPrev"),
+
+  galleryNext:
+    document.getElementById("galleryNext"),
+
+  galleryCounter:
+    document.getElementById("galleryCounter")
+
+};
+
+
+/* =========================================================
+   NORMALIZAR TEXTO
+========================================================= */
+
+function normalizarTexto(valor){
+
+  if(
+    valor === null ||
+    valor === undefined
+  ){
+    return "";
+  }
+
+  return String(valor)
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    );
+}
+
+
+/* =========================================================
+   NORMALIZAR CLAVE
+========================================================= */
+
+function normalizarClave(valor){
+
+  return normalizarTexto(valor)
+    .replace(
+      /[^a-z0-9]/g,
+      ""
+    );
+}
+
+
+/* =========================================================
+   OBTENER CAMPO
+========================================================= */
+
+function obtenerCampo(
+  propiedad,
+  nombres
+){
+
+  for(
+    const nombre of nombres
+  ){
+
+    const clave =
+      normalizarClave(nombre);
+
+    if(
+      Object.prototype.hasOwnProperty.call(
+        propiedad,
+        clave
+      )
+    ){
+
+      const valor =
+        propiedad[clave];
+
+      if(
+        valor !== null &&
+        valor !== undefined &&
+        String(valor).trim() !== ""
+      ){
+
+        return String(valor).trim();
+
+      }
+
+    }
+
+  }
+
+  return "";
+}
+
+
+/* =========================================================
+   BUSCAR CAMPO FLEXIBLE
+========================================================= */
+
+function obtenerCampoFlexible(
+  propiedad,
+  nombres
+){
+
+  /* Primero intenta coincidencia exacta */
+
+  const exacto =
+    obtenerCampo(
+      propiedad,
+      nombres
+    );
+
+  if(exacto){
+    return exacto;
+  }
+
+
+  /* Luego busca claves similares */
+
+  const claves =
+    Object.keys(propiedad);
+
+  for(
+    const clave of claves
+  ){
+
+    const normalizada =
+      normalizarClave(clave);
+
+    for(
+      const nombre of nombres
+    ){
+
+      const buscada =
+        normalizarClave(nombre);
+
+      if(
+        normalizada.includes(buscada)
+      ){
+
+        const valor =
+          propiedad[clave];
+
+        if(
+          valor !== null &&
+          valor !== undefined &&
+          String(valor).trim() !== ""
+        ){
+
+          return String(valor).trim();
+
+        }
+
+      }
+
+    }
+
+  }
+
+  return "";
+}
+
+
+/* =========================================================
+   VERDADERO
+========================================================= */
+
+function esVerdadero(valor){
+
+  const texto =
+    normalizarTexto(valor);
+
+  if(!texto){
+    return false;
+  }
+
+  return [
+
+    "si",
+    "sí",
+    "yes",
+    "true",
+    "1",
+    "apto",
+    "apta",
+    "acepta",
+    "permitido",
+    "permitida",
+    "incluido",
+    "incluida",
+    "disponible",
+    "ok",
+    "✓",
+    "✔",
+    "x",
+    "check"
+
+  ].includes(texto);
+
+}
+
+
+/* =========================================================
+   DRIVE ID
+========================================================= */
+
+function extraerDriveId(url){
+
+  if(!url){
+    return "";
+  }
+
+  const texto =
+    String(url).trim();
+
+
+  let match =
+    texto.match(
+      /\/file\/d\/([a-zA-Z0-9_-]+)/
+    );
+
+  if(match){
+    return match[1];
+  }
+
+
+  match =
+    texto.match(
+      /[?&]id=([a-zA-Z0-9_-]+)/
+    );
+
+  if(match){
+    return match[1];
+  }
+
+
+  match =
+    texto.match(
+      /\/d\/([a-zA-Z0-9_-]+)/
+    );
+
+  if(match){
+    return match[1];
+  }
+
+
+  if(
+    /^[a-zA-Z0-9_-]{20,}$/.test(texto)
+  ){
+
+    return texto;
+
+  }
+
+  return "";
+}
+
+
+/* =========================================================
+   CONVERTIR IMAGEN DRIVE
+========================================================= */
+
+function convertirImagenDrive(url){
+
+  if(!url){
+    return "";
+  }
+
+  const texto =
+    String(url).trim();
+
+  const id =
+    extraerDriveId(texto);
+
+  if(!id){
+
+    return texto;
+
+  }
+
+
+  /*
+    thumbnail suele ser la opción
+    más rápida para imágenes públicas
+  */
+
+  return (
+    "https://drive.google.com/thumbnail" +
+    "?id=" +
+    encodeURIComponent(id) +
+    "&sz=w1600"
+  );
+
+}
+
+
+/* =========================================================
+   OBTENER FOTOS
+========================================================= */
+
+function obtenerFotos(propiedad){
+
+  const fotos=[];
+
+  Object.keys(propiedad)
+
+    .filter(
+      clave =>
+        clave === "fotos" ||
+        /^fotos\d+$/.test(clave)
+    )
+
+    .sort(
+      (a,b)=>{
+
+        if(a==="fotos"){
+          return -1;
+        }
+
+        if(b==="fotos"){
+          return 1;
+        }
+
+        const na =
+          parseInt(
+            a.replace("fotos","")
+          ) || 0;
+
+        const nb =
+          parseInt(
+            b.replace("fotos","")
+          ) || 0;
+
+        return na-nb;
+
+      }
+    )
+
+    .forEach(
+      clave=>{
+
+        const valor =
+          propiedad[clave];
+
+        if(!valor){
+          return;
+        }
+
+        const urls =
+          String(valor)
+            .split(
+              /\s*,\s*|\n+/
+            )
+            .map(
+              x=>x.trim()
+            )
+            .filter(Boolean);
+
+        urls.forEach(
+          url=>{
+
+            const imagen =
+              convertirImagenDrive(url);
+
+            if(
+              imagen &&
+              !fotos.includes(imagen)
+            ){
+
+              fotos.push(imagen);
+
+            }
+
+          }
+        );
+
+      }
+    );
+
+  return fotos;
+
+}
+
+
+/* =========================================================
+   ESCAPAR HTML
+========================================================= */
+
+function escaparHTML(valor){
+
+  return String(
+    valor ?? ""
+  )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   PRECIO
+========================================================= */
+
+function formatearPrecio(valor){
+
+  if(!valor){
+    return "Consultar";
+  }
+
+  return String(valor).trim();
+
+}
+
+
+/* =========================================================
+   PORTADA
+========================================================= */
+
+function cargarImagenPortada(url){
+
+  if(!url){
+    return;
+  }
+
+  const imagen =
+    convertirImagenDrive(url);
+
+  if(!imagen){
+    return;
+  }
+
+
+  /*
+    Cargamos primero con Image()
+    para comprobar que realmente
+    puede descargarse.
+  */
+
+  const test =
+    new Image();
+
+  test.onload = ()=>{
+
+    elements.heroBackground.style
+      .backgroundImage =
+      `url("${imagen}")`;
+
+    elements.heroBackground.style
+      .opacity = "1";
+
+  };
+
+
+  test.onerror = ()=>{
+
+    console.warn(
+      "No se pudo cargar la portada:",
+      imagen
+    );
+
+    /*
+      Segundo intento con la URL original.
+    */
+
+    const original =
+      String(url).trim();
+
+    if(original !== imagen){
+
+      elements.heroBackground.style
+        .backgroundImage =
+        `url("${original}")`;
+
+    }
+
+  };
+
+
+  test.src =
+    imagen;
+
+}
+
+
+/* =========================================================
+   CONFIGURACIÓN ADMIN
+========================================================= */
+
+async function cargarConfiguracion(){
+
+  try{
+
+    const response =
+      await fetch(
+        API_URL +
+        "?action=config&t=" +
+        Date.now(),
+        {
+          method:"GET",
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "HTTP " +
+        response.status
+      );
+
+    }
+
+    const data =
+      await response.json();
+
+
+    console.log(
+      "CONFIG recibida:",
+      data
+    );
+
+
+    /*
+      Soporta varias estructuras
+      posibles del Apps Script.
+    */
+
+    let config =
+      data?.config ||
+      data?.CONFIG ||
+      data?.data?.config ||
+      data?.data ||
+      data;
+
+
+    if(
+      !config ||
+      typeof config !== "object"
+    ){
+
+      console.warn(
+        "La respuesta de CONFIG no contiene configuración válida."
+      );
+
+      return;
+
+    }
+
+
+    /*
+      TÍTULO
+    */
+
+    const titulo =
+      config.titulo ||
+      config.Titulo ||
+      config.nombre ||
+      config.nombre_sitio;
+
+    if(titulo){
+
+      elements.heroTitle.textContent =
+        titulo;
+
+    }
+
+
+    /*
+      SUBTÍTULO
+    */
+
+    const subtitulo =
+      config.subtitulo ||
+      config.Subtitulo ||
+      config.descripcion;
+
+    if(subtitulo){
+
+      elements.heroSubtitle.textContent =
+        subtitulo;
+
+    }
+
+
+    /*
+      COLOR
+    */
+
+    const color =
+      config.color_portada ||
+      config.color ||
+      config.colorprimario ||
+      config.primary;
+
+    if(color){
+
+      document.documentElement.style
+        .setProperty(
+          "--primary",
+          String(color).trim()
+        );
+
+    }
+
+
+    /*
+      FOTO PORTADA
+    */
+
+    const fotoPortada =
+      config.foto_portada ||
+      config.fotoPortada ||
+      config.portada ||
+      config.imagen_portada ||
+      config.imagenPortada;
+
+    if(fotoPortada){
+
+      cargarImagenPortada(
+        fotoPortada
+      );
+
+    }
+
+
+    /*
+      WHATSAPP
+    */
+
+    const whatsapp =
+      config.whatsapp ||
+      config.telefono ||
+      config.numero_whatsapp ||
+      config.numeroWhatsapp;
+
+    if(whatsapp){
+
+      const limpio =
+        String(whatsapp)
+          .replace(/\D/g,"");
+
+      if(limpio){
+
+        state.whatsapp =
+          limpio;
+
+      }
+
+    }
+
+
+    actualizarWhatsApp();
+
+  }
+
+  catch(error){
+
+    console.warn(
+      "No se pudo cargar CONFIG:",
+      error
+    );
+
+    /*
+      Importante:
+      si CONFIG falla, el catálogo
+      igualmente continúa cargando.
+    */
+
+    actualizarWhatsApp();
+
+  }
+
+}
+
+
+/* =========================================================
+   WHATSAPP GENERAL
+========================================================= */
+
+function actualizarWhatsApp(){
+
+  const numero =
+    state.whatsapp ||
+    "5491125772852";
+
+
+  const mensaje =
+    "Hola ! quiero más información sobre los departamentos en Alquiler\n" +
+    "Mi nombre es";
+
+
+  elements.floatingWhatsapp.href =
+    `https://wa.me/${numero}` +
+    `?text=` +
+    encodeURIComponent(
+      mensaje
+    );
+
+}
+
+
+/* =========================================================
+   WHATSAPP PROPIEDAD
+========================================================= */
+
+function abrirWhatsApp(
+  propiedad
+){
+
+  const ambientes =
+    propiedad.ambientes ||
+    "departamento";
+
+  const direccion =
+    propiedad.direccion ||
+    "";
+
+  const barrio =
+    propiedad.barrio ||
+    "";
+
+
+  let mensaje =
+    `Hola! quiero mas info del ${ambientes}`;
+
+
+  if(direccion){
+
+    mensaje +=
+      ` ubicado en ${direccion}`;
+
+  }
+
+
+  if(barrio){
+
+    mensaje +=
+      ` - ${barrio}`;
+
+  }
+
+
+  mensaje +=
+    "\nMi nombre es";
+
+
+  const url =
+    `https://wa.me/${state.whatsapp}` +
+    `?text=` +
+    encodeURIComponent(
+      mensaje
+    );
+
+
+  window.open(
+    url,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+
+/* =========================================================
+   CARGAR CSV
+========================================================= */
+
+async function cargarPropiedades(){
+
+  try{
+
+    mostrarLoading();
+
+
+    const response =
+      await fetch(
+        CSV_URL +
+        "&t=" +
+        Date.now(),
+        {
+          cache:"no-store"
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "No se pudo descargar el CSV"
+      );
+
+    }
+
+
+    const csv =
+      await response.text();
+
+
+    Papa.parse(
+      csv,
+      {
+
+        header:true,
+
+        skipEmptyLines:true,
+
+        transformHeader:
+          header =>
+            normalizarClave(
+              header
+            ),
+
+        complete:
+          resultado =>{
+
+            try{
+
+              procesarPropiedades(
+                resultado.data
+              );
+
+            }
+
+            catch(error){
+
+              console.error(error);
+
+              mostrarError();
+
+            }
+
+          },
+
+        error:
+          error =>{
+
+            console.error(error);
+
+            mostrarError();
+
+          }
+
+      }
+    );
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Error cargando CSV:",
+      error
+    );
+
+    mostrarError();
+
+  }
+
+}
+
+
+/* =========================================================
+   PROCESAR PROPIEDADES
+========================================================= */
+
+function procesarPropiedades(
+  propiedades
+){
+
+  state.properties =
+    propiedades
+
+      .filter(
+        propiedad =>
+          Object.values(
+            propiedad
+          ).some(
+            valor =>
+              String(
+                valor || ""
+              ).trim() !== ""
+          )
+      )
+
+      .map(
+        propiedad =>{
+
+          return {
+
+            raw:propiedad,
+
+            fotos:
+              obtenerFotos(
+                propiedad
+              ),
+
+            ambientes:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "ambientes"
+                ]
+              ),
+
+            barrio:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "barrio"
+                ]
+              ),
+
+            direccion:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "direccion"
+                ]
+              ),
+
+            valor:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "valor",
+                  "precio"
+                ]
+              ),
+
+            expensas:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "expensas"
+                ]
+              ),
+
+            gastos:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "gastos"
+                ]
+              ),
+
+            perro:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "perro",
+                  "apto perro",
+                  "aptoperro",
+                  "mascotas perro"
+                ]
+              ),
+
+            gato:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "gato",
+                  "apto gato",
+                  "aptogato",
+                  "mascotas gato"
+                ]
+              ),
+
+            lavado:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "lavado",
+                  "lavarropas",
+                  "lavadora"
+                ]
+              ),
+
+            disponibilidad:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "disponibilidad",
+                  "disponible"
+                ]
+              ),
+
+            descripcion:
+              obtenerCampoFlexible(
+                propiedad,
+                [
+                  "descripcion",
+                  "descripción"
+                ]
+              )
+
+          };
+
+        }
+      );
+
+
+  construirFiltros();
+
+  aplicarFiltros();
+
+}
+
+
+/* =========================================================
+   CONSTRUIR FILTROS
+========================================================= */
+
+function construirFiltros(){
+
+  const ambientes =
+    state.properties
+
+      .map(
+        propiedad =>
+          propiedad.ambientes
+      )
+
+      .filter(Boolean);
+
+
+  state.environments =
+    [
+      ...new Set(
+        ambientes.map(
+          valor =>
+            String(valor).trim()
+        )
+      )
+    ];
+
+
+  state.environments.sort(
+    ordenarValores
+  );
+
+
+  elements.environmentButtons
+    .innerHTML = "";
+
+
+  elements.environmentButtons
+    .appendChild(
+      crearBotonAmbientes(
+        "Todos",
+        ""
+      )
+    );
+
+
+  state.environments
+    .forEach(
+      ambiente =>{
+
+        elements.environmentButtons
+          .appendChild(
+            crearBotonAmbientes(
+              ambiente,
+              ambiente
+            )
+          );
+
+      }
+    );
+
+
+  const barrios =
+    state.properties
+
+      .map(
+        propiedad =>
+          propiedad.barrio
+      )
+
+      .filter(Boolean);
+
+
+  state.neighborhoods =
+    [
+      ...new Set(
+        barrios.map(
+          barrio =>
+            String(
+              barrio
+            ).trim()
+        )
+      )
+    ];
+
+
+  state.neighborhoods.sort(
+    (a,b)=>
+      a.localeCompare(
+        b,
+        "es",
+        {
+          sensitivity:"base"
+        }
+      )
+  );
+
+
+  elements.neighborhoodSelect
+    .innerHTML =
+      `
+        <option value="">
+          Todos los barrios
+        </option>
+      `;
+
+
+  state.neighborhoods
+    .forEach(
+      barrio =>{
+
+        const option =
+          document.createElement(
+            "option"
+          );
+
+        option.value =
+          barrio;
+
+        option.textContent =
+          barrio;
+
+        elements.neighborhoodSelect
+          .appendChild(
+            option
+          );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   ORDENAR
+========================================================= */
+
+function ordenarValores(
+  a,
+  b
+){
+
+  const na =
+    parseFloat(
+      String(a)
+        .replace(",",".")
+    );
+
+  const nb =
+    parseFloat(
+      String(b)
+        .replace(",",".")
+    );
+
+
+  if(
+    !Number.isNaN(na) &&
+    !Number.isNaN(nb)
+  ){
+
+    return na-nb;
+
+  }
+
+
+  return String(a)
+    .localeCompare(
+      String(b),
+      "es",
+      {
+        sensitivity:"base"
+      }
+    );
+
+}
+
+
+/* =========================================================
+   BOTONES AMBIENTES
+========================================================= */
+
+function crearBotonAmbientes(
+  texto,
+  valor
+){
+
+  const button =
+    document.createElement(
+      "button"
+    );
+
+  button.type =
+    "button";
+
+  button.className =
+    "environment-button";
+
+  button.textContent =
+    texto;
+
+  button.dataset.value =
+    valor;
+
+
+  if(
+    state.selectedEnvironment ===
+    valor
+  ){
+
+    button.classList.add(
+      "active"
+    );
+
+  }
+
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      state.selectedEnvironment =
+        valor;
+
+      actualizarBotonesAmbientes();
+
+      aplicarFiltros();
+
+    }
+  );
+
+
+  return button;
+
+}
+
+
+function actualizarBotonesAmbientes(){
+
+  document
+    .querySelectorAll(
+      ".environment-button"
+    )
+    .forEach(
+      button =>{
+
+        const valor =
+          button.dataset.value;
+
+        button.classList.toggle(
+          "active",
+          valor ===
+          state.selectedEnvironment
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+function aplicarFiltros(){
+
+  const ambienteSeleccionado =
+    normalizarTexto(
+      state.selectedEnvironment
+    );
+
+  const barrioSeleccionado =
+    normalizarTexto(
+      state.neighborhood
+    );
+
+
+  state.filteredProperties =
+    state.properties.filter(
+      propiedad =>{
+
+
+        if(
+          ambienteSeleccionado
+        ){
+
+          const ambiente =
+            normalizarTexto(
+              propiedad.ambientes
+            );
+
+          if(
+            ambiente !==
+            ambienteSeleccionado
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        if(
+          barrioSeleccionado
+        ){
+
+          const barrio =
+            normalizarTexto(
+              propiedad.barrio
+            );
+
+          if(
+            barrio !==
+            barrioSeleccionado
+          ){
+
+            return false;
+
+          }
+
+        }
+
+
+        if(
+          state.dog &&
+          !esVerdadero(
+            propiedad.perro
+          )
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          state.cat &&
+          !esVerdadero(
+            propiedad.gato
+          )
+        ){
+
+          return false;
+
+        }
+
+
+        if(
+          state.laundry &&
+          !esVerdadero(
+            propiedad.lavado
+          )
+        ){
+
+          return false;
+
+        }
+
+
+        return true;
+
+      }
+    );
+
+
+  renderizarPropiedades();
+
+  actualizarContador();
+
+}
+
+
+/* =========================================================
+   CONTADOR
+========================================================= */
+
+function actualizarContador(){
+
+  const cantidad =
+    state.filteredProperties.length;
+
+
+  if(cantidad === 1){
+
+    elements.resultsCount.textContent =
+      "1 departamento encontrado";
+
+  }
+
+  else{
+
+    elements.resultsCount.textContent =
+      `${cantidad} departamentos encontrados`;
+
+  }
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderizarPropiedades(){
+
+  elements.propertiesContainer
+    .innerHTML = "";
+
+
+  if(
+    state.filteredProperties.length === 0
+  ){
+
+    mostrarEmpty();
+
+    return;
+
+  }
+
+
+  state.filteredProperties
+    .forEach(
+      (propiedad,index)=>{
+
+        elements.propertiesContainer
+          .appendChild(
+            crearTarjeta(
+              propiedad,
+              index
+            )
+          );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   CREAR TARJETA
+========================================================= */
+
+function crearTarjeta(
+  propiedad,
+  index
+){
+
+  const card =
+    document.createElement(
+      "article"
+    );
+
+  card.className =
+    "property-card";
+
+
+  /* =====================================================
+     IMAGEN
+  ===================================================== */
+
+  const imageContainer =
+    document.createElement(
+      "div"
+    );
+
+  imageContainer.className =
+    "property-image-container";
+
+
+  if(propiedad.disponibilidad){
+
+    const badge =
+      document.createElement(
+        "div"
+      );
+
+    badge.className =
+      "image-badge available";
+
+    badge.textContent =
+      propiedad.disponibilidad;
+
+    imageContainer.appendChild(
+      badge
+    );
+
+  }
+
+
+  if(propiedad.fotos.length > 0){
+
+    const img =
+      document.createElement(
+        "img"
+      );
+
+    img.className =
+      "property-image";
+
+    img.src =
+      propiedad.fotos[0];
+
+    img.alt =
+      `Departamento en ${
+        propiedad.barrio ||
+        "alquiler"
+      }`;
+
+    img.loading =
+      index < 3
+        ? "eager"
+        : "lazy";
+
+    img.decoding =
+      "async";
+
+
+    img.onerror =
+      ()=>{
+
+        img.style.display =
+          "none";
+
+
+        const placeholder =
+          document.createElement(
+            "div"
+          );
+
+        placeholder.className =
+          "property-image-placeholder";
+
+
+        placeholder.innerHTML =
+          `
+            <div style="font-size:36px">
+              🏠
+            </div>
+
+            <div>
+              Imagen no disponible
+            </div>
+          `;
+
+
+        imageContainer
+          .appendChild(
+            placeholder
+          );
+
+      };
+
+
+    img.addEventListener(
+      "click",
+      ()=>{
+
+        abrirGaleria(
+          propiedad.fotos,
+          0
+        );
+
+      }
+    );
+
+
+    imageContainer.appendChild(
+      img
+    );
+
+
+    if(
+      propiedad.fotos.length > 1
+    ){
+
+      const photosBadge =
+        document.createElement(
+          "div"
+        );
+
+      photosBadge.className =
+        "photos-badge";
+
+      photosBadge.textContent =
+        `📷 ${
+          propiedad.fotos.length
+        } fotos`;
+
+
+      imageContainer
+        .appendChild(
+          photosBadge
+        );
+
+    }
+
+  }
+
+  else{
+
+    imageContainer.innerHTML =
+      `
+        <div
+          class="property-image-placeholder"
+        >
+
+          <div style="font-size:36px">
+            🏠
           </div>
 
-          <div
-            id="resultsCount"
-            class="results-count"
-          >
-            Cargando propiedades...
+          <div>
+            Sin imágenes
           </div>
 
         </div>
+      `;
+
+  }
+
+
+  card.appendChild(
+    imageContainer
+  );
+
+
+  /* =====================================================
+     CONTENT
+  ===================================================== */
+
+  const content =
+    document.createElement(
+      "div"
+    );
+
+  content.className =
+    "property-content";
+
+
+  /* BARRIO */
+
+  if(propiedad.barrio){
+
+    const location =
+      document.createElement(
+        "div"
+      );
+
+    location.className =
+      "property-location";
+
+    location.innerHTML =
+      `
+        <span>📍</span>
+
+        <span>
+          ${escaparHTML(
+            propiedad.barrio
+          )}
+        </span>
+      `;
+
+    content.appendChild(
+      location
+    );
+
+  }
+
+
+  /* TITULO */
+
+  const title =
+    document.createElement(
+      "h2"
+    );
+
+  title.className =
+    "property-title";
+
+
+  if(propiedad.ambientes){
+
+    const ambiente =
+      propiedad.ambientes;
+
+    const ambienteNormalizado =
+      normalizarTexto(
+        ambiente
+      );
+
+
+    title.textContent =
+      ambienteNormalizado.includes(
+        "amb"
+      )
+
+        ? ambiente
+
+        : ambienteNormalizado === "1"
+
+          ? "1 ambiente"
+
+          : `${ambiente} ambientes`;
+
+  }
+
+  else{
+
+    title.textContent =
+      "Departamento";
+
+  }
+
+
+  content.appendChild(
+    title
+  );
+
+
+  /* DIRECCIÓN */
+
+  if(propiedad.direccion){
+
+    const address =
+      document.createElement(
+        "div"
+      );
+
+    address.className =
+      "property-address";
+
+    address.textContent =
+      `📍 ${
+        propiedad.direccion
+      }`;
+
+    content.appendChild(
+      address
+    );
+
+  }
+
+
+  /* PRECIO */
+
+  const price =
+    document.createElement(
+      "div"
+    );
+
+  price.className =
+    "property-price";
+
+
+  price.innerHTML =
+    `
+      <div>
+
+        <div class="price-label">
+          Valor mensual
+        </div>
+
+      </div>
+
+      <div class="price-value">
+        ${escaparHTML(
+          formatearPrecio(
+            propiedad.valor
+          )
+        )}
+      </div>
+    `;
+
+
+  content.appendChild(
+    price
+  );
+
+
+  /* EXPENSAS / GASTOS */
+
+  if(
+    propiedad.expensas ||
+    propiedad.gastos
+  ){
+
+    const costs =
+      document.createElement(
+        "div"
+      );
+
+    costs.className =
+      "property-costs";
+
+
+    if(propiedad.expensas){
+
+      costs.innerHTML +=
+        `
+          <div class="cost-box">
+
+            <span class="cost-label">
+              Expensas
+            </span>
+
+            <span class="cost-value">
+              ${escaparHTML(
+                propiedad.expensas
+              )}
+            </span>
+
+          </div>
+        `;
+
+    }
+
+
+    if(propiedad.gastos){
+
+      costs.innerHTML +=
+        `
+          <div class="cost-box">
+
+            <span class="cost-label">
+              Gastos
+            </span>
+
+            <span class="cost-value">
+              ${escaparHTML(
+                propiedad.gastos
+              )}
+            </span>
+
+          </div>
+        `;
+
+    }
+
+
+    content.appendChild(
+      costs
+    );
+
+  }
+
+
+  /* =====================================================
+     PERRO / GATO
+     
+     SIEMPRE SE MUESTRAN
+  ===================================================== */
+
+  const amenitiesContainer =
+    document.createElement(
+      "div"
+    );
+
+  amenitiesContainer.className =
+    "property-amenities";
+
+
+  /* PERRO */
+
+  const dogChip =
+    document.createElement(
+      "div"
+    );
+
+  const perroApto =
+    esVerdadero(
+      propiedad.perro
+    );
+
+
+  dogChip.className =
+    "amenity-chip " +
+    (
+      perroApto
+        ? "yes"
+        : "no"
+    );
+
+
+  dogChip.textContent =
+    perroApto
+      ? "🐶 ✓ Apto perro"
+      : "🐶 ✕ No apto perro";
+
+
+  amenitiesContainer.appendChild(
+    dogChip
+  );
+
+
+  /* GATO */
+
+  const catChip =
+    document.createElement(
+      "div"
+    );
+
+  const gatoApto =
+    esVerdadero(
+      propiedad.gato
+    );
+
+
+  catChip.className =
+    "amenity-chip " +
+    (
+      gatoApto
+        ? "yes"
+        : "no"
+    );
+
+
+  catChip.textContent =
+    gatoApto
+      ? "🐱 ✓ Apto gato"
+      : "🐱 ✕ No apto gato";
+
+
+  amenitiesContainer.appendChild(
+    catChip
+  );
+
+
+  /* LAVARROPAS SOLO SI EXISTE */
+
+  if(propiedad.lavado){
+
+    const laundryChip =
+      document.createElement(
+        "div"
+      );
+
+    const tieneLavado =
+      esVerdadero(
+        propiedad.lavado
+      );
+
+
+    laundryChip.className =
+      "amenity-chip " +
+      (
+        tieneLavado
+          ? "yes"
+          : "no"
+      );
+
+
+    laundryChip.textContent =
+      tieneLavado
+        ? "🧺 ✓ Lavarropas"
+        : "🧺 ✕ Sin lavarropas";
+
+
+    amenitiesContainer.appendChild(
+      laundryChip
+    );
+
+  }
+
+
+  content.appendChild(
+    amenitiesContainer
+  );
+
+
+  /* DESCRIPCIÓN */
+
+  if(propiedad.descripcion){
+
+    const descriptionButton =
+      document.createElement(
+        "button"
+      );
+
+    descriptionButton.type =
+      "button";
+
+    descriptionButton.className =
+      "description-button";
+
+
+    descriptionButton.innerHTML =
+      `
+        <span>📄</span>
+
+        <span>
+          Ver descripción
+        </span>
+
+        <span>→</span>
+      `;
+
+
+    descriptionButton.addEventListener(
+      "click",
+      ()=>{
+
+        abrirDescripcion(
+          propiedad
+        );
+
+      }
+    );
+
+
+    content.appendChild(
+      descriptionButton
+    );
+
+  }
+
+
+  /* WHATSAPP */
+
+  const actions =
+    document.createElement(
+      "div"
+    );
+
+  actions.className =
+    "property-actions";
+
+
+  const button =
+    document.createElement(
+      "button"
+    );
+
+  button.type =
+    "button";
+
+  button.className =
+    "whatsapp-button";
+
+
+  button.innerHTML =
+    `
+      <span>💬</span>
+
+      <span>
+        Consultar por WhatsApp
+      </span>
+    `;
+
+
+  button.addEventListener(
+    "click",
+    ()=>{
+
+      abrirWhatsApp(
+        propiedad
+      );
+
+    }
+  );
+
+
+  actions.appendChild(
+    button
+  );
+
+  content.appendChild(
+    actions
+  );
+
+
+  card.appendChild(
+    content
+  );
+
+
+  return card;
+
+}
+
+
+/* =========================================================
+   DESCRIPCIÓN
+========================================================= */
+
+function abrirDescripcion(
+  propiedad
+){
+
+  if(
+    !propiedad ||
+    !propiedad.descripcion
+  ){
+
+    return;
+
+  }
+
+
+  state.description.property =
+    propiedad;
+
+  state.description.scrollPosition =
+    window.scrollY;
+
+  state.description.open =
+    true;
+
+
+  const ambiente =
+    propiedad.ambientes;
+
+
+  if(ambiente){
+
+    const ambienteNormalizado =
+      normalizarTexto(
+        ambiente
+      );
+
+
+    elements.descriptionModalTitle
+      .textContent =
+        ambienteNormalizado.includes(
+          "amb"
+        )
+
+          ? ambiente
+
+          : ambienteNormalizado === "1"
+
+            ? "1 ambiente"
+
+            : `${ambiente} ambientes`;
+
+  }
+
+  else{
+
+    elements.descriptionModalTitle
+      .textContent =
+      "Departamento";
+
+  }
+
+
+  const ubicacion=[];
+
+
+  if(propiedad.barrio){
+
+    ubicacion.push(
+      propiedad.barrio
+    );
+
+  }
+
+
+  if(propiedad.direccion){
+
+    ubicacion.push(
+      propiedad.direccion
+    );
+
+  }
+
+
+  elements.descriptionModalLocation
+    .textContent =
+    ubicacion.join(" · ");
+
+
+  elements.descriptionModalText
+    .textContent =
+    propiedad.descripcion;
+
+
+  history.pushState(
+    {
+      description:true
+    },
+    "",
+    "#descripcion"
+  );
+
+
+  document.body.classList.add(
+    "modal-open"
+  );
+
+
+  elements.descriptionModal
+    .classList.add(
+      "active"
+    );
+
+
+  elements.descriptionModal
+    .setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+}
+
+
+function cerrarDescripcion(
+  usarHistorial=true
+){
+
+  if(
+    !state.description.open
+  ){
+
+    return;
+
+  }
+
+
+  state.description.open =
+    false;
+
+  state.description.property =
+    null;
+
+
+  document.body.classList.remove(
+    "modal-open"
+  );
+
+
+  elements.descriptionModal
+    .classList.remove(
+      "active"
+    );
+
+
+  elements.descriptionModal
+    .setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+  if(
+    usarHistorial &&
+    location.hash ===
+    "#descripcion"
+  ){
+
+    history.back();
+
+  }
+
+
+  requestAnimationFrame(
+    ()=>{
+
+      window.scrollTo(
+        0,
+        state.description.scrollPosition
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+function mostrarEmpty(){
+
+  elements.propertiesContainer
+    .innerHTML =
+    `
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          🔎
+        </div>
+
+        <div class="empty-title">
+          No encontramos departamentos
+        </div>
+
+        <div class="empty-text">
+          Probá modificando alguno
+          de los filtros.
+        </div>
 
         <button
-          id="clearFilters"
+          id="emptyClearButton"
           class="clear-filters"
           type="button"
         >
@@ -2886,89 +4684,30 @@
         </button>
 
       </div>
+    `;
 
 
-      <div class="filter-grid">
+  document
+    .getElementById(
+      "emptyClearButton"
+    )
+    ?.addEventListener(
+      "click",
+      limpiarFiltros
+    );
 
-        <div class="filter-group">
-
-          <label class="filter-label">
-            Ambientes
-          </label>
-
-          <div
-            id="environmentButtons"
-            class="environment-buttons"
-          ></div>
-
-        </div>
+}
 
 
-        <div class="filter-group">
+/* =========================================================
+   LOADING
+========================================================= */
 
-          <label
-            class="filter-label"
-            for="neighborhoodSelect"
-          >
-            Barrio
-          </label>
+function mostrarLoading(){
 
-          <div class="select-wrapper">
-
-            <select
-              id="neighborhoodSelect"
-              class="neighborhood-select"
-            >
-
-              <option value="">
-                Todos los barrios
-              </option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="amenity-filters">
-
-        <button
-          id="filterDog"
-          class="amenity-button"
-          type="button"
-        >
-          🐶 Apto perro
-        </button>
-
-        <button
-          id="filterCat"
-          class="amenity-button"
-          type="button"
-        >
-          🐱 Apto gato
-        </button>
-
-        <button
-          id="filterLaundry"
-          class="amenity-button"
-          type="button"
-        >
-          🧺 Lavarropas
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <section
-      id="propertiesContainer"
-      class="properties-grid"
-    >
-
+  elements.propertiesContainer
+    .innerHTML =
+    `
       <div class="loading">
 
         <div class="spinner"></div>
@@ -2978,3035 +4717,672 @@
         </div>
 
       </div>
+    `;
 
-    </section>
+}
 
-  </main>
 
+/* =========================================================
+   ERROR
+========================================================= */
 
-  <!-- =======================================================
-       FLOATING WHATSAPP
-  ======================================================== -->
+function mostrarError(){
 
-  <a
-    id="floatingWhatsapp"
-    class="floating-whatsapp"
-    href="#"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Contactar por WhatsApp"
-  >
-    ☎
-  </a>
+  elements.propertiesContainer
+    .innerHTML =
+    `
+      <div class="error-state">
 
+        <div
+          style="
+            font-size:38px;
+            margin-bottom:12px;
+          "
+        >
+          ⚠️
+        </div>
 
-  <!-- =======================================================
-       DESCRIPTION MODAL
-  ======================================================== -->
+        <strong>
+          No pudimos cargar
+          los departamentos.
+        </strong>
 
-  <div
-    id="descriptionModal"
-    class="description-modal"
-    aria-hidden="true"
-  >
+        <p style="margin-top:8px;">
+          Revisá que la planilla
+          esté publicada correctamente
+          como CSV.
+        </p>
 
-    <div class="description-panel">
+        <button
+          class="retry-button"
+          onclick="location.reload()"
+        >
+          Reintentar
+        </button>
 
-      <button
-        id="descriptionClose"
-        class="description-close"
-        type="button"
-        aria-label="Cerrar descripción"
-      >
-        ×
-      </button>
+      </div>
+    `;
 
-      <h2
-        id="descriptionModalTitle"
-        class="description-modal-title"
-      >
-        Departamento
-      </h2>
 
-      <div
-        id="descriptionModalLocation"
-        class="description-modal-location"
-      ></div>
+  elements.resultsCount.textContent =
+    "No se pudieron cargar las propiedades";
 
-      <div
-        id="descriptionModalText"
-        class="description-modal-text"
-      ></div>
+}
 
-    </div>
 
-  </div>
+/* =========================================================
+   LIMPIAR FILTROS
+========================================================= */
 
+function limpiarFiltros(){
 
-  <!-- =======================================================
-       GALLERY
-  ======================================================== -->
+  state.selectedEnvironment="";
+  state.neighborhood="";
 
-  <div
-    id="gallery"
-    class="gallery"
-    aria-hidden="true"
-  >
+  state.dog=false;
+  state.cat=false;
+  state.laundry=false;
 
-    <button
-      id="galleryClose"
-      class="gallery-close"
-      type="button"
-      aria-label="Cerrar"
-    >
-      ×
-    </button>
 
-    <button
-      id="galleryPrev"
-      class="gallery-prev"
-      type="button"
-      aria-label="Foto anterior"
-    >
-      ‹
-    </button>
+  elements.neighborhoodSelect.value="";
 
-    <img
-      id="galleryImage"
-      class="gallery-image"
-      src=""
-      alt="Foto del departamento"
-    >
 
-    <button
-      id="galleryNext"
-      class="gallery-next"
-      type="button"
-      aria-label="Foto siguiente"
-    >
-      ›
-    </button>
+  elements.filterDog
+    .classList.remove(
+      "active"
+    );
 
-    <div
-      id="galleryCounter"
-      class="gallery-counter"
-    >
-      1 / 1
-    </div>
+  elements.filterCat
+    .classList.remove(
+      "active"
+    );
 
-  </div>
+  elements.filterLaundry
+    .classList.remove(
+      "active"
+    );
 
 
-  <!-- =======================================================
-       PAPAPARSE
-  ======================================================== -->
+  actualizarBotonesAmbientes();
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  aplicarFiltros();
 
+}
 
-  <script>
 
-    /* =========================================================
-       CONFIGURACIÓN
-    ========================================================= */
+/* =========================================================
+   EVENTOS FILTROS
+========================================================= */
 
-    const CSV_URL =
-      "https://docs.google.com/spreadsheets/d/e/2PACX-1vQka5UoeTB1hjGIhr237hfo2CkU78GdtdjIwY21Y2BvxuqghragitmjCSDspPv9cD14JBuYcu1mgQ2Z/pub?output=csv";
-
-
-    const API_URL =
-      "https://script.google.com/macros/s/AKfycbzmDMeHM4DDO_mtVnJQXyRs7r_3V4VIzdpBhYNKHYwW-WKAzHrWofsF_7N6Ub3nh17Hwg/exec";
-
-
-    /* =========================================================
-       ESTADO
-    ========================================================= */
-
-    const state = {
-
-      properties: [],
-
-      filteredProperties: [],
-
-      environments: [],
-
-      neighborhoods: [],
-
-      selectedEnvironment: "",
-
-      neighborhood: "",
-
-      dog: false,
-
-      cat: false,
-
-      laundry: false,
-
-      whatsapp: "5491125772852",
-
-      description: {
-
-        open: false,
-
-        property: null,
-
-        scrollPosition: 0
-
-      },
-
-      gallery: {
-
-        open: false,
-
-        images: [],
-
-        index: 0,
-
-        scrollPosition: 0
-
-      }
-
-    };
-
-
-    /* =========================================================
-       DOM
-    ========================================================= */
-
-    const elements = {
-
-      heroBackground:
-        document.getElementById(
-          "heroBackground"
-        ),
-
-      heroBottom:
-        document.getElementById(
-          "heroBottom"
-        ),
-
-      heroTitle:
-        document.getElementById(
-          "heroTitle"
-        ),
-
-      heroSubtitle:
-        document.getElementById(
-          "heroSubtitle"
-        ),
-
-      propertiesContainer:
-        document.getElementById(
-          "propertiesContainer"
-        ),
-
-      environmentButtons:
-        document.getElementById(
-          "environmentButtons"
-        ),
-
-      neighborhoodSelect:
-        document.getElementById(
-          "neighborhoodSelect"
-        ),
-
-      filterDog:
-        document.getElementById(
-          "filterDog"
-        ),
-
-      filterCat:
-        document.getElementById(
-          "filterCat"
-        ),
-
-      filterLaundry:
-        document.getElementById(
-          "filterLaundry"
-        ),
-
-      clearFilters:
-        document.getElementById(
-          "clearFilters"
-        ),
-
-      resultsCount:
-        document.getElementById(
-          "resultsCount"
-        ),
-
-      floatingWhatsapp:
-        document.getElementById(
-          "floatingWhatsapp"
-        ),
-
-      descriptionModal:
-        document.getElementById(
-          "descriptionModal"
-        ),
-
-      descriptionPanel:
-        document.querySelector(
-          ".description-panel"
-        ),
-
-      descriptionClose:
-        document.getElementById(
-          "descriptionClose"
-        ),
-
-      descriptionModalTitle:
-        document.getElementById(
-          "descriptionModalTitle"
-        ),
-
-      descriptionModalLocation:
-        document.getElementById(
-          "descriptionModalLocation"
-        ),
-
-      descriptionModalText:
-        document.getElementById(
-          "descriptionModalText"
-        ),
-
-      gallery:
-        document.getElementById(
-          "gallery"
-        ),
-
-      galleryImage:
-        document.getElementById(
-          "galleryImage"
-        ),
-
-      galleryClose:
-        document.getElementById(
-          "galleryClose"
-        ),
-
-      galleryPrev:
-        document.getElementById(
-          "galleryPrev"
-        ),
-
-      galleryNext:
-        document.getElementById(
-          "galleryNext"
-        ),
-
-      galleryCounter:
-        document.getElementById(
-          "galleryCounter"
-        )
-
-    };
-
-
-    /* =========================================================
-       NORMALIZAR TEXTO
-    ========================================================= */
-
-    function normalizarTexto(valor) {
-
-      if (
-        valor === null ||
-        valor === undefined
-      ) {
-
-        return "";
-
-      }
-
-      return String(valor)
-
-        .trim()
-
-        .toLowerCase()
-
-        .normalize("NFD")
-
-        .replace(
-          /[\u0300-\u036f]/g,
-          ""
-        );
-
-    }
-
-
-    /* =========================================================
-       NORMALIZAR CLAVE
-    ========================================================= */
-
-    function normalizarClave(valor) {
-
-      return normalizarTexto(valor)
-
-        .replace(
-          /[^a-z0-9]/g,
-          ""
-        );
-
-    }
-
-
-    /* =========================================================
-       OBTENER CAMPO
-    ========================================================= */
-
-    function obtenerCampo(
-      propiedad,
-      nombres
-    ) {
-
-      for (
-        const nombre of nombres
-      ) {
-
-        const clave =
-          normalizarClave(nombre);
-
-        if (
-          Object.prototype.hasOwnProperty.call(
-            propiedad,
-            clave
-          )
-        ) {
-
-          const valor =
-            propiedad[clave];
-
-          if (
-            valor !== null &&
-            valor !== undefined &&
-            String(valor).trim() !== ""
-          ) {
-
-            return String(valor).trim();
-
-          }
-
-        }
-
-      }
-
-      return "";
-
-    }
-
-
-    /* =========================================================
-       VERDADERO
-    ========================================================= */
-
-    function esVerdadero(valor) {
-
-      const texto =
-        normalizarTexto(valor);
-
-      if (!texto) {
-
-        return false;
-
-      }
-
-      return [
-
-        "si",
-        "yes",
-        "true",
-        "1",
-        "apto",
-        "acepta",
-        "permitido",
-        "permitida",
-        "incluido",
-        "incluida",
-        "disponible"
-
-      ].includes(texto);
-
-    }
-
-
-    /* =========================================================
-       DRIVE
-    ========================================================= */
-
-    function extraerDriveId(url) {
-
-      if (!url) {
-
-        return "";
-
-      }
-
-      const texto =
-        String(url).trim();
-
-      let match =
-        texto.match(
-          /\/file\/d\/([a-zA-Z0-9_-]+)/
-        );
-
-      if (match) {
-
-        return match[1];
-
-      }
-
-      match =
-        texto.match(
-          /[?&]id=([a-zA-Z0-9_-]+)/
-        );
-
-      if (match) {
-
-        return match[1];
-
-      }
-
-      match =
-        texto.match(
-          /\/d\/([a-zA-Z0-9_-]+)/
-        );
-
-      if (match) {
-
-        return match[1];
-
-      }
-
-      if (
-        /^[a-zA-Z0-9_-]{20,}$/.test(
-          texto
-        )
-      ) {
-
-        return texto;
-
-      }
-
-      return "";
-
-    }
-
-
-    function convertirImagenDrive(url) {
-
-      if (!url) {
-
-        return "";
-
-      }
-
-      const id =
-        extraerDriveId(url);
-
-      if (!id) {
-
-        return url;
-
-      }
-
-      return (
-        "https://drive.google.com/thumbnail" +
-        "?id=" +
-        encodeURIComponent(id) +
-        "&sz=w1200"
-      );
-
-    }
-
-
-    /* =========================================================
-       FOTOS
-    ========================================================= */
-
-    function obtenerFotos(propiedad) {
-
-      const fotos = [];
-
-      Object.keys(propiedad)
-
-        .filter(
-          clave =>
-            clave === "fotos" ||
-            /^fotos\d+$/.test(clave)
-        )
-
-        .sort(
-          (a, b) => {
-
-            if (a === "fotos") {
-
-              return -1;
-
-            }
-
-            if (b === "fotos") {
-
-              return 1;
-
-            }
-
-            const na =
-              parseInt(
-                a.replace(
-                  "fotos",
-                  ""
-                )
-              ) || 0;
-
-            const nb =
-              parseInt(
-                b.replace(
-                  "fotos",
-                  ""
-                )
-              ) || 0;
-
-            return na - nb;
-
-          }
-        )
-
-        .forEach(
-          clave => {
-
-            const valor =
-              propiedad[clave];
-
-            if (!valor) {
-
-              return;
-
-            }
-
-            const urls =
-              String(valor)
-
-                .split(
-                  /\s*,\s*|\n+/
-                )
-
-                .map(
-                  x => x.trim()
-                )
-
-                .filter(Boolean);
-
-            urls.forEach(
-              url => {
-
-                const imagen =
-                  convertirImagenDrive(
-                    url
-                  );
-
-                if (
-                  imagen &&
-                  !fotos.includes(
-                    imagen
-                  )
-                ) {
-
-                  fotos.push(
-                    imagen
-                  );
-
-                }
-
-              }
-            );
-
-          }
-        );
-
-      return fotos;
-
-    }
-
-
-    /* =========================================================
-       ESCAPAR HTML
-    ========================================================= */
-
-    function escaparHTML(valor) {
-
-      return String(
-        valor ?? ""
-      )
-
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-
-        .replace(
-          /</g,
-          "&lt;"
-        )
-
-        .replace(
-          />/g,
-          "&gt;"
-        )
-
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
-
-
-    /* =========================================================
-       PRECIO
-    ========================================================= */
-
-    function formatearPrecio(valor) {
-
-      if (!valor) {
-
-        return "Consultar";
-
-      }
-
-      return String(valor).trim();
-
-    }
-
-
-    /* =========================================================
-       CARGAR CONFIGURACIÓN
-    ========================================================= */
-
-    async function cargarConfiguracion() {
-
-      try {
-
-        const response =
-          await fetch(
-            API_URL +
-            "?t=" +
-            Date.now()
-          );
-
-        if (!response.ok) {
-
-          throw new Error(
-            "No se pudo cargar CONFIG"
-          );
-
-        }
-
-        const data =
-          await response.json();
-
-        if (!data.ok) {
-
-          return;
-
-        }
-
-        const config =
-          data.config || {};
-
-        if (config.titulo) {
-
-          elements.heroTitle.textContent =
-            config.titulo;
-
-        }
-
-        if (config.subtitulo) {
-
-          elements.heroSubtitle.textContent =
-            config.subtitulo;
-
-        }
-
-        if (config.color_portada) {
-
-          document.documentElement.style
-            .setProperty(
-              "--primary",
-              config.color_portada
-            );
-
-        }
-
-        if (config.foto_portada) {
-
-          const portada =
-            convertirImagenDrive(
-              config.foto_portada
-            );
-
-          if (portada) {
-
-            elements.heroBackground.style
-              .backgroundImage =
-              `url("${portada}")`;
-
-          }
-
-        }
-
-        if (config.whatsapp) {
-
-          state.whatsapp =
-            String(
-              config.whatsapp
-            ).replace(
-              /\D/g,
-              ""
-            );
-
-        }
-
-        actualizarWhatsApp();
-
-      }
-
-      catch (error) {
-
-        console.warn(
-          "No se pudo cargar CONFIG:",
-          error
-        );
-
-      }
-
-    }
-
-
-    /* =========================================================
-       WHATSAPP
-    ========================================================= */
-
-    function actualizarWhatsApp() {
-
-      const numero =
-        state.whatsapp ||
-        "5491125772852";
-
-      elements.floatingWhatsapp.href =
-        `https://wa.me/${numero}`;
-
-    }
-
-
-    function abrirWhatsApp(propiedad) {
-
-      const barrio =
-        propiedad.barrio;
-
-      const direccion =
-        propiedad.direccion;
-
-      const ambientes =
-        propiedad.ambientes;
-
-      const valor =
-        propiedad.valor;
-
-      let mensaje =
-        "Hola! Me interesa un departamento.";
-
-      if (ambientes) {
-
-        mensaje +=
-          ` Ambientes: ${ambientes}.`;
-
-      }
-
-      if (barrio) {
-
-        mensaje +=
-          ` Barrio: ${barrio}.`;
-
-      }
-
-      if (direccion) {
-
-        mensaje +=
-          ` Dirección: ${direccion}.`;
-
-      }
-
-      if (valor) {
-
-        mensaje +=
-          ` Valor: ${valor}.`;
-
-      }
-
-      const url =
-        `https://wa.me/${state.whatsapp}` +
-        `?text=` +
-        encodeURIComponent(
-          mensaje
-        );
-
-      window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer"
-      );
-
-    }
-
-
-    /* =========================================================
-       CARGAR CSV
-    ========================================================= */
-
-    async function cargarPropiedades() {
-
-      try {
-
-        mostrarLoading();
-
-        const response =
-          await fetch(
-            CSV_URL +
-            "&t=" +
-            Date.now()
-          );
-
-        if (!response.ok) {
-
-          throw new Error(
-            "No se pudo descargar el CSV"
-          );
-
-        }
-
-        const csv =
-          await response.text();
-
-        Papa.parse(
-          csv,
-          {
-
-            header: true,
-
-            skipEmptyLines: true,
-
-            transformHeader:
-              header =>
-                normalizarClave(
-                  header
-                ),
-
-            complete:
-              resultado => {
-
-                try {
-
-                  procesarPropiedades(
-                    resultado.data
-                  );
-
-                }
-
-                catch (error) {
-
-                  console.error(
-                    error
-                  );
-
-                  mostrarError();
-
-                }
-
-              },
-
-            error:
-              error => {
-
-                console.error(
-                  error
-                );
-
-                mostrarError();
-
-              }
-
-          }
-        );
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Error cargando CSV:",
-          error
-        );
-
-        mostrarError();
-
-      }
-
-    }
-
-
-    /* =========================================================
-       PROCESAR PROPIEDADES
-    ========================================================= */
-
-    function procesarPropiedades(
-      propiedades
-    ) {
-
-      state.properties =
-        propiedades
-
-          .filter(
-            propiedad =>
-              Object.values(
-                propiedad
-              ).some(
-                valor =>
-                  String(
-                    valor || ""
-                  ).trim() !== ""
-              )
-          )
-
-          .map(
-            propiedad => {
-
-              return {
-
-                raw:
-                  propiedad,
-
-                fotos:
-                  obtenerFotos(
-                    propiedad
-                  ),
-
-                ambientes:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "ambientes"
-                    ]
-                  ),
-
-                barrio:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "barrio"
-                    ]
-                  ),
-
-                direccion:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "direccion"
-                    ]
-                  ),
-
-                valor:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "valor",
-                      "precio"
-                    ]
-                  ),
-
-                expensas:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "expensas"
-                    ]
-                  ),
-
-                gastos:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "gastos"
-                    ]
-                  ),
-
-                perro:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "perro"
-                    ]
-                  ),
-
-                gato:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "gato"
-                    ]
-                  ),
-
-                lavado:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "lavado",
-                      "lavarropas",
-                      "lavadora"
-                    ]
-                  ),
-
-                disponibilidad:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "disponibilidad",
-                      "disponible"
-                    ]
-                  ),
-
-                descripcion:
-                  obtenerCampo(
-                    propiedad,
-                    [
-                      "descripcion",
-                      "descripción"
-                    ]
-                  )
-
-              };
-
-            }
-          );
-
-      construirFiltros();
-
-      aplicarFiltros();
-
-    }
-
-
-    /* =========================================================
-       CONSTRUIR FILTROS
-    ========================================================= */
-
-    function construirFiltros() {
-
-      const ambientes =
-        state.properties
-
-          .map(
-            propiedad =>
-              propiedad.ambientes
-          )
-
-          .filter(Boolean);
-
-      state.environments =
-        [
-          ...new Set(
-            ambientes.map(
-              valor =>
-                String(
-                  valor
-                ).trim()
-            )
-          )
-        ];
-
-      state.environments.sort(
-        ordenarValores
-      );
-
-      elements.environmentButtons
-        .innerHTML = "";
-
-      elements.environmentButtons
-        .appendChild(
-          crearBotonAmbientes(
-            "Todos",
-            ""
-          )
-        );
-
-      state.environments
-        .forEach(
-          ambiente => {
-
-            elements.environmentButtons
-              .appendChild(
-                crearBotonAmbientes(
-                  ambiente,
-                  ambiente
-                )
-              );
-
-          }
-        );
-
-      const barrios =
-        state.properties
-
-          .map(
-            propiedad =>
-              propiedad.barrio
-          )
-
-          .filter(Boolean);
-
-      state.neighborhoods =
-        [
-          ...new Set(
-            barrios
-              .map(
-                barrio =>
-                  String(
-                    barrio
-                  ).trim()
-              )
-          )
-        ];
-
-      state.neighborhoods.sort(
-        (a, b) =>
-          a.localeCompare(
-            b,
-            "es",
-            {
-              sensitivity:
-                "base"
-            }
-          )
-      );
-
-      elements.neighborhoodSelect
-        .innerHTML =
-        `
-          <option value="">
-            Todos los barrios
-          </option>
-        `;
-
-      state.neighborhoods
-        .forEach(
-          barrio => {
-
-            const option =
-              document.createElement(
-                "option"
-              );
-
-            option.value =
-              barrio;
-
-            option.textContent =
-              barrio;
-
-            elements.neighborhoodSelect
-              .appendChild(
-                option
-              );
-
-          }
-        );
-
-    }
-
-
-    function ordenarValores(
-      a,
-      b
-    ) {
-
-      const na =
-        parseFloat(
-          String(a)
-            .replace(",", ".")
-        );
-
-      const nb =
-        parseFloat(
-          String(b)
-            .replace(",", ".")
-        );
-
-      if (
-        !Number.isNaN(na) &&
-        !Number.isNaN(nb)
-      ) {
-
-        return na - nb;
-
-      }
-
-      return String(a)
-        .localeCompare(
-          String(b),
-          "es",
-          {
-            sensitivity:
-              "base"
-          }
-        );
-
-    }
-
-
-    /* =========================================================
-       BOTONES AMBIENTES
-    ========================================================= */
-
-    function crearBotonAmbientes(
-      texto,
-      valor
-    ) {
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-      button.type =
-        "button";
-
-      button.className =
-        "environment-button";
-
-      button.textContent =
-        texto;
-
-      button.dataset.value =
-        valor;
-
-      if (
-        state.selectedEnvironment ===
-        valor
-      ) {
-
-        button.classList.add(
-          "active"
-        );
-
-      }
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          state.selectedEnvironment =
-            valor;
-
-          actualizarBotonesAmbientes();
-
-          aplicarFiltros();
-
-        }
-      );
-
-      return button;
-
-    }
-
-
-    function actualizarBotonesAmbientes() {
-
-      document
-        .querySelectorAll(
-          ".environment-button"
-        )
-
-        .forEach(
-          button => {
-
-            const valor =
-              button.dataset.value;
-
-            button.classList.toggle(
-              "active",
-              valor ===
-              state.selectedEnvironment
-            );
-
-          }
-        );
-
-    }
-
-
-    /* =========================================================
-       APLICAR FILTROS
-    ========================================================= */
-
-    function aplicarFiltros() {
-
-      const ambienteSeleccionado =
-        normalizarTexto(
-          state.selectedEnvironment
-        );
-
-      const barrioSeleccionado =
-        normalizarTexto(
-          state.neighborhood
-        );
-
-      state.filteredProperties =
-        state.properties.filter(
-          propiedad => {
-
-            if (
-              ambienteSeleccionado
-            ) {
-
-              const ambiente =
-                normalizarTexto(
-                  propiedad.ambientes
-                );
-
-              if (
-                ambiente !==
-                ambienteSeleccionado
-              ) {
-
-                return false;
-
-              }
-
-            }
-
-            if (
-              barrioSeleccionado
-            ) {
-
-              const barrio =
-                normalizarTexto(
-                  propiedad.barrio
-                );
-
-              if (
-                barrio !==
-                barrioSeleccionado
-              ) {
-
-                return false;
-
-              }
-
-            }
-
-            if (
-              state.dog &&
-              !esVerdadero(
-                propiedad.perro
-              )
-            ) {
-
-              return false;
-
-            }
-
-            if (
-              state.cat &&
-              !esVerdadero(
-                propiedad.gato
-              )
-            ) {
-
-              return false;
-
-            }
-
-            if (
-              state.laundry &&
-              !esVerdadero(
-                propiedad.lavado
-              )
-            ) {
-
-              return false;
-
-            }
-
-            return true;
-
-          }
-        );
-
-      renderizarPropiedades();
-
-      actualizarContador();
-
-    }
-
-
-    /* =========================================================
-       CONTADOR
-    ========================================================= */
-
-    function actualizarContador() {
-
-      const cantidad =
-        state.filteredProperties.length;
-
-      if (cantidad === 1) {
-
-        elements.resultsCount.textContent =
-          "1 departamento encontrado";
-
-      }
-
-      else {
-
-        elements.resultsCount.textContent =
-          `${cantidad} departamentos encontrados`;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       RENDER
-    ========================================================= */
-
-    function renderizarPropiedades() {
-
-      elements.propertiesContainer
-        .innerHTML = "";
-
-      if (
-        state.filteredProperties.length ===
-        0
-      ) {
-
-        mostrarEmpty();
-
-        return;
-
-      }
-
-      state.filteredProperties
-        .forEach(
-          (propiedad, index) => {
-
-            elements.propertiesContainer
-              .appendChild(
-                crearTarjeta(
-                  propiedad,
-                  index
-                )
-              );
-
-          }
-        );
-
-    }
-
-
-    /* =========================================================
-       CREAR TARJETA
-    ========================================================= */
-
-    function crearTarjeta(
-      propiedad,
-      index
-    ) {
-
-      const card =
-        document.createElement(
-          "article"
-        );
-
-      card.className =
-        "property-card";
-
-
-      /* =====================================================
-         IMAGEN
-      ===================================================== */
-
-      const imageContainer =
-        document.createElement(
-          "div"
-        );
-
-      imageContainer.className =
-        "property-image-container";
-
-      if (
-        propiedad.disponibilidad
-      ) {
-
-        const badge =
-          document.createElement(
-            "div"
-          );
-
-        badge.className =
-          "image-badge available";
-
-        badge.textContent =
-          propiedad.disponibilidad;
-
-        imageContainer.appendChild(
-          badge
-        );
-
-      }
-
-      if (
-        propiedad.fotos.length > 0
-      ) {
-
-        const img =
-          document.createElement(
-            "img"
-          );
-
-        img.className =
-          "property-image";
-
-        img.src =
-          propiedad.fotos[0];
-
-        img.alt =
-          `Departamento en ${
-            propiedad.barrio ||
-            "alquiler"
-          }`;
-
-        img.loading =
-          index < 3
-            ? "eager"
-            : "lazy";
-
-        img.decoding =
-          "async";
-
-        img.onerror =
-          () => {
-
-            img.style.display =
-              "none";
-
-            const placeholder =
-              document.createElement(
-                "div"
-              );
-
-            placeholder.className =
-              "property-image-placeholder";
-
-            placeholder.innerHTML =
-              `
-                <div style="font-size:36px">
-                  🏠
-                </div>
-
-                <div>
-                  Imagen no disponible
-                </div>
-              `;
-
-            imageContainer
-              .appendChild(
-                placeholder
-              );
-
-          };
-
-        img.addEventListener(
-          "click",
-          () => {
-
-            abrirGaleria(
-              propiedad.fotos,
-              0
-            );
-
-          }
-        );
-
-        imageContainer.appendChild(
-          img
-        );
-
-        if (
-          propiedad.fotos.length > 1
-        ) {
-
-          const photosBadge =
-            document.createElement(
-              "div"
-            );
-
-          photosBadge.className =
-            "photos-badge";
-
-          photosBadge.textContent =
-            `📷 ${
-              propiedad.fotos.length
-            } fotos`;
-
-          imageContainer
-            .appendChild(
-              photosBadge
-            );
-
-        }
-
-      }
-
-      else {
-
-        imageContainer.innerHTML =
-          `
-            <div
-              class="property-image-placeholder"
-            >
-
-              <div style="font-size:36px">
-                🏠
-              </div>
-
-              <div>
-                Sin imágenes
-              </div>
-
-            </div>
-          `;
-
-      }
-
-      card.appendChild(
-        imageContainer
-      );
-
-
-      /* =====================================================
-         CONTENT
-      ===================================================== */
-
-      const content =
-        document.createElement(
-          "div"
-        );
-
-      content.className =
-        "property-content";
-
-      if (
-        propiedad.barrio
-      ) {
-
-        const location =
-          document.createElement(
-            "div"
-          );
-
-        location.className =
-          "property-location";
-
-        location.innerHTML =
-          `
-            <span>📍</span>
-
-            <span>
-              ${escaparHTML(
-                propiedad.barrio
-              )}
-            </span>
-          `;
-
-        content.appendChild(
-          location
-        );
-
-      }
-
-
-      /* =====================================================
-         TITULO
-      ===================================================== */
-
-      const title =
-        document.createElement(
-          "h2"
-        );
-
-      title.className =
-        "property-title";
-
-      if (
-        propiedad.ambientes
-      ) {
-
-        const ambiente =
-          propiedad.ambientes;
-
-        const ambienteNormalizado =
-          normalizarTexto(
-            ambiente
-          );
-
-        title.textContent =
-          ambienteNormalizado.includes(
-            "amb"
-          )
-
-            ? ambiente
-
-            : ambienteNormalizado === "1"
-
-              ? "1 ambiente"
-
-              : `${ambiente} ambientes`;
-
-      }
-
-      else {
-
-        title.textContent =
-          "Departamento";
-
-      }
-
-      content.appendChild(
-        title
-      );
-
-
-      /* =====================================================
-         DIRECCIÓN
-      ===================================================== */
-
-      if (
-        propiedad.direccion
-      ) {
-
-        const address =
-          document.createElement(
-            "div"
-          );
-
-        address.className =
-          "property-address";
-
-        address.textContent =
-          `📍 ${
-            propiedad.direccion
-          }`;
-
-        content.appendChild(
-          address
-        );
-
-      }
-
-
-      /* =====================================================
-         PRECIO
-      ===================================================== */
-
-      const price =
-        document.createElement(
-          "div"
-        );
-
-      price.className =
-        "property-price";
-
-      price.innerHTML =
-        `
-          <div>
-
-            <div class="price-label">
-              Valor mensual
-            </div>
-
-          </div>
-
-          <div class="price-value">
-            ${escaparHTML(
-              formatearPrecio(
-                propiedad.valor
-              )
-            )}
-          </div>
-        `;
-
-      content.appendChild(
-        price
-      );
-
-
-      /* =====================================================
-         EXPENSAS / GASTOS
-      ===================================================== */
-
-      if (
-        propiedad.expensas ||
-        propiedad.gastos
-      ) {
-
-        const costs =
-          document.createElement(
-            "div"
-          );
-
-        costs.className =
-          "property-costs";
-
-        if (
-          propiedad.expensas
-        ) {
-
-          costs.innerHTML +=
-            `
-              <div class="cost-box">
-
-                <span class="cost-label">
-                  Expensas
-                </span>
-
-                <span class="cost-value">
-                  ${escaparHTML(
-                    propiedad.expensas
-                  )}
-                </span>
-
-              </div>
-            `;
-
-        }
-
-        if (
-          propiedad.gastos
-        ) {
-
-          costs.innerHTML +=
-            `
-              <div class="cost-box">
-
-                <span class="cost-label">
-                  Gastos
-                </span>
-
-                <span class="cost-value">
-                  ${escaparHTML(
-                    propiedad.gastos
-                  )}
-                </span>
-
-              </div>
-            `;
-
-        }
-
-        content.appendChild(
-          costs
-        );
-
-      }
-
-
-      /* =====================================================
-         AMENITIES
-      ===================================================== */
-
-      const amenities = [];
-
-      if (
-        esVerdadero(
-          propiedad.perro
-        )
-      ) {
-
-        amenities.push(
-          "🐶 Apto perro"
-        );
-
-      }
-
-      if (
-        esVerdadero(
-          propiedad.gato
-        )
-      ) {
-
-        amenities.push(
-          "🐱 Apto gato"
-        );
-
-      }
-
-      if (
-        esVerdadero(
-          propiedad.lavado
-        )
-      ) {
-
-        amenities.push(
-          "🧺 Lavarropas"
-        );
-
-      }
-
-      if (
-        amenities.length > 0
-      ) {
-
-        const amenitiesContainer =
-          document.createElement(
-            "div"
-          );
-
-        amenitiesContainer.className =
-          "property-amenities";
-
-        amenities.forEach(
-          amenity => {
-
-            const chip =
-              document.createElement(
-                "span"
-              );
-
-            chip.className =
-              "amenity-chip";
-
-            chip.textContent =
-              amenity;
-
-            amenitiesContainer
-              .appendChild(
-                chip
-              );
-
-          }
-        );
-
-        content.appendChild(
-          amenitiesContainer
-        );
-
-      }
-
-
-      /* =====================================================
-         DESCRIPCIÓN
-      ===================================================== */
-
-      if (
-        propiedad.descripcion
-      ) {
-
-        const descriptionButton =
-          document.createElement(
-            "button"
-          );
-
-        descriptionButton.type =
-          "button";
-
-        descriptionButton.className =
-          "description-button";
-
-        descriptionButton.innerHTML =
-          `
-            <span>📄</span>
-
-            <span>
-              Ver descripción
-            </span>
-
-            <span>→</span>
-          `;
-
-        descriptionButton.addEventListener(
-          "click",
-          () => {
-
-            abrirDescripcion(
-              propiedad
-            );
-
-          }
-        );
-
-        content.appendChild(
-          descriptionButton
-        );
-
-      }
-
-
-      /* =====================================================
-         WHATSAPP
-      ===================================================== */
-
-      const actions =
-        document.createElement(
-          "div"
-        );
-
-      actions.className =
-        "property-actions";
-
-      const button =
-        document.createElement(
-          "button"
-        );
-
-      button.type =
-        "button";
-
-      button.className =
-        "whatsapp-button";
-
-      button.innerHTML =
-        `
-          <span>💬</span>
-
-          <span>
-            Consultar por WhatsApp
-          </span>
-        `;
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          abrirWhatsApp(
-            propiedad
-          );
-
-        }
-      );
-
-      actions.appendChild(
-        button
-      );
-
-      content.appendChild(
-        actions
-      );
-
-      card.appendChild(
-        content
-      );
-
-      return card;
-
-    }
-
-
-    /* =========================================================
-       DESCRIPCIÓN
-    ========================================================= */
-
-    function abrirDescripcion(
-      propiedad
-    ) {
-
-      if (
-        !propiedad ||
-        !propiedad.descripcion
-      ) {
-
-        return;
-
-      }
-
-      state.description.property =
-        propiedad;
-
-      state.description.scrollPosition =
-        window.scrollY;
-
-      state.description.open =
-        true;
-
-      const ambiente =
-        propiedad.ambientes;
-
-      if (ambiente) {
-
-        const ambienteNormalizado =
-          normalizarTexto(
-            ambiente
-          );
-
-        elements.descriptionModalTitle
-          .textContent =
-          ambienteNormalizado.includes(
-            "amb"
-          )
-
-            ? ambiente
-
-            : ambienteNormalizado === "1"
-
-              ? "1 ambiente"
-
-              : `${ambiente} ambientes`;
-
-      }
-
-      else {
-
-        elements.descriptionModalTitle
-          .textContent =
-          "Departamento";
-
-      }
-
-      const ubicacion = [];
-
-      if (
-        propiedad.barrio
-      ) {
-
-        ubicacion.push(
-          propiedad.barrio
-        );
-
-      }
-
-      if (
-        propiedad.direccion
-      ) {
-
-        ubicacion.push(
-          propiedad.direccion
-        );
-
-      }
-
-      elements.descriptionModalLocation
-        .textContent =
-        ubicacion.join(
-          " · "
-        );
-
-      elements.descriptionModalText
-        .textContent =
-        propiedad.descripcion;
-
-      history.pushState(
-        {
-          description: true
-        },
-        "",
-        "#descripcion"
-      );
-
-      document.body.classList.add(
-        "modal-open"
-      );
-
-      elements.descriptionModal
-        .classList.add(
-          "active"
-        );
-
-      elements.descriptionModal
-        .setAttribute(
-          "aria-hidden",
-          "false"
-        );
-
-    }
-
-
-    function cerrarDescripcion(
-      usarHistorial = true
-    ) {
-
-      if (
-        !state.description.open
-      ) {
-
-        return;
-
-      }
-
-      state.description.open =
-        false;
-
-      state.description.property =
-        null;
-
-      document.body.classList.remove(
-        "modal-open"
-      );
-
-      elements.descriptionModal
-        .classList.remove(
-          "active"
-        );
-
-      elements.descriptionModal
-        .setAttribute(
-          "aria-hidden",
-          "true"
-        );
-
-      if (
-        usarHistorial &&
-        location.hash ===
-        "#descripcion"
-      ) {
-
-        history.back();
-
-      }
-
-      requestAnimationFrame(
-        () => {
-
-          window.scrollTo(
-            0,
-            state.description.scrollPosition
-          );
-
-        }
-      );
-
-    }
-
-
-    /* =========================================================
-       EMPTY
-    ========================================================= */
-
-    function mostrarEmpty() {
-
-      elements.propertiesContainer
-        .innerHTML =
-        `
-          <div class="empty-state">
-
-            <div class="empty-icon">
-              🔎
-            </div>
-
-            <div class="empty-title">
-              No encontramos departamentos
-            </div>
-
-            <div class="empty-text">
-              Probá modificando alguno
-              de los filtros.
-            </div>
-
-            <button
-              id="emptyClearButton"
-              class="clear-filters"
-              type="button"
-            >
-              Limpiar filtros
-            </button>
-
-          </div>
-        `;
-
-      document
-        .getElementById(
-          "emptyClearButton"
-        )
-        ?.addEventListener(
-          "click",
-          limpiarFiltros
-        );
-
-    }
-
-
-    /* =========================================================
-       LOADING
-    ========================================================= */
-
-    function mostrarLoading() {
-
-      elements.propertiesContainer
-        .innerHTML =
-        `
-          <div class="loading">
-
-            <div class="spinner"></div>
-
-            <div>
-              Cargando departamentos...
-            </div>
-
-          </div>
-        `;
-
-    }
-
-
-    /* =========================================================
-       ERROR
-    ========================================================= */
-
-    function mostrarError() {
-
-      elements.propertiesContainer
-        .innerHTML =
-        `
-          <div class="error-state">
-
-            <div
-              style="
-                font-size:38px;
-                margin-bottom:12px;
-              "
-            >
-              ⚠️
-            </div>
-
-            <strong>
-              No pudimos cargar
-              los departamentos.
-            </strong>
-
-            <p style="margin-top:8px;">
-              Revisá que la planilla
-              esté publicada correctamente
-              como CSV.
-            </p>
-
-            <button
-              class="retry-button"
-              onclick="location.reload()"
-            >
-              Reintentar
-            </button>
-
-          </div>
-        `;
-
-      elements.resultsCount.textContent =
-        "No se pudieron cargar las propiedades";
-
-    }
-
-
-    /* =========================================================
-       LIMPIAR FILTROS
-    ========================================================= */
-
-    function limpiarFiltros() {
-
-      state.selectedEnvironment =
-        "";
+elements.neighborhoodSelect
+  .addEventListener(
+    "change",
+    event=>{
 
       state.neighborhood =
-        "";
-
-      state.dog =
-        false;
-
-      state.cat =
-        false;
-
-      state.laundry =
-        false;
-
-      elements.neighborhoodSelect.value =
-        "";
-
-      elements.filterDog
-        .classList.remove(
-          "active"
-        );
-
-      elements.filterCat
-        .classList.remove(
-          "active"
-        );
-
-      elements.filterLaundry
-        .classList.remove(
-          "active"
-        );
-
-      actualizarBotonesAmbientes();
+        event.target.value;
 
       aplicarFiltros();
 
     }
+  );
 
 
-    /* =========================================================
-       EVENTOS FILTROS
-    ========================================================= */
+elements.filterDog
+  .addEventListener(
+    "click",
+    ()=>{
 
-    elements.neighborhoodSelect
-      .addEventListener(
-        "change",
-        event => {
+      state.dog =
+        !state.dog;
 
-          state.neighborhood =
-            event.target.value;
-
-          aplicarFiltros();
-
-        }
-      );
-
-
-    elements.filterDog
-      .addEventListener(
-        "click",
-        () => {
-
-          state.dog =
-            !state.dog;
-
-          elements.filterDog
-            .classList.toggle(
-              "active",
-              state.dog
-            );
-
-          aplicarFiltros();
-
-        }
-      );
-
-
-    elements.filterCat
-      .addEventListener(
-        "click",
-        () => {
-
-          state.cat =
-            !state.cat;
-
-          elements.filterCat
-            .classList.toggle(
-              "active",
-              state.cat
-            );
-
-          aplicarFiltros();
-
-        }
-      );
-
-
-    elements.filterLaundry
-      .addEventListener(
-        "click",
-        () => {
-
-          state.laundry =
-            !state.laundry;
-
-          elements.filterLaundry
-            .classList.toggle(
-              "active",
-              state.laundry
-            );
-
-          aplicarFiltros();
-
-        }
-      );
-
-
-    elements.clearFilters
-      .addEventListener(
-        "click",
-        limpiarFiltros
-      );
-
-
-    /* =========================================================
-       GALERÍA
-    ========================================================= */
-
-    function abrirGaleria(
-      fotos,
-      indice = 0
-    ) {
-
-      if (
-        !fotos ||
-        fotos.length === 0
-      ) {
-
-        return;
-
-      }
-
-      state.gallery.images =
-        fotos;
-
-      state.gallery.index =
-        indice;
-
-      state.gallery.scrollPosition =
-        window.scrollY;
-
-      state.gallery.open =
-        true;
-
-      history.pushState(
-        {
-          gallery: true
-        },
-        "",
-        "#galeria"
-      );
-
-      document.body.classList.add(
-        "modal-open"
-      );
-
-      elements.gallery
-        .classList.add(
-          "active"
+      elements.filterDog
+        .classList.toggle(
+          "active",
+          state.dog
         );
 
-      elements.gallery
-        .setAttribute(
-          "aria-hidden",
-          "false"
+      aplicarFiltros();
+
+    }
+  );
+
+
+elements.filterCat
+  .addEventListener(
+    "click",
+    ()=>{
+
+      state.cat =
+        !state.cat;
+
+      elements.filterCat
+        .classList.toggle(
+          "active",
+          state.cat
         );
 
-      actualizarGaleria();
+      aplicarFiltros();
 
     }
+  );
 
 
-    function cerrarGaleria(
-      usarHistorial = true
-    ) {
+elements.filterLaundry
+  .addEventListener(
+    "click",
+    ()=>{
 
-      if (
-        !state.gallery.open
-      ) {
+      state.laundry =
+        !state.laundry;
 
-        return;
-
-      }
-
-      state.gallery.open =
-        false;
-
-      document.body.classList.remove(
-        "modal-open"
-      );
-
-      elements.gallery
-        .classList.remove(
-          "active"
+      elements.filterLaundry
+        .classList.toggle(
+          "active",
+          state.laundry
         );
 
-      elements.gallery
-        .setAttribute(
-          "aria-hidden",
-          "true"
-        );
-
-      if (
-        usarHistorial &&
-        location.hash ===
-        "#galeria"
-      ) {
-
-        history.back();
-
-      }
-
-      requestAnimationFrame(
-        () => {
-
-          window.scrollTo(
-            0,
-            state.gallery.scrollPosition
-          );
-
-        }
-      );
+      aplicarFiltros();
 
     }
+  );
 
 
-    function actualizarGaleria() {
+elements.clearFilters
+  .addEventListener(
+    "click",
+    limpiarFiltros
+  );
 
-      const fotos =
-        state.gallery.images;
 
-      const indice =
-        state.gallery.index;
+/* =========================================================
+   GALERÍA
+========================================================= */
 
-      if (
-        !fotos.length
-      ) {
+function abrirGaleria(
+  fotos,
+  indice=0
+){
 
-        return;
+  if(
+    !fotos ||
+    fotos.length===0
+  ){
 
-      }
+    return;
 
-      elements.galleryImage.src =
-        fotos[indice];
+  }
 
-      elements.galleryImage.alt =
-        `Foto ${
-          indice + 1
-        } del departamento`;
 
-      elements.galleryCounter.textContent =
-        `${
-          indice + 1
-        } / ${
-          fotos.length
-        }`;
+  state.gallery.images =
+    fotos;
 
-      elements.galleryPrev.style.display =
-        fotos.length > 1
-          ? "block"
-          : "none";
+  state.gallery.index =
+    indice;
 
-      elements.galleryNext.style.display =
-        fotos.length > 1
-          ? "block"
-          : "none";
+  state.gallery.scrollPosition =
+    window.scrollY;
 
-    }
+  state.gallery.open =
+    true;
 
 
-    function fotoAnterior() {
+  history.pushState(
+    {
+      gallery:true
+    },
+    "",
+    "#galeria"
+  );
 
-      const cantidad =
-        state.gallery.images.length;
 
-      if (
-        cantidad <= 1
-      ) {
+  document.body.classList.add(
+    "modal-open"
+  );
 
-        return;
 
-      }
-
-      state.gallery.index =
-        (
-          state.gallery.index -
-          1 +
-          cantidad
-        ) %
-        cantidad;
-
-      actualizarGaleria();
-
-    }
-
-
-    function fotoSiguiente() {
-
-      const cantidad =
-        state.gallery.images.length;
-
-      if (
-        cantidad <= 1
-      ) {
-
-        return;
-
-      }
-
-      state.gallery.index =
-        (
-          state.gallery.index +
-          1
-        ) %
-        cantidad;
-
-      actualizarGaleria();
-
-    }
-
-
-    /* =========================================================
-       EVENTOS GALERÍA
-    ========================================================= */
-
-    elements.galleryClose
-      .addEventListener(
-        "click",
-        () => {
-
-          cerrarGaleria(true);
-
-        }
-      );
-
-
-    elements.galleryPrev
-      .addEventListener(
-        "click",
-        fotoAnterior
-      );
-
-
-    elements.galleryNext
-      .addEventListener(
-        "click",
-        fotoSiguiente
-      );
-
-
-    elements.gallery
-      .addEventListener(
-        "click",
-        event => {
-
-          if (
-            event.target ===
-            elements.gallery
-          ) {
-
-            cerrarGaleria(true);
-
-          }
-
-        }
-      );
-
-
-    /* =========================================================
-       DESCRIPTION EVENTS
-    ========================================================= */
-
-    elements.descriptionClose
-      .addEventListener(
-        "click",
-        () => {
-
-          cerrarDescripcion(true);
-
-        }
-      );
-
-
-    elements.descriptionModal
-      .addEventListener(
-        "click",
-        event => {
-
-          if (
-            event.target ===
-            elements.descriptionModal
-          ) {
-
-            cerrarDescripcion(true);
-
-          }
-
-        }
-      );
-
-
-    /* =========================================================
-       TECLADO
-    ========================================================= */
-
-    document.addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          state.description.open
-        ) {
-
-          if (
-            event.key ===
-            "Escape"
-          ) {
-
-            cerrarDescripcion(true);
-
-          }
-
-          return;
-
-        }
-
-        if (
-          !state.gallery.open
-        ) {
-
-          return;
-
-        }
-
-        if (
-          event.key ===
-          "Escape"
-        ) {
-
-          cerrarGaleria(true);
-
-        }
-
-        if (
-          event.key ===
-          "ArrowLeft"
-        ) {
-
-          fotoAnterior();
-
-        }
-
-        if (
-          event.key ===
-          "ArrowRight"
-        ) {
-
-          fotoSiguiente();
-
-        }
-
-      }
+  elements.gallery
+    .classList.add(
+      "active"
     );
 
 
-    /* =========================================================
-       BOTÓN ATRÁS
-    ========================================================= */
-
-    window.addEventListener(
-      "popstate",
-      () => {
-
-        if (
-          state.gallery.open
-        ) {
-
-          cerrarGaleria(false);
-
-          return;
-
-        }
-
-        if (
-          state.description.open
-        ) {
-
-          cerrarDescripcion(false);
-
-          return;
-
-        }
-
-      }
+  elements.gallery
+    .setAttribute(
+      "aria-hidden",
+      "false"
     );
 
 
-    /* =========================================================
-       SWIPE GALERÍA
-    ========================================================= */
+  actualizarGaleria();
 
-    let touchStartX =
-      0;
-
-    let touchEndX =
-      0;
+}
 
 
-    elements.gallery
-      .addEventListener(
-        "touchstart",
-        event => {
+function cerrarGaleria(
+  usarHistorial=true
+){
 
-          touchStartX =
-            event.changedTouches[0]
-              .screenX;
+  if(
+    !state.gallery.open
+  ){
 
-        },
-        {
-          passive: true
-        }
+    return;
+
+  }
+
+
+  state.gallery.open =
+    false;
+
+
+  document.body.classList.remove(
+    "modal-open"
+  );
+
+
+  elements.gallery
+    .classList.remove(
+      "active"
+    );
+
+
+  elements.gallery
+    .setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+  if(
+    usarHistorial &&
+    location.hash ===
+    "#galeria"
+  ){
+
+    history.back();
+
+  }
+
+
+  requestAnimationFrame(
+    ()=>{
+
+      window.scrollTo(
+        0,
+        state.gallery.scrollPosition
       );
 
+    }
+  );
 
-    elements.gallery
-      .addEventListener(
-        "touchend",
-        event => {
-
-          touchEndX =
-            event.changedTouches[0]
-              .screenX;
-
-          const diferencia =
-            touchEndX -
-            touchStartX;
-
-          if (
-            Math.abs(
-              diferencia
-            ) < 50
-          ) {
-
-            return;
-
-          }
-
-          if (
-            diferencia > 0
-          ) {
-
-            fotoAnterior();
-
-          }
-
-          else {
-
-            fotoSiguiente();
-
-          }
-
-        },
-        {
-          passive: true
-        }
-      );
+}
 
 
-    /* =========================================================
-       INICIALIZACIÓN
-    ========================================================= */
+function actualizarGaleria(){
 
-    async function iniciar() {
+  const fotos =
+    state.gallery.images;
 
-      await cargarConfiguracion();
+  const indice =
+    state.gallery.index;
 
-      await cargarPropiedades();
+
+  if(!fotos.length){
+    return;
+  }
+
+
+  elements.galleryImage.src =
+    fotos[indice];
+
+
+  elements.galleryImage.alt =
+    `Foto ${
+      indice+1
+    } del departamento`;
+
+
+  elements.galleryCounter.textContent =
+    `${
+      indice+1
+    } / ${
+      fotos.length
+    }`;
+
+
+  elements.galleryPrev.style.display =
+    fotos.length>1
+      ? "block"
+      : "none";
+
+
+  elements.galleryNext.style.display =
+    fotos.length>1
+      ? "block"
+      : "none";
+
+}
+
+
+function fotoAnterior(){
+
+  const cantidad =
+    state.gallery.images.length;
+
+
+  if(cantidad<=1){
+    return;
+  }
+
+
+  state.gallery.index =
+    (
+      state.gallery.index -
+      1 +
+      cantidad
+    ) %
+    cantidad;
+
+
+  actualizarGaleria();
+
+}
+
+
+function fotoSiguiente(){
+
+  const cantidad =
+    state.gallery.images.length;
+
+
+  if(cantidad<=1){
+    return;
+  }
+
+
+  state.gallery.index =
+    (
+      state.gallery.index +
+      1
+    ) %
+    cantidad;
+
+
+  actualizarGaleria();
+
+}
+
+
+/* =========================================================
+   EVENTOS GALERÍA
+========================================================= */
+
+elements.galleryClose
+  .addEventListener(
+    "click",
+    ()=>{
+
+      cerrarGaleria(true);
+
+    }
+  );
+
+
+elements.galleryPrev
+  .addEventListener(
+    "click",
+    fotoAnterior
+  );
+
+
+elements.galleryNext
+  .addEventListener(
+    "click",
+    fotoSiguiente
+  );
+
+
+elements.gallery
+  .addEventListener(
+    "click",
+    event=>{
+
+      if(
+        event.target ===
+        elements.gallery
+      ){
+
+        cerrarGaleria(true);
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   DESCRIPTION EVENTS
+========================================================= */
+
+elements.descriptionClose
+  .addEventListener(
+    "click",
+    ()=>{
+
+      cerrarDescripcion(true);
+
+    }
+  );
+
+
+elements.descriptionModal
+  .addEventListener(
+    "click",
+    event=>{
+
+      if(
+        event.target ===
+        elements.descriptionModal
+      ){
+
+        cerrarDescripcion(true);
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   TECLADO
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(
+      state.description.open
+    ){
+
+      if(
+        event.key ===
+        "Escape"
+      ){
+
+        cerrarDescripcion(true);
+
+      }
+
+      return;
 
     }
 
 
-    iniciar();
+    if(
+      !state.gallery.open
+    ){
 
-  </script>
+      return;
+
+    }
+
+
+    if(
+      event.key ===
+      "Escape"
+    ){
+
+      cerrarGaleria(true);
+
+    }
+
+
+    if(
+      event.key ===
+      "ArrowLeft"
+    ){
+
+      fotoAnterior();
+
+    }
+
+
+    if(
+      event.key ===
+      "ArrowRight"
+    ){
+
+      fotoSiguiente();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   BOTÓN ATRÁS
+========================================================= */
+
+window.addEventListener(
+  "popstate",
+  ()=>{
+
+    if(
+      state.gallery.open
+    ){
+
+      cerrarGaleria(false);
+
+      return;
+
+    }
+
+
+    if(
+      state.description.open
+    ){
+
+      cerrarDescripcion(false);
+
+      return;
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   SWIPE
+========================================================= */
+
+let touchStartX=0;
+let touchEndX=0;
+
+
+elements.gallery
+  .addEventListener(
+    "touchstart",
+    event=>{
+
+      touchStartX =
+        event.changedTouches[0]
+          .screenX;
+
+    },
+    {
+      passive:true
+    }
+  );
+
+
+elements.gallery
+  .addEventListener(
+    "touchend",
+    event=>{
+
+      touchEndX =
+        event.changedTouches[0]
+          .screenX;
+
+
+      const diferencia =
+        touchEndX -
+        touchStartX;
+
+
+      if(
+        Math.abs(diferencia)<50
+      ){
+
+        return;
+
+      }
+
+
+      if(diferencia>0){
+
+        fotoAnterior();
+
+      }
+
+      else{
+
+        fotoSiguiente();
+
+      }
+
+    },
+    {
+      passive:true
+    }
+  );
+
+
+/* =========================================================
+   INICIALIZACIÓN
+========================================================= */
+
+async function iniciar(){
+
+  /*
+    Cargamos configuración y propiedades
+    independientemente.
+  */
+
+  await cargarConfiguracion();
+
+  await cargarPropiedades();
+
+}
+
+
+iniciar();
+
+</script>
 
 </body>
 </html>
