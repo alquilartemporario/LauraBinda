@@ -2267,6 +2267,9 @@ const CSV_URL =
 
 
 const API_URL =
+  "https://script.google.com/macros/s/AKfycbzmDMeHM4DDO_mtVnJQXyRs7r_3V4VIzdpBhYNKHwYw-WKAzHrWofsF_7N6Ub3nh17Hwg/exec";
+
+const API_URL_FALLBACK =
   "https://script.google.com/macros/s/AKfycbzmDMeHM4DDO_mtVnJQXyRs7r_3V4VIzdpBhYNKHYwW-WKAzHrWofsF_7N6Ub3nh17Hwg/exec";
 
 
@@ -2312,6 +2315,12 @@ const state = {
 ========================================================= */
 
 const elements = {
+
+  heroImage:
+    document.querySelector(".hero-image"),
+
+  heroBottom:
+    document.getElementById("heroBottom"),
 
   heroBackground:
     document.getElementById("heroBackground"),
@@ -2863,51 +2872,181 @@ function cargarImagenPortada(url){
    CONFIGURACIÓN ADMIN
 ========================================================= */
 
+async function obtenerConfiguracionDesde(apiUrl){
+
+  const response =
+    await fetch(
+      apiUrl +
+      "?action=config&t=" +
+      Date.now(),
+      {
+        method:"GET",
+        cache:"no-store"
+      }
+    );
+
+  if(!response.ok){
+    throw new Error(
+      "HTTP " +
+      response.status
+    );
+  }
+
+  const data =
+    await response.json();
+
+  return (
+    data?.config ||
+    data?.CONFIG ||
+    data?.data?.config ||
+    data?.data ||
+    data
+  );
+
+}
+
+
+function aplicarEstetica(config){
+
+  const tituloTamano =
+    config.titulo_tamano;
+
+  if(tituloTamano){
+    elements.heroTitle.style.fontSize =
+      `${parseFloat(tituloTamano)}px`;
+  }
+
+  const tituloColor =
+    config.titulo_color;
+
+  if(tituloColor){
+    elements.heroTitle.style.color =
+      String(tituloColor).trim();
+  }
+
+  const tituloFuente =
+    config.titulo_fuente;
+
+  if(tituloFuente){
+    elements.heroTitle.style.fontFamily =
+      String(tituloFuente).trim();
+  }
+
+  const tituloGrosor =
+    config.titulo_grosor;
+
+  if(tituloGrosor){
+    elements.heroTitle.style.fontWeight =
+      String(tituloGrosor).trim();
+  }
+
+  const tituloAlineacion =
+    config.titulo_alineacion;
+
+  if(tituloAlineacion){
+    elements.heroTitle.style.textAlign =
+      String(tituloAlineacion).trim();
+  }
+
+
+  const subtituloTamano =
+    config.subtitulo_tamano;
+
+  if(subtituloTamano){
+    elements.heroSubtitle.style.fontSize =
+      `${parseFloat(subtituloTamano)}px`;
+  }
+
+  const subtituloColor =
+    config.subtitulo_color;
+
+  if(subtituloColor){
+    elements.heroSubtitle.style.color =
+      String(subtituloColor).trim();
+  }
+
+  const subtituloFuente =
+    config.subtitulo_fuente;
+
+  if(subtituloFuente){
+    elements.heroSubtitle.style.fontFamily =
+      String(subtituloFuente).trim();
+  }
+
+  const subtituloGrosor =
+    config.subtitulo_grosor;
+
+  if(subtituloGrosor){
+    elements.heroSubtitle.style.fontWeight =
+      String(subtituloGrosor).trim();
+  }
+
+  const subtituloAlineacion =
+    config.subtitulo_alineacion;
+
+  if(subtituloAlineacion){
+    elements.heroSubtitle.style.textAlign =
+      String(subtituloAlineacion).trim();
+  }
+
+
+  const portadaAltura =
+    config.portada_altura;
+
+  if(portadaAltura){
+
+    const altura =
+      parseFloat(portadaAltura);
+
+    if(
+      Number.isFinite(altura) &&
+      altura > 0
+    ){
+
+      elements.heroImage.style.height =
+        `${altura}px`;
+
+    }
+
+  }
+
+}
+
+
 async function cargarConfiguracion(){
 
   try{
 
-    const response =
-      await fetch(
-        API_URL +
-        "?action=config&t=" +
-        Date.now(),
-        {
-          method:"GET",
-          cache:"no-store"
-        }
-      );
+    let config;
 
-    if(!response.ok){
+    try{
 
-      throw new Error(
-        "HTTP " +
-        response.status
-      );
+      config =
+        await obtenerConfiguracionDesde(
+          API_URL
+        );
 
     }
 
-    const data =
-      await response.json();
+    catch(errorPrincipal){
+
+      console.warn(
+        "No se pudo cargar CONFIG desde la URL principal:",
+        errorPrincipal
+      );
+
+      config =
+        await obtenerConfiguracionDesde(
+          API_URL_FALLBACK
+        );
+
+    }
 
 
     console.log(
       "CONFIG recibida:",
-      data
+      config
     );
-
-
-    /*
-      Soporta varias estructuras
-      posibles del Apps Script.
-    */
-
-    let config =
-      data?.config ||
-      data?.CONFIG ||
-      data?.data?.config ||
-      data?.data ||
-      data;
 
 
     if(
@@ -2915,18 +3054,12 @@ async function cargarConfiguracion(){
       typeof config !== "object"
     ){
 
-      console.warn(
-        "La respuesta de CONFIG no contiene configuración válida."
+      throw new Error(
+        "La respuesta de CONFIG no contiene una configuración válida."
       );
-
-      return;
 
     }
 
-
-    /*
-      TÍTULO
-    */
 
     const titulo =
       config.titulo ||
@@ -2935,16 +3068,10 @@ async function cargarConfiguracion(){
       config.nombre_sitio;
 
     if(titulo){
-
       elements.heroTitle.textContent =
         titulo;
-
     }
 
-
-    /*
-      SUBTÍTULO
-    */
 
     const subtitulo =
       config.subtitulo ||
@@ -2952,16 +3079,10 @@ async function cargarConfiguracion(){
       config.descripcion;
 
     if(subtitulo){
-
       elements.heroSubtitle.textContent =
         subtitulo;
-
     }
 
-
-    /*
-      COLOR
-    */
 
     const color =
       config.color_portada ||
@@ -2971,18 +3092,23 @@ async function cargarConfiguracion(){
 
     if(color){
 
+      const colorLimpio =
+        String(color).trim();
+
       document.documentElement.style
         .setProperty(
           "--primary",
-          String(color).trim()
+          colorLimpio
         );
+
+      elements.heroBottom.style.background =
+        colorLimpio;
 
     }
 
 
-    /*
-      FOTO PORTADA
-    */
+    aplicarEstetica(config);
+
 
     const fotoPortada =
       config.foto_portada ||
@@ -2992,17 +3118,11 @@ async function cargarConfiguracion(){
       config.imagenPortada;
 
     if(fotoPortada){
-
       cargarImagenPortada(
         fotoPortada
       );
-
     }
 
-
-    /*
-      WHATSAPP
-    */
 
     const whatsapp =
       config.whatsapp ||
@@ -3017,10 +3137,8 @@ async function cargarConfiguracion(){
           .replace(/\D/g,"");
 
       if(limpio){
-
         state.whatsapp =
           limpio;
-
       }
 
     }
@@ -3036,12 +3154,6 @@ async function cargarConfiguracion(){
       "No se pudo cargar CONFIG:",
       error
     );
-
-    /*
-      Importante:
-      si CONFIG falla, el catálogo
-      igualmente continúa cargando.
-    */
 
     actualizarWhatsApp();
 
@@ -3062,8 +3174,9 @@ function actualizarWhatsApp(){
 
 
   const mensaje =
-    "Hola ! quiero más información sobre los departamentos en Alquiler temporario 🏠\n" +
-    "Mi nombre es";
+"¡Hola! 👋 Quiero información sobre los departamentos disponibles. 🏠\n\n" +
+"👤 Mi nombre es: ";
+
 
 
   elements.floatingWhatsapp.href =
@@ -3077,66 +3190,65 @@ function actualizarWhatsApp(){
 
 
 /* =========================================================
-   WHATSAPP PROPIEDAD
+WHATSAPP PROPIEDAD
 ========================================================= */
 
 function abrirWhatsApp(
-  propiedad
+propiedad
 ){
 
-  const ambientes =
-    propiedad.ambientes ||
-    "departamento";
+const ambientes =
+propiedad.ambientes ||
+"Departamento";
 
-  const direccion =
-    propiedad.direccion ||
-    "";
+const direccion =
+propiedad.direccion ||
+"";
 
-  const barrio =
-    propiedad.barrio ||
-    "";
+const barrio =
+propiedad.barrio ||
+"";
 
+let mensaje =
+`¡Hola! 👋 Me gustaría recibir más información sobre esta propiedad. 🏠\n\n` +
+`🏡 *Tipo:* ${ambientes}`;
 
-  let mensaje =
-    `Hola! quiero mas info sobre el departamento`;
+if(direccion){
 
-
-  if(direccion){
-
-    mensaje +=
-      ` ubicado en ${direccion} 🏠`;
-
-  }
-
-
-  if(barrio){
-
-    mensaje +=
-      ` - ${barrio}`✨;
-
-  }
-
-
-  mensaje +=
-    " Mi nombre es";
-
-
-  const url =
-    `https://wa.me/${state.whatsapp}` +
-    `?text=` +
-    encodeURIComponent(
-      mensaje
-    );
-
-
-  window.open(
-    url,
-    "_blank",
-    "noopener,noreferrer"
-  );
+```
+mensaje +=
+  `\n📍 *Dirección:* ${direccion}`;
+```
 
 }
 
+if(barrio){
+
+```
+mensaje +=
+  `\n🏘️ *Barrio:* ${barrio}`;
+```
+
+}
+
+mensaje +=
+`\n\nQuedo atento/a a la información disponible. 😊\n\n` +
+`👤 *Mi nombre es:* `;
+
+const url =
+`https://wa.me/${state.whatsapp}` +
+`?text=` +
+encodeURIComponent(
+mensaje
+);
+
+window.open(
+url,
+"_blank",
+"noopener,noreferrer"
+);
+
+}
 
 /* =========================================================
    CARGAR CSV
