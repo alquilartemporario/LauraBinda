@@ -3175,8 +3175,8 @@ function actualizarWhatsApp(){
 
 
   const mensaje =
-    "Hola ! quiero más información sobre los departamentos en Alquiler\n" +
-    "Mi nombre es";
+"¡Hola! 👋 Quiero información sobre los departamentos disponibles. 🏠\n\n" +
+"👤 Mi nombre es: ";
 
 
   elements.floatingWhatsapp.href =
@@ -3190,63 +3190,63 @@ function actualizarWhatsApp(){
 
 
 /* =========================================================
-   WHATSAPP PROPIEDAD
+WHATSAPP PROPIEDAD
 ========================================================= */
 
 function abrirWhatsApp(
-  propiedad
+propiedad
 ){
 
-  const ambientes =
-    propiedad.ambientes ||
-    "departamento";
+const ambientes =
+propiedad.ambientes ||
+"Departamento";
 
-  const direccion =
-    propiedad.direccion ||
-    "";
+const direccion =
+propiedad.direccion ||
+"";
 
-  const barrio =
-    propiedad.barrio ||
-    "";
+const barrio =
+propiedad.barrio ||
+"";
 
+let mensaje =
+`¡Hola! 👋 Me gustaría recibir más información sobre esta propiedad. 🏠\n\n` +
+`🏡 *Tipo:* ${ambientes}`;
 
-  let mensaje =
-    `Hola! quiero mas info del ${ambientes}`;
+if(direccion){
 
+```
+mensaje +=
+  `\n📍 *Dirección:* ${direccion}`;
+```
 
-  if(direccion){
+}
 
-    mensaje +=
-      ` ubicado en ${direccion}`;
+if(barrio){
 
-  }
+```
+mensaje +=
+  `\n🏘️ *Barrio:* ${barrio}`;
+```
 
+}
 
-  if(barrio){
+mensaje +=
+`\n\nQuedo atento/a a la información disponible. 😊\n\n` +
+`👤 *Mi nombre es:* `;
 
-    mensaje +=
-      ` - ${barrio}`;
+const url =
+`https://wa.me/${state.whatsapp}` +
+`?text=` +
+encodeURIComponent(
+mensaje
+);
 
-  }
-
-
-  mensaje +=
-    "\nMi nombre es";
-
-
-  const url =
-    `https://wa.me/${state.whatsapp}` +
-    `?text=` +
-    encodeURIComponent(
-      mensaje
-    );
-
-
-  window.open(
-    url,
-    "_blank",
-    "noopener,noreferrer"
-  );
+window.open(
+url,
+"_blank",
+"noopener,noreferrer"
+);
 
 }
 
