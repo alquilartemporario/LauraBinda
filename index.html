@@ -84,7 +84,622 @@
       max-width: 100%;
       display: block;
     }
+/* =========================================================
+   AJUSTE FINAL MOBILE
+   Mantiene la estética original pero adapta las tarjetas
+   como en la segunda imagen.
+========================================================= */
 
+@media screen and (max-width: 800px) {
+
+  /* ---------------------------------------------------------
+     CONTENEDOR GENERAL
+  --------------------------------------------------------- */
+
+  main {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ---------------------------------------------------------
+     FILTROS
+     Mantiene el diseño de la primera imagen
+  --------------------------------------------------------- */
+
+  .filters {
+    width: calc(100% - 20px) !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  }
+
+  /* ---------------------------------------------------------
+     GRID
+  --------------------------------------------------------- */
+
+  .properties-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+      minmax(0, 1fr) !important;
+
+    gap: 18px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* ---------------------------------------------------------
+     TARJETA
+     
+     La tarjeta ocupa TODO el ancho disponible.
+     Se mantiene la estética blanca de la primera imagen.
+  --------------------------------------------------------- */
+
+  .property-card {
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    margin: 0 !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+      minmax(270px, 48%)
+      minmax(0, 52%) !important;
+
+    grid-template-rows: auto !important;
+
+    border-radius: 18px !important;
+
+    border:
+      1px solid
+      var(--border) !important;
+
+    overflow: hidden !important;
+
+    background: white !important;
+
+    box-shadow:
+      0 4px 18px
+      rgba(16, 24, 40, 0.08) !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     FOTO
+     
+     La foto deja de ocupar 100% vertical.
+     Pasa a ocupar el lado izquierdo de la tarjeta.
+  --------------------------------------------------------- */
+
+  .property-image-container {
+
+    position: relative !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    min-height: 360px !important;
+
+    aspect-ratio: auto !important;
+
+    max-height: none !important;
+
+    overflow: hidden !important;
+
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+
+  }
+
+  .property-image {
+
+    width: 100% !important;
+    height: 100% !important;
+
+    min-height: 360px !important;
+
+    object-fit: cover !important;
+
+    object-position: center !important;
+
+    display: block !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     BADGES
+  --------------------------------------------------------- */
+
+  .image-badge {
+
+    top: 12px !important;
+    left: 12px !important;
+
+    padding:
+      7px 10px !important;
+
+    font-size: 12px !important;
+
+    z-index: 5 !important;
+
+  }
+
+  .photos-badge {
+
+    right: 10px !important;
+    bottom: 10px !important;
+
+    padding:
+      6px 9px !important;
+
+    font-size: 11px !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     INFORMACIÓN
+     
+     Todo el contenido ocupa TODO el ancho de su columna.
+     Mucho más legible que antes.
+  --------------------------------------------------------- */
+
+  .property-content {
+
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+
+    padding:
+      24px
+      22px
+      24px !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    gap: 13px !important;
+
+    overflow: hidden !important;
+
+    justify-content: flex-start !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     BARRIO
+  --------------------------------------------------------- */
+
+  .property-location {
+
+    width: 100% !important;
+
+    font-size: 15px !important;
+
+    line-height: 1.35 !important;
+
+    font-weight: 700 !important;
+
+    overflow-wrap: anywhere !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     AMBIENTES
+  --------------------------------------------------------- */
+
+  .property-title {
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    font-size: 28px !important;
+
+    line-height: 1.15 !important;
+
+    font-weight: 850 !important;
+
+    letter-spacing: -0.025em !important;
+
+    overflow-wrap: anywhere !important;
+
+    word-break: break-word !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     DIRECCIÓN
+  --------------------------------------------------------- */
+
+  .property-address {
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    font-size: 17px !important;
+
+    line-height: 1.45 !important;
+
+    color: var(--text-soft) !important;
+
+    overflow-wrap: anywhere !important;
+
+    word-break: break-word !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     PRECIO
+  --------------------------------------------------------- */
+
+  .property-price {
+
+    width: 100% !important;
+
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: flex-start !important;
+
+    justify-content: flex-start !important;
+
+    gap: 6px !important;
+
+    padding:
+      15px
+      0 !important;
+
+    margin-top: 2px !important;
+
+  }
+
+  .price-label {
+
+    font-size: 11px !important;
+
+    line-height: 1.2 !important;
+
+    white-space: nowrap !important;
+
+  }
+
+  .price-value {
+
+    width: 100% !important;
+
+    max-width: 100% !important;
+
+    font-size: 27px !important;
+
+    line-height: 1.1 !important;
+
+    font-weight: 850 !important;
+
+    text-align: left !important;
+
+    color: var(--primary) !important;
+
+    overflow-wrap: anywhere !important;
+
+    word-break: break-word !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     EXPENSAS / GASTOS
+  --------------------------------------------------------- */
+
+  .property-costs {
+
+    width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+      minmax(0, 1fr) !important;
+
+    gap: 8px !important;
+
+  }
+
+  .cost-box {
+
+    width: 100% !important;
+
+    min-width: 0 !important;
+
+    padding:
+      10px
+      11px !important;
+
+  }
+
+  .cost-label {
+
+    font-size: 9px !important;
+
+    line-height: 1.2 !important;
+
+  }
+
+  .cost-value {
+
+    font-size: 14px !important;
+
+    line-height: 1.35 !important;
+
+    overflow-wrap: anywhere !important;
+
+    word-break: break-word !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     AMENITIES
+  --------------------------------------------------------- */
+
+  .property-amenities {
+
+    width: 100% !important;
+
+    display: flex !important;
+
+    flex-wrap: wrap !important;
+
+    gap: 6px !important;
+
+  }
+
+  .amenity-chip {
+
+    max-width: 100% !important;
+
+    padding:
+      6px
+      9px !important;
+
+    font-size: 13px !important;
+
+    line-height: 1.25 !important;
+
+    overflow-wrap: anywhere !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     DESCRIPCIÓN
+  --------------------------------------------------------- */
+
+  .description-button {
+
+    width: 100% !important;
+
+    min-height: 46px !important;
+
+    padding:
+      8px
+      10px !important;
+
+    font-size: 14px !important;
+
+    line-height: 1.2 !important;
+
+  }
+
+  /* ---------------------------------------------------------
+     WHATSAPP
+  --------------------------------------------------------- */
+
+  .property-actions {
+
+    width: 100% !important;
+
+    margin-top: auto !important;
+
+    padding-top: 2px !important;
+
+  }
+
+  .whatsapp-button {
+
+    width: 100% !important;
+
+    min-height: 52px !important;
+
+    padding:
+      8px
+      10px !important;
+
+    font-size: 15px !important;
+
+    line-height: 1.2 !important;
+
+    white-space: normal !important;
+
+  }
+
+}
+
+
+/* =========================================================
+   CELULARES MÁS ANGOSTOS
+========================================================= */
+
+@media screen and (max-width: 550px) {
+
+  .property-card {
+
+    grid-template-columns:
+      minmax(145px, 44%)
+      minmax(0, 56%) !important;
+
+    border-radius: 15px !important;
+
+  }
+
+  .property-image-container {
+
+    min-height: 330px !important;
+
+  }
+
+  .property-image {
+
+    min-height: 330px !important;
+
+  }
+
+  .property-content {
+
+    padding:
+      20px
+      15px
+      20px !important;
+
+    gap: 11px !important;
+
+  }
+
+  .property-location {
+
+    font-size: 14px !important;
+
+  }
+
+  .property-title {
+
+    font-size: 24px !important;
+
+  }
+
+  .property-address {
+
+    font-size: 15px !important;
+
+  }
+
+  .price-value {
+
+    font-size: 24px !important;
+
+  }
+
+  .cost-box {
+
+    padding:
+      9px 10px !important;
+
+  }
+
+  .cost-value {
+
+    font-size: 13px !important;
+
+  }
+
+  .description-button {
+
+    min-height: 44px !important;
+
+    font-size: 13px !important;
+
+  }
+
+  .whatsapp-button {
+
+    min-height: 50px !important;
+
+    font-size: 14px !important;
+
+  }
+
+}
+
+
+/* =========================================================
+   CELULARES MUY ANGOSTOS
+========================================================= */
+
+@media screen and (max-width: 380px) {
+
+  .property-card {
+
+    grid-template-columns:
+      minmax(125px, 42%)
+      minmax(0, 58%) !important;
+
+  }
+
+  .property-image-container,
+  .property-image {
+
+    min-height: 300px !important;
+
+  }
+
+  .property-content {
+
+    padding:
+      17px
+      12px
+      18px !important;
+
+    gap: 9px !important;
+
+  }
+
+  .property-title {
+
+    font-size: 21px !important;
+
+  }
+
+  .property-address {
+
+    font-size: 14px !important;
+
+  }
+
+  .price-value {
+
+    font-size: 21px !important;
+
+  }
+
+  .cost-value {
+
+    font-size: 12px !important;
+
+  }
+
+  .description-button {
+
+    font-size: 12px !important;
+
+  }
+
+  .whatsapp-button {
+
+    font-size: 13px !important;
+
+  }
+
+}
 
     /* =========================================================
        VARIABLES
